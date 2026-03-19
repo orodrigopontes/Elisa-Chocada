@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Design System - Elisa, Escritora</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Design System Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        writer: {
+                            50: '#fdf8f9',
+                            100: '#f9edf0',
+                            200: '#f1dce2',
+                            300: '#e5c0ca',
+                            400: '#d39bab',
+                            500: '#c07187',
+                            600: '#a7556d',
+                            700: '#8c4355',
+                            800: '#753b49',
+                            900: '#643440',
+                            dark: '#2d2426'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glass': '0 10px 40px -10px rgba(117, 59, 73, 0.08)',
+                        'elegant': '0 20px 40px -5px rgba(117, 59, 73, 0.1), 0 8px 10px -6px rgba(117, 59, 73, 0.05)',
+                        'inner-elegant': 'inset 0 2px 4px 0 rgba(117, 59, 73, 0.06)'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #ffffff; 
+            color: #2d2426; 
+            scroll-behavior: smooth;
+        }
+        
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 1);
+            box-shadow: 0 10px 40px -10px rgba(117, 59, 73, 0.08);
+        }
+        
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(253, 248, 249, 0.4) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px 0 rgba(117, 59, 73, 0.05);
+        }
+
+        /* Animations */
+        .animate-fade-in { animation: fadeIn 1.2s ease-out forwards; opacity: 0; }
+        .animate-slide-up { animation: slideUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(40px); }
+        .animate-delay-200 { animation-delay: 0.2s; }
+        .animate-delay-400 { animation-delay: 0.4s; }
+        .animate-delay-600 { animation-delay: 0.6s; }
+        .animate-delay-800 { animation-delay: 0.8s; }
+        
+        @keyframes fadeIn { to { opacity: 1; } }
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+        
+        /* Details & Gradients */
+        .text-gradient {
+            background: linear-gradient(135deg, #2d2426 0%, #8c4355 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .bg-mesh {
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(347, 45%, 96%, 1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(347, 45%, 94%, 1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(347, 45%, 96%, 1) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(0, 0%, 100%, 1) 0px, transparent 50%);
+        }
+        
+        .selection-pink *::selection {
+            background-color: #f1dce2;
+            color: #753b49;
+        }
+    </style>
+</head>
+<body class="selection-pink bg-mesh relative pb-20 overflow-x-hidden">
+
+    <!-- Ambient Background Elements -->
+    <div class="fixed top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-writer-100 blur-[100px] opacity-60 z-[-1] pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-writer-50 blur-[120px] opacity-80 z-[-1] pointer-events-none"></div>
+
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-white/50 transition-all duration-300">
+        <div class="mx-auto max-w-7xl px-8 py-5 flex items-center justify-between">
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-writer-50 flex items-center justify-center border border-writer-200 group-hover:scale-105 transition-transform duration-500">
+                    <i data-lucide="feather" class="w-5 h-5 text-writer-700"></i>
+                </div>
+                <span class="font-serif italic font-semibold text-xl tracking-wide text-writer-dark group-hover:text-writer-700 transition-colors">Elisa</span>
+            </a>
+            
+            <nav class="hidden md:flex items-center gap-10 text-sm font-medium tracking-widest uppercase">
+                <a href="#typography" class="text-writer-800/60 hover:text-writer-800 transition-colors">Tipografia</a>
+                <a href="#colors" class="text-writer-800/60 hover:text-writer-800 transition-colors">Cores</a>
+                <a href="#components" class="text-writer-800/60 hover:text-writer-800 transition-colors">Componentes</a>
+                <a href="#layout" class="text-writer-800/60 hover:text-writer-800 transition-colors">Layout</a>
+            </nav>
+            
+            <button class="hidden md:inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-writer-dark text-white text-xs font-semibold tracking-[0.2em] uppercase hover:bg-writer-800 transition-all hover:shadow-elegant hover:-translate-y-0.5 duration-300">
+                Ver Obras
+            </button>
+            
+            <!-- Mobile Menu Icon -->
+            <button class="md:hidden text-writer-dark">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="mx-auto max-w-7xl px-6 lg:px-8 mt-12 space-y-32">
+        
+        <!-- 0) Hero Section -->
+        <section id="hero" class="relative pt-12 pb-20">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="z-10 relative">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-writer-200 bg-white/60 backdrop-blur-sm mb-8 animate-slide-up">
+                        <i data-lucide="pen-tool" class="w-4 h-4 text-writer-600"></i>
+                        <span class="text-xs font-semibold uppercase tracking-widest text-writer-700">Design System</span>
+                    </div>
+                    
+                    <h1 class="text-5xl lg:text-7xl font-serif text-writer-dark leading-[1.1] mb-8 animate-slide-up animate-delay-200">
+                        A elegância e o <br/>
+                        <span class="italic text-gradient">poder da palavra.</span>
+                    </h1>
+                    
+                    <p class="text-lg text-writer-800/70 font-sans leading-relaxed max-w-xl mb-12 animate-slide-up animate-delay-400">
+                        Um guia completo para a linguagem visual da autora, documentando tipografias serifadas, paletas de rosas sutis, componentes de interface fluidos e o layout ideal para a leitura em telas.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-6 animate-slide-up animate-delay-600">
+                        <a href="#components" class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-writer-800 text-white font-medium tracking-wide hover:bg-writer-700 hover:shadow-elegant transition-all duration-300 hover:-translate-y-1">
+                            Explorar Componentes
+                            <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </a>
+                        <a href="#typography" class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-transparent border border-writer-300 text-writer-800 font-medium tracking-wide hover:bg-writer-50 hover:border-writer-400 transition-all duration-300">
+                            Ver Tipografia
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="relative animate-slide-up animate-delay-800 group">
+                    <!-- Image Showcase Card -->
+                    <div class="relative rounded-[2.5rem] overflow-hidden aspect-[4/5] shadow-elegant">
+                        <img src="https://images.unsplash.com/photo-1455390582262-044cdead2708?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Máquina de escrever" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out"/>
+                        <!-- Elegant overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-writer-900/60 via-writer-900/10 to-transparent"></div>
+                        
+                        <div class="absolute bottom-10 left-10">
+                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/30 bg-white/20 backdrop-blur-md text-white">
+                                <i data-lucide="book-open" class="w-4 h-4"></i>
+                                <span class="text-xs font-semibold tracking-widest uppercase">Padrões Visuais</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating abstract badge -->
+                    <div class="absolute -right-8 top-1/4 w-32 h-32 rounded-full bg-white glass-panel flex flex-col items-center justify-center p-4 animate-[bounce_6s_infinite] shadow-elegant hidden lg:flex">
+                        <span class="font-serif italic text-3xl text-writer-700">"Elisa"</span>
+                        <span class="text-[0.6rem] uppercase tracking-widest font-semibold text-writer-800/60 mt-2">Autora</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-writer-200/50">
+
+        <!-- 1) Typography -->
+        <section id="typography" class="scroll-mt-32">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-12 h-px bg-writer-300"></span>
+                <span class="text-xs font-semibold uppercase tracking-widest text-writer-500">Fundação Visual</span>
+            </div>
+            <h2 class="text-4xl font-serif text-writer-dark mb-16">Tipografia e Hierarquia</h2>
+
+            <div class="glass-card rounded-[2rem] p-10 lg:p-16 space-y-12">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-writer-200/60">
+                    <div class="flex-1">
+                        <div class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-writer-500 mb-4">Título Principal (H1)</div>
+                        <h1 class="text-5xl lg:text-7xl font-serif text-writer-dark leading-tight">A Arte de Escrever</h1>
+                    </div>
+                    <div class="text-sm font-mono text-writer-600/60">Playfair Display / Serif</div>
+                </div>
+
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-writer-200/60">
+                    <div class="flex-1">
+                        <div class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-writer-500 mb-4">Subtítulo (H2)</div>
+                        <h2 class="text-3xl lg:text-4xl font-serif italic text-writer-700">Capítulo 1: O Início da Jornada</h2>
+                    </div>
+                    <div class="text-sm font-mono text-writer-600/60">Playfair Itálico</div>
+                </div>
+
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-writer-200/60">
+                    <div class="flex-1">
+                        <div class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-writer-500 mb-4">Título de Seção (H3)</div>
+                        <h3 class="text-xl lg:text-2xl font-sans font-medium text-writer-dark tracking-tight">Obras Publicadas</h3>
+                    </div>
+                    <div class="text-sm font-mono text-writer-600/60">Inter / Sans-serif / Medium</div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-start justify-between gap-6 pb-12 border-b border-writer-200/60">
+                    <div class="flex-1 max-w-2xl">
+                        <div class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-writer-500 mb-4">Parágrafo Corpo de Texto (P)</div>
+                        <p class="text-lg text-writer-800/80 font-sans leading-[1.8]">
+                            A tipografia para leitura longa deve ser confortável, arejada e convidativa. Usamos a fonte "Inter" com uma altura de linha espaçosa (1.8) e uma cor focada no contraste suave, reduzindo a fadiga visual do leitor e mantendo a leveza exigida.
+                        </p>
+                    </div>
+                    <div class="text-sm font-mono text-writer-600/60 pt-6">Inter / 18px / 1.8</div>
+                </div>
+
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div class="flex-1">
+                        <div class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-writer-500 mb-4">Citação Visual (Blockquote)</div>
+                        <blockquote class="text-2xl font-serif italic text-writer-700 border-l-4 border-writer-300 pl-6 py-2">
+                            "A palavra é o meu domínio sobre o mundo."
+                        </blockquote>
+                    </div>
+                    <div class="text-sm font-mono text-writer-600/60">Playfair Itálico / Border Left</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 2) Colors -->
+        <section id="colors" class="scroll-mt-32">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-12 h-px bg-writer-300"></span>
+                <span class="text-xs font-semibold uppercase tracking-widest text-writer-500">Atmosfera</span>
+            </div>
+            <h2 class="text-4xl font-serif text-writer-dark mb-16">Cores e Superfícies</h2>
+
+            <!-- Palette Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6 mb-16">
+                <!-- Color Cards -->
+                <div class="group">
+                    <div class="h-32 rounded-[2rem] bg-writer-50 border border-writer-200 mb-4 shadow-sm group-hover:-translate-y-2 transition-transform duration-300"></div>
+                    <div class="text-sm font-semibold text-writer-dark">Writer 50</div>
+                    <div class="text-xs font-mono text-writer-500">#fdf8f9</div>
+                </div>
+                <div class="group">
+                    <div class="h-32 rounded-[2rem] bg-writer-100 border border-writer-200 mb-4 shadow-sm group-hover:-translate-y-2 transition-transform duration-300"></div>
+                    <div class="text-sm font-semibold text-writer-dark">Writer 100</div>
+                    <div class="text-xs font-mono text-writer-500">#f9edf0</div>
+                </div>
+                <div class="group">
+                    <div class="h-32 rounded-[2rem] bg-writer-300 border border-writer-200 mb-4 shadow-sm group-hover:-translate-y-2 transition-transform duration-300"></div>
+                    <div class="text-sm font-semibold text-writer-dark">Writer 300</div>
+                    <div class="text-xs font-mono text-writer-500">#e5c0ca</div>
+                </div>
+                <div class="group">
+                    <div class="h-32 rounded-[2rem] bg-writer-500 mb-4 shadow-sm group-hover:-translate-y-2 transition-transform duration-300"></div>
+                    <div class="text-sm font-semibold text-writer-dark">Writer 500</div>
+                    <div class="text-xs font-mono text-writer-500">#c07187</div>
+                </div>
+                <div class="group">
+                    <div class="h-32 rounded-[2rem] bg-writer-700 mb-4 shadow-sm group-hover:-translate-y-2 transition-transform duration-300"></div>
+                    <div class="text-sm font-semibold text-writer-dark">Writer 700 (Primária)</div>
+                    <div class="text-xs font-mono text-writer-500">#8c4355</div>
+                </div>
+                <div class="group">
+                    <div class="h-32 rounded-[2rem] bg-writer-800 mb-4 shadow-sm group-hover:-translate-y-2 transition-transform duration-300"></div>
+                    <div class="text-sm font-semibold text-writer-dark">Writer 800</div>
+                    <div class="text-xs font-mono text-writer-500">#753b49</div>
+                </div>
+                <div class="group">
+                    <div class="h-32 rounded-[2rem] bg-writer-dark mb-4 shadow-sm group-hover:-translate-y-2 transition-transform duration-300"></div>
+                    <div class="text-sm font-semibold text-writer-dark">Writer Dark</div>
+                    <div class="text-xs font-mono text-writer-500">#2d2426</div>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Surfaces -->
+                <div>
+                    <h3 class="text-xl font-sans font-medium mb-6">Tratamento de Superfície</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="relative h-40 rounded-[2rem] overflow-hidden group">
+                            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80" alt="Books" class="absolute w-full h-full object-cover"/>
+                            <div class="absolute inset-0 bg-writer-900/40 backdrop-blur-sm flex items-center justify-center">
+                                <span class="text-white font-serif italic text-2xl tracking-wide">Overlay Escuro + Blur</span>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel h-40 rounded-[2rem] p-8 flex items-center justify-center relative shadow-glass overflow-hidden">
+                            <!-- Background gradient block behind glass -->
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-writer-300 rounded-full blur-3xl opacity-50 -z-10"></div>
+                            <span class="text-writer-800 font-sans font-medium">Card Glassmorphism (bg-white/85)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gradients -->
+                <div>
+                    <h3 class="text-xl font-sans font-medium mb-6">Gradientes</h3>
+                    <div class="space-y-6">
+                        <div class="h-28 rounded-[2rem] bg-gradient-to-r from-writer-100 to-writer-50 border border-writer-200 flex items-center px-8">
+                            <div>
+                                <div class="font-medium text-writer-800 mb-1">Gradiente Sutil Fundo</div>
+                                <div class="text-xs font-mono text-writer-500">from-writer-100 to-writer-50</div>
+                            </div>
+                        </div>
+                        <div class="h-28 rounded-[2rem] bg-gradient-to-br from-writer-800 to-writer-700 flex items-center px-8 shadow-elegant">
+                            <div>
+                                <div class="font-medium text-white mb-1">Gradiente Destacado</div>
+                                <div class="text-xs font-mono text-white/70">from-writer-800 to-writer-700</div>
+                            </div>
+                        </div>
+                        <div class="h-28 rounded-[2rem] bg-writer-50 border border-writer-200 flex items-center px-8">
+                            <h2 class="text-3xl font-serif text-gradient font-semibold">
+                                Text Gradient Elegante
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3) UI Components & Cards -->
+        <section id="components" class="scroll-mt-32">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-12 h-px bg-writer-300"></span>
+                <span class="text-xs font-semibold uppercase tracking-widest text-writer-500">Elementos</span>
+            </div>
+            <h2 class="text-4xl font-serif text-writer-dark mb-16">Componentes de Interface</h2>
+
+            <div class="space-y-16">
+                <!-- Buttons & Badges -->
+                <div>
+                    <h3 class="text-xl font-sans font-medium mb-8">Botões e Tags</h3>
+                    <div class="flex flex-wrap items-center gap-6">
+                        <!-- Botão Primário -->
+                        <button class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-writer-800 text-white text-sm font-medium tracking-wide hover:bg-writer-700 hover:shadow-elegant transition-all duration-300 hover:-translate-y-1">
+                            Botão Primário
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </button>
+                        
+                        <!-- Botão Secundário -->
+                        <button class="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-writer-300 bg-white text-writer-800 text-sm font-medium tracking-wide hover:bg-writer-50 hover:border-writer-400 transition-all duration-300">
+                            Botão Secundário
+                        </button>
+
+                        <!-- Botão Ícone -->
+                        <button class="w-12 h-12 rounded-full border border-writer-200 bg-white shadow-sm flex items-center justify-center text-writer-700 hover:bg-writer-50 hover:scale-110 transition-all duration-300">
+                            <i data-lucide="heart" class="w-5 h-5"></i>
+                        </button>
+
+                        <!-- Tags / Badges -->
+                        <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-writer-100 text-writer-700 text-xs font-semibold uppercase tracking-widest">
+                            Novo Livro
+                        </div>
+                        <div class="inline-flex items-center px-4 py-1.5 rounded-full border border-writer-300 bg-transparent text-writer-600 text-xs font-semibold uppercase tracking-widest">
+                            Ficção
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cards -->
+                <div>
+                    <h3 class="text-xl font-sans font-medium mb-8">Padrões de Cartões</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        
+                        <!-- Book Card -->
+                        <div class="group glass-card rounded-[2rem] p-6 hover:-translate-y-2 transition-transform duration-500 cursor-pointer flex flex-col items-center text-center">
+                            <div class="relative w-40 h-56 rounded-xl overflow-hidden shadow-elegant mb-6 group-hover:shadow-[0_25px_50px_-12px_rgba(117,59,73,0.3)] transition-shadow duration-500">
+                                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="Book Cover" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-writer-900/20 group-hover:bg-transparent transition-colors duration-500"></div>
+                            </div>
+                            <div class="text-[0.65rem] font-semibold uppercase tracking-widest text-writer-500 mb-2">Romance</div>
+                            <h4 class="text-2xl font-serif text-writer-dark mb-2">Suspiros do Vento</h4>
+                            <p class="text-sm text-writer-600">Disponível na Amazon</p>
+                        </div>
+
+                        <!-- Content Card -->
+                        <div class="group glass-card rounded-[2rem] p-8 hover:-translate-y-2 transition-transform duration-500 border border-white relative overflow-hidden flex flex-col justify-between">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-writer-100 rounded-bl-full -z-10 transition-transform duration-500 group-hover:scale-110"></div>
+                            <div>
+                                <div class="w-12 h-12 rounded-full bg-writer-100 flex items-center justify-center text-writer-700 mb-6 group-hover:scale-110 transition-transform duration-300">
+                                    <i data-lucide="scroll-text" class="w-6 h-6"></i>
+                                </div>
+                                <h4 class="text-xl font-serif text-writer-dark mb-4">Revisão Literária</h4>
+                                <p class="text-writer-600/80 text-sm leading-relaxed mb-6">
+                                    Além da escrita, um olhar crítico sobre obras em desenvolvimento, refinando enredos e desenvolvimento de personagens.
+                                </p>
+                            </div>
+                            <a href="#" class="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-writer-700 group-hover:text-writer-800 transition-colors">
+                                Saber mais <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+
+                        <!-- Review/Quote Card -->
+                        <div class="glass-panel rounded-[2rem] p-8 flex flex-col justify-center relative overflow-visible mt-8 lg:mt-0">
+                            <!-- Quoute icon floating -->
+                            <div class="absolute -top-6 left-8 w-12 h-12 rounded-full bg-writer-700 text-white flex items-center justify-center shadow-elegant">
+                                <i data-lucide="quote" class="w-5 h-5 fill-current"></i>
+                            </div>
+                            
+                            <blockquote class="text-lg font-serif italic text-writer-800 leading-relaxed mb-6 pt-4">
+                                "Uma escrita delicada que penetra a alma e acalma o espírito. Ler Elisa é viajar para dentro de si mesma."
+                            </blockquote>
+                            
+                            <div class="flex items-center gap-4 border-t border-writer-200/50 pt-6">
+                                <div class="w-10 h-10 rounded-full bg-writer-300 overflow-hidden">
+                                     <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Reviewer" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <div class="text-sm font-semibold text-writer-dark">Clara Mendes</div>
+                                    <div class="flex text-writer-400 gap-0.5">
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4) Composition & Motion Effects -->
+        <section id="layout" class="scroll-mt-32">
+             <div class="flex items-center gap-3 mb-4">
+                <span class="w-12 h-px bg-writer-300"></span>
+                <span class="text-xs font-semibold uppercase tracking-widest text-writer-500">Comportamento</span>
+            </div>
+            <h2 class="text-4xl font-serif text-writer-dark mb-16">Animações & Ícones</h2>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                
+                <!-- Hover Effects -->
+                <div class="glass-card p-10 rounded-[2rem]">
+                    <h3 class="text-xl font-sans font-medium mb-8">Feedback Visual Sutil</h3>
+                    <div class="space-y-6">
+                        
+                        <div class="flex items-center justify-between p-4 rounded-xl hover:bg-white transition-colors cursor-pointer group border border-transparent hover:border-writer-100 hover:shadow-sm">
+                            <span class="font-medium text-writer-700">Mudança de Cor Suave</span>
+                            <span class="text-xs font-mono text-writer-400">hover:bg-white transition-colors</span>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-4 rounded-xl group cursor-pointer">
+                            <span class="font-medium text-writer-700">Transformação & Escala</span>
+                            <div class="w-10 h-10 rounded-full bg-writer-100 flex items-center justify-center group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300">
+                                <i data-lucide="arrow-up-right" class="w-4 h-4 text-writer-600"></i>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-4 rounded-xl group cursor-pointer">
+                            <span class="font-medium text-writer-700">Animação Contínua (Pulse)</span>
+                            <div class="flex items-center gap-2">
+                                <span class="relative flex h-3 w-3">
+                                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-writer-400 opacity-75"></span>
+                                  <span class="relative inline-flex rounded-full h-3 w-3 bg-writer-500"></span>
+                                </span>
+                                <span class="text-xs font-mono text-writer-400">animate-ping</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Icons Library -->
+                <div class="glass-card p-10 rounded-[2rem]">
+                    <h3 class="text-xl font-sans font-medium mb-8">Ícones (Lucide) Selecionados</h3>
+                    <div class="grid grid-cols-4 gap-6 text-center text-writer-600">
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <i data-lucide="pen-tool" class="w-6 h-6 group-hover:text-writer-800 transition-colors"></i>
+                            <span class="text-[0.6rem] font-mono">pen-tool</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <i data-lucide="book-open" class="w-6 h-6 group-hover:text-writer-800 transition-colors"></i>
+                            <span class="text-[0.6rem] font-mono">book-open</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <i data-lucide="feather" class="w-6 h-6 group-hover:text-writer-800 transition-colors"></i>
+                            <span class="text-[0.6rem] font-mono">feather</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <i data-lucide="bookmark" class="w-6 h-6 group-hover:text-writer-800 transition-colors"></i>
+                            <span class="text-[0.6rem] font-mono">bookmark</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <i data-lucide="coffee" class="w-6 h-6 group-hover:text-writer-800 transition-colors"></i>
+                            <span class="text-[0.6rem] font-mono">coffee</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <i data-lucide="mail" class="w-6 h-6 group-hover:text-writer-800 transition-colors"></i>
+                            <span class="text-[0.6rem] font-mono">mail</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <i data-lucide="instagram" class="w-6 h-6 group-hover:text-writer-800 transition-colors"></i>
+                            <span class="text-[0.6rem] font-mono">instagram</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <i data-lucide="scroll-text" class="w-6 h-6 group-hover:text-writer-800 transition-colors"></i>
+                            <span class="text-[0.6rem] font-mono">scroll-text</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="mt-32 border-t border-writer-200">
+        <div class="mx-auto max-w-7xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="font-serif italic text-writer-700 text-2xl">Elisa</div>
+            <p class="text-sm text-writer-500">Design System elegante construído para uma escrita que inspira.</p>
+        </div>
+    </footer>
+
+    <!-- Initialize Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

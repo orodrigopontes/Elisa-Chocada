@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design System - Elegance (Escritora)</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        rose: {
+                            50: '#fdf8f9',
+                            100: '#fbeff1',
+                            200: '#f5dce1',
+                            300: '#eebfca',
+                            400: '#e399a9',
+                            500: '#d56d84',
+                            600: '#be4b66',
+                            700: '#9f3951',
+                            800: '#853246',
+                            900: '#712d3e', // Elegant dark rose
+                            950: '#3f1520',
+                        },
+                        stone: {
+                            50: '#fafaf9',
+                            100: '#f5f5f4',
+                            200: '#e7e5e4',
+                            900: '#1c1917',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out forwards',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        .animate-delay-100 { animation-delay: 0.1s; }
+        .animate-delay-200 { animation-delay: 0.2s; }
+        .animate-delay-300 { animation-delay: 0.3s; }
+        .animate-delay-400 { animation-delay: 0.4s; }
+        .animate-delay-500 { animation-delay: 0.5s; }
+        
+        /* Subtle noise texture for elegance */
+        .bg-noise {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-white text-stone-900 font-sans antialiased bg-noise relative selection:bg-rose-200 selection:text-rose-950">
+
+    <!-- Ambient background glows -->
+    <div class="fixed top-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] bg-rose-100 rounded-full blur-[120px] opacity-70"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-stone-100 rounded-full blur-[100px] opacity-80"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-rose-100/50 py-4 mb-8">
+        <div class="mx-auto max-w-7xl px-6">
+            <div class="flex flex-wrap items-center justify-center gap-6 text-xs tracking-widest uppercase font-medium">
+                <a href="#hero" class="transition-colors hover:text-rose-700 text-stone-500">Início</a>
+                <a href="#typography" class="transition-colors hover:text-rose-700 text-stone-500">Tipografia</a>
+                <a href="#colors" class="transition-colors hover:text-rose-700 text-stone-500">Cores</a>
+                <a href="#components" class="transition-colors hover:text-rose-700 text-stone-500">Componentes</a>
+                <a href="#layout" class="transition-colors hover:text-rose-700 text-stone-500">Layout</a>
+                <a href="#motion" class="transition-colors hover:text-rose-700 text-stone-500">Animações</a>
+                <a href="#icons" class="transition-colors hover:text-rose-700 text-stone-500">Ícones</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="mx-auto max-w-7xl px-6 pb-20 space-y-32">
+
+        <!-- 0) Hero Section -->
+        <section id="hero" class="relative pt-12 pb-24">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="max-w-2xl">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-rose-200 bg-rose-50 text-rose-800 text-[0.65rem] font-semibold uppercase tracking-widest mb-8 animate-slide-up">
+                        <i data-lucide="feather" class="w-3 h-3"></i>
+                        Design System · Escritora
+                    </div>
+                    
+                    <h1 class="text-5xl lg:text-7xl font-serif text-rose-950 leading-[1.1] mb-6 animate-slide-up animate-delay-100">
+                        Elegância<br/>
+                        <span class="italic font-light text-rose-800">&amp; Poesia</span> visual.
+                    </h1>
+                    
+                    <p class="text-lg text-stone-600 font-light leading-relaxed mb-10 animate-slide-up animate-delay-200 max-w-lg">
+                        Um guia abrangente de padrões visuais, criado para transmitir o profissionalismo e a delicadeza literária através de tipografia serifada, cores suaves e componentes minimalistas. Explore nossa documentação adaptada para o universo da escrita e literatura.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 animate-slide-up animate-delay-300">
+                        <a href="#components" class="inline-flex items-center justify-center gap-2 bg-rose-900 text-white px-8 py-4 rounded-full text-xs font-medium uppercase tracking-widest hover:bg-rose-950 transition-all hover:scale-105 shadow-xl shadow-rose-900/20">
+                            Explorar <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#typography" class="inline-flex items-center justify-center gap-2 bg-transparent text-rose-950 border border-rose-200 px-8 py-4 rounded-full text-xs font-medium uppercase tracking-widest hover:border-rose-400 hover:bg-rose-50 transition-all">
+                            Tipografia
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="relative animate-slide-up animate-delay-400">
+                    <div class="aspect-[4/5] rounded-[2rem] overflow-hidden relative shadow-2xl shadow-stone-200/50 group bg-stone-100 flex items-center justify-center">
+                        <div class="absolute inset-0 z-0">
+                            <!-- Image of elegant writing/typewriter/book -->
+                            <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=1887&auto=format&fit=crop" alt="Elegance" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-rose-950/60 via-transparent to-transparent z-10 transition-opacity duration-700 opacity-80 group-hover:opacity-100"></div>
+                        
+                        <div class="absolute bottom-8 left-8 right-8 backdrop-blur-md bg-white/10 border border-white/20 p-6 rounded-2xl z-20">
+                            <h3 class="font-serif text-2xl text-white mb-2">Padrões Literários</h3>
+                            <p class="text-white/80 font-light text-sm">A união do moderno com o clássico, traduzido em código.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating accent -->
+                    <div class="absolute -right-6 top-1/4 w-24 h-24 bg-rose-100 rounded-full mix-blend-multiply blur-xl animate-pulse-slow"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1) Typography Section -->
+        <section id="typography" class="scroll-mt-24 bg-white/50 backdrop-blur-md rounded-[2.5rem] p-8 md:p-16 border border-stone-100 shadow-sm">
+            <div class="border-b border-rose-100 pb-4 mb-12 flex flex-col gap-2">
+                <span class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-rose-500">Estilo Literário</span>
+                <h2 class="text-3xl font-serif text-rose-950">Tipografia</h2>
+            </div>
+            
+            <div class="space-y-12">
+                <!-- Heading 1 -->
+                <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-8 border-b border-stone-100">
+                    <div class="flex-1">
+                        <p class="text-[0.65rem] font-semibold uppercase tracking-widest text-stone-400 mb-4">Heading 1 / Playfair Display</p>
+                        <h1 class="text-5xl lg:text-7xl font-serif text-rose-950 leading-tight">
+                            Palavras ao <span class="italic text-rose-800">vento</span>
+                        </h1>
+                    </div>
+                    <div class="text-xs text-stone-400 font-mono text-left lg:text-right">
+                        text-5xl lg:text-7xl <br/> font-serif font-normal
+                    </div>
+                </div>
+
+                <!-- Heading 2 -->
+                <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-8 border-b border-stone-100">
+                    <div class="flex-1">
+                        <p class="text-[0.65rem] font-semibold uppercase tracking-widest text-stone-400 mb-4">Heading 2 / Playfair Display</p>
+                        <h2 class="text-3xl lg:text-4xl font-serif text-rose-950">
+                            A arte de contar histórias.
+                        </h2>
+                    </div>
+                    <div class="text-xs text-stone-400 font-mono text-left lg:text-right">
+                        text-3xl lg:text-4xl <br/> font-serif
+                    </div>
+                </div>
+
+                <!-- Body Text -->
+                <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4 pb-8 border-b border-stone-100">
+                    <div class="flex-1">
+                        <p class="text-[0.65rem] font-semibold uppercase tracking-widest text-stone-400 mb-4">Body Text / Montserrat</p>
+                        <p class="text-base lg:text-lg text-stone-600 font-light leading-relaxed max-w-2xl">
+                            A leitura transporta o ser para outra dimensão. Esta tipografia "sans-serif" traz um balanço perfeito, garantindo que longos blocos de texto mantenham-se legíveis e suaves aos olhos, acompanhando as serifas luxuosas dos títulos.
+                        </p>
+                    </div>
+                    <div class="text-xs text-stone-400 font-mono text-left lg:text-right pt-2">
+                        text-base lg:text-lg <br/> font-sans font-light <br/> leading-relaxed
+                    </div>
+                </div>
+
+                <!-- Small Info -->
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-8 border-b border-stone-100">
+                    <div class="flex-1">
+                        <p class="text-[0.65rem] font-semibold uppercase tracking-widest text-stone-400 mb-4">Small / Uppercase / Montserrat</p>
+                        <span class="text-xs font-semibold uppercase tracking-widest text-rose-800">
+                            Capítulo I — O Início
+                        </span>
+                    </div>
+                    <div class="text-xs text-stone-400 font-mono text-left lg:text-right">
+                        text-xs font-semibold <br/> uppercase tracking-widest
+                    </div>
+                </div>
+                
+                <!-- Quote Text -->
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-8">
+                    <div class="flex-1">
+                        <p class="text-[0.65rem] font-semibold uppercase tracking-widest text-stone-400 mb-4">Blockquote / Playfair Display</p>
+                        <blockquote class="text-2xl font-serif italic text-stone-500 border-l-2 border-rose-300 pl-6 py-2">
+                            "Um livro é um sonho que você segura nas mãos."
+                        </blockquote>
+                    </div>
+                    <div class="text-xs text-stone-400 font-mono text-left lg:text-right">
+                        text-2xl font-serif italic <br/> border-l-2 border-rose-300
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2) Colors Section -->
+        <section id="colors" class="scroll-mt-24">
+            <div class="border-b border-rose-100 pb-4 mb-12 flex flex-col gap-2">
+                <span class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-rose-500">Paleta de Cores</span>
+                <h2 class="text-3xl font-serif text-rose-950">Superfícies &amp; Tons</h2>
+            </div>
+
+            <!-- Primary Colors (Rose) -->
+            <h3 class="text-sm font-semibold uppercase tracking-widest text-stone-500 mb-6 font-sans">Tons de Rosa Elegante (Rose)</h3>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-12">
+                <div>
+                    <div class="h-24 w-full rounded-2xl bg-rose-50 border border-stone-100 mb-3 shadow-inner"></div>
+                    <p class="text-sm font-medium text-stone-900">Rose 50</p>
+                    <p class="text-xs text-stone-500 font-mono mt-1">bg-rose-50</p>
+                </div>
+                <div>
+                    <div class="h-24 w-full rounded-2xl bg-rose-100 border border-stone-100 mb-3 shadow-inner"></div>
+                    <p class="text-sm font-medium text-stone-900">Rose 100</p>
+                    <p class="text-xs text-stone-500 font-mono mt-1">bg-rose-100</p>
+                </div>
+                <div>
+                    <div class="h-24 w-full rounded-2xl bg-rose-300 border border-stone-100 mb-3"></div>
+                    <p class="text-sm font-medium text-stone-900">Rose 300 (Accent)</p>
+                    <p class="text-xs text-stone-500 font-mono mt-1">bg-rose-300</p>
+                </div>
+                <div>
+                    <div class="h-24 w-full rounded-2xl bg-rose-800 mb-3 shadow-md"></div>
+                    <p class="text-sm font-medium text-rose-950">Rose 800 (Primary)</p>
+                    <p class="text-xs text-stone-500 font-mono mt-1">bg-rose-800</p>
+                </div>
+                <div>
+                    <div class="h-24 w-full rounded-2xl bg-rose-950 mb-3 shadow-lg text-white flex items-center justify-center font-serif italic text-2xl">Aa</div>
+                    <p class="text-sm font-medium text-rose-950">Rose 950 (Deep)</p>
+                    <p class="text-xs text-stone-500 font-mono mt-1">bg-rose-950</p>
+                </div>
+            </div>
+
+            <!-- Grays/Stones (Neutrals) -->
+            <h3 class="text-sm font-semibold uppercase tracking-widest text-stone-500 mb-6 font-sans">Neutros (White &amp; Stone)</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+                <div>
+                    <div class="h-24 w-full rounded-2xl bg-white border border-stone-200 mb-3 shadow-sm"></div>
+                    <p class="text-sm font-medium text-stone-900">White Background</p>
+                    <p class="text-xs text-stone-500 font-mono mt-1">bg-white</p>
+                </div>
+                <div>
+                    <div class="h-24 w-full rounded-2xl bg-stone-50 border border-stone-200 mb-3 shadow-inner"></div>
+                    <p class="text-sm font-medium text-stone-900">Stone 50 Surface</p>
+                    <p class="text-xs text-stone-500 font-mono mt-1">bg-stone-50</p>
+                </div>
+                <div>
+                    <div class="h-24 w-full rounded-2xl bg-stone-500 mb-3"></div>
+                    <p class="text-sm font-medium text-stone-900">Stone 500 Text</p>
+                    <p class="text-xs text-stone-500 font-mono mt-1">bg-stone-500 / text</p>
+                </div>
+                <div>
+                    <div class="h-24 w-full rounded-2xl bg-stone-900 mb-3 text-white flex items-center justify-center font-sans font-light text-2xl">Aa</div>
+                    <p class="text-sm font-medium text-stone-900">Stone 900 Heading</p>
+                    <p class="text-xs text-stone-500 font-mono mt-1">bg-stone-900 / text</p>
+                </div>
+            </div>
+
+            <!-- Gradients -->
+            <h3 class="text-sm font-semibold uppercase tracking-widest text-stone-500 mb-6 font-sans">Gradientes Suaves &amp; Overlays</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <div class="h-32 w-full rounded-2xl bg-gradient-to-br from-rose-50 to-white border border-rose-100 mb-3"></div>
+                    <p class="text-sm font-medium text-stone-900">Soft Rose Fade</p>
+                    <p class="text-xs text-stone-500 font-mono mt-1">from-rose-50 to-white</p>
+                </div>
+                <div>
+                    <div class="h-32 w-full rounded-2xl bg-gradient-to-tr from-stone-50 to-rose-50 border border-stone-100 mb-3"></div>
+                    <p class="text-sm font-medium text-stone-900">Stone to Rose</p>
+                    <p class="text-xs text-stone-500 font-mono mt-1">from-stone-50 to-rose-50</p>
+                </div>
+                <div class="h-auto">
+                    <div class="relative rounded-2xl overflow-hidden h-32 border border-stone-200 mb-3">
+                        <img src="https://images.unsplash.com/photo-1455390582262-044cdead27d8?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 object-cover w-full h-full" alt="Book" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-rose-950/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <i data-lucide="feather" class="w-4 h-4 text-rose-200 mb-1"></i>
+                        </div>
+                    </div>
+                    <p class="text-sm font-medium text-stone-900">Image Overlay</p>
+                    <p class="text-xs text-stone-500 font-mono mt-1">from-rose-950/80 to-transparent</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3) UI Components Section -->
+        <section id="components" class="scroll-mt-24">
+            <div class="border-b border-rose-100 pb-4 mb-12 flex flex-col gap-2">
+                <span class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-rose-500">Elementos Interativos</span>
+                <h2 class="text-3xl font-serif text-rose-950">Componentes UI</h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-16">
+                
+                <!-- Buttons & Badges -->
+                <div class="space-y-12 bg-white/50 backdrop-blur-md rounded-[2.5rem] p-8 border border-stone-100 shadow-sm">
+                    <div>
+                        <h3 class="text-xl font-serif text-stone-800 mb-6">Botões</h3>
+                        <div class="flex flex-wrap items-center gap-4">
+                            <!-- Primary -->
+                            <button class="inline-flex items-center justify-center gap-2 bg-rose-900 text-white px-8 py-4 rounded-full text-xs font-medium uppercase tracking-widest hover:bg-rose-950 transition-all shadow-lg shadow-rose-900/20 hover:scale-105 hover:shadow-xl">
+                                Botão Principal
+                            </button>
+                            <!-- Secondary -->
+                            <button class="inline-flex items-center justify-center gap-2 bg-transparent text-rose-950 border border-rose-200 px-8 py-4 rounded-full text-xs font-medium uppercase tracking-widest hover:border-rose-400 hover:bg-rose-50 transition-all">
+                                Secundário
+                            </button>
+                        </div>
+                        <div class="mt-6">
+                            <!-- Text Link -->
+                            <a href="#" class="inline-flex items-center gap-2 text-rose-800 text-sm font-medium hover:text-rose-600 transition-colors group p-4 pl-0">
+                                Ler Artigo Completo
+                                <span class="bg-rose-50 rounded-full p-2 group-hover:bg-rose-100 transition-colors">
+                                    <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-serif text-stone-800 mb-6">Tags &amp; Badges</h3>
+                        <div class="flex flex-wrap items-center gap-4">
+                            <!-- Border Tag -->
+                            <span class="px-4 py-1.5 rounded-full border border-rose-200 bg-rose-50 text-rose-800 text-[0.65rem] font-semibold uppercase tracking-widest">
+                                Lançamento
+                            </span>
+                            <!-- Subdued Tag -->
+                            <span class="px-4 py-1.5 rounded-full bg-stone-100 text-stone-600 text-[0.65rem] font-semibold uppercase tracking-widest">
+                                Poesia
+                            </span>
+                            <!-- Filled Highlight Tag -->
+                            <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-rose-900 text-white text-[0.65rem] font-semibold uppercase tracking-widest shadow-md">
+                                <i data-lucide="star" class="w-3 h-3 fill-current text-rose-200"></i> Bestseller
+                            </span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-serif text-stone-800 mb-6">Navegação em Menus</h3>
+                        <nav class="inline-flex flex-col sm:flex-row items-start sm:items-center gap-6 bg-white border border-stone-200 rounded-2xl p-4 sm:px-8 shadow-sm">
+                            <a href="#" class="text-sm font-medium text-stone-500 hover:text-rose-800 transition-colors border-b-2 border-transparent hover:border-rose-300 pb-1">Obras</a>
+                            <a href="#" class="text-sm font-medium text-rose-800 border-b-2 border-rose-300 pb-1">Biografia</a>
+                            <a href="#" class="text-sm font-medium text-stone-500 hover:text-rose-800 transition-colors border-b-2 border-transparent hover:border-rose-300 pb-1">Contato</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Cards -->
+                <div>
+                    <h3 class="text-xl font-serif text-stone-800 mb-6">Cards &amp; Painéis</h3>
+                    
+                    <div class="flex flex-col gap-8">
+                        <!-- Book Card -->
+                        <div class="group flex flex-col sm:flex-row gap-6 p-6 rounded-[2rem] hover:bg-rose-50/40 transition-colors border border-stone-100 hover:border-rose-100 cursor-pointer bg-white/50 backdrop-blur-md">
+                            <div class="w-full sm:w-28 h-40 bg-stone-200 rounded-xl overflow-hidden shadow-md flex-shrink-0 relative">
+                                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Livro" />
+                            </div>
+                            <div class="flex flex-col justify-center">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <i data-lucide="book-open" class="w-4 h-4 text-rose-400"></i>
+                                    <span class="text-[0.65rem] font-semibold uppercase tracking-widest text-rose-600">Romance</span>
+                                </div>
+                                <h4 class="text-2xl font-serif text-stone-900 mb-3 group-hover:text-rose-800 transition-colors">A Sombra do Vento</h4>
+                                <p class="text-sm text-stone-500 font-light line-clamp-2 mb-4 leading-relaxed">
+                                    Uma história envolvente sobre memórias esquecidas e livros perdidos no tempo, revelando segredos literários.
+                                </p>
+                                <span class="text-xs font-semibold uppercase tracking-widest text-rose-800 flex items-center gap-2">Detalhes da obra <i data-lucide="arrow-right" class="w-3 h-3 group-hover:translate-x-1 transition-transform"></i></span>
+                            </div>
+                        </div>
+
+                        <!-- Info Card (Newsletter) -->
+                        <div class="bg-gradient-to-br from-rose-50 to-white border border-rose-100 rounded-[2rem] p-8 lg:p-10 shadow-[0_8px_30px_rgb(225,29,72,0.05)] hover:shadow-[0_8px_30px_rgb(225,29,72,0.1)] transition-shadow">
+                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm border border-rose-50">
+                                <i data-lucide="quill" class="w-5 h-5 text-rose-700"></i>
+                            </div>
+                            <h4 class="text-3xl font-serif text-stone-900 mb-3">Carta Literária</h4>
+                            <p class="text-base text-stone-600 font-light mb-8 max-w-sm">
+                                Receba contos exclusivos, poemas inéditos e pequenos ensaios diretamente na sua caixa de entrada, mensalmente.
+                            </p>
+                            <div class="flex gap-2">
+                                <input type="email" placeholder="Seu endereço de e-mail" class="flex-1 bg-white border border-rose-200/60 rounded-full px-6 text-sm outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400 transition-all font-light" />
+                                <button class="w-12 h-12 bg-rose-900 text-white rounded-full flex items-center justify-center hover:bg-rose-950 transition-colors shadow-lg shadow-rose-900/20">
+                                    <i data-lucide="send" class="w-4 h-4 ml-[-2px]"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4) Layout & Spacing Section -->
+        <section id="layout" class="scroll-mt-24">
+            <div class="border-b border-rose-100 pb-4 mb-12 flex flex-col gap-2">
+                <span class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-rose-500">Estrutura de Conteúdo</span>
+                <h2 class="text-3xl font-serif text-rose-950">Layout &amp; Grid Padrão</h2>
+            </div>
+
+            <!-- Blog Grid Example -->
+            <h3 class="text-xl font-serif text-stone-800 mb-6">Grid de Artigos / Ensaios (3 Colunas)</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <!-- Artigo 1 -->
+                <article class="group cursor-pointer flex flex-col gap-5 p-4 rounded-[2rem] hover:bg-rose-50/30 transition-colors border border-transparent hover:border-rose-100">
+                    <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-stone-100">
+                        <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Blog" />
+                    </div>
+                    <div class="px-2">
+                        <span class="text-[0.65rem] font-semibold uppercase tracking-widest text-rose-400">03 Março 2024</span>
+                        <h4 class="text-2xl font-serif mt-2 mb-3 text-stone-900 group-hover:text-rose-800 transition-colors leading-tight">O Processo Criativo Diário</h4>
+                        <p class="text-sm text-stone-500 font-light line-clamp-2 leading-relaxed">Reflexões sobre como manter a constância na escrita mesmo nos dias em que a inspiração parece escassa.</p>
+                    </div>
+                </article>
+                <!-- Artigo 2 -->
+                <article class="group cursor-pointer flex flex-col gap-5 p-4 rounded-[2rem] hover:bg-rose-50/30 transition-colors border border-transparent hover:border-rose-100">
+                    <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-stone-100">
+                        <img src="https://images.unsplash.com/photo-1476275466078-4007374efac4?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Blog" />
+                    </div>
+                    <div class="px-2">
+                        <span class="text-[0.65rem] font-semibold uppercase tracking-widest text-rose-400">15 Fevereiro 2024</span>
+                        <h4 class="text-2xl font-serif mt-2 mb-3 text-stone-900 group-hover:text-rose-800 transition-colors leading-tight">Encontrando sua Voz</h4>
+                        <p class="text-sm text-stone-500 font-light line-clamp-2 leading-relaxed">Dicas práticas de como imprimir sua personalidade e alma nas palavras que você transcreve para o papel.</p>
+                    </div>
+                </article>
+                <!-- Artigo 3 -->
+                <article class="group cursor-pointer flex flex-col gap-5 p-4 rounded-[2rem] hover:bg-rose-50/30 transition-colors border border-transparent hover:border-rose-100">
+                    <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-stone-100">
+                        <img src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Blog" />
+                    </div>
+                    <div class="px-2">
+                        <span class="text-[0.65rem] font-semibold uppercase tracking-widest text-rose-400">28 Janeiro 2024</span>
+                        <h4 class="text-2xl font-serif mt-2 mb-3 text-stone-900 group-hover:text-rose-800 transition-colors leading-tight">Leituras do Ano</h4>
+                        <p class="text-sm text-stone-500 font-light line-clamp-2 leading-relaxed">Uma curadoria especial e íntima dos livros e obras clássicas que mudaram minha perspectiva recentemente.</p>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Alternating Feature -->
+            <h3 class="text-xl font-serif text-stone-800 mb-6">Destaque Alternado (Imagem + Texto)</h3>
+            <div class="bg-gradient-to-br from-stone-50 to-rose-50/30 rounded-[3rem] p-8 lg:p-16 border border-stone-100 shadow-sm relative overflow-hidden">
+                <!-- Decorative element -->
+                <div class="absolute -top-12 -left-12 opacity-5">
+                    <i data-lucide="quill" class="w-48 h-48"></i>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
+                    <div class="order-2 lg:order-1 max-w-lg">
+                        <div class="w-10 h-0.5 bg-rose-300 mb-6"></div>
+                        <h3 class="text-4xl md:text-5xl font-serif text-rose-950 mb-8 leading-tight">A Poesia nas Pequenas Coisas</h3>
+                        <p class="text-stone-600 text-lg font-light leading-relaxed mb-8">
+                            Para encontrar inspiração autêntica, às vezes basta pausar e observar os detalhes singelos ao nosso redor. Cada xícara de café fumegante, cada folha que cai e dança no ar, carrega uma história em potencial esperando as palavras certas.
+                        </p>
+                        <button class="inline-flex items-center gap-2 text-rose-800 font-semibold uppercase tracking-[0.2em] text-[0.65rem] hover:text-rose-600 transition-colors group">
+                            Descubra a Filosofia <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                    <div class="order-1 lg:order-2">
+                        <div class="aspect-square bg-white rounded-full p-4 lg:p-6 shadow-2xl shadow-rose-900/10 rotate-3 hover:rotate-0 transition-transform duration-700">
+                            <div class="w-full h-full rounded-full overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1528659424641-6e06b99684c3?q=80&w=800&auto=format&fit=crop" alt="Coffee and book" class="w-full h-full object-cover" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5) Motion Section -->
+        <section id="motion" class="scroll-mt-24">
+            <div class="border-b border-rose-100 pb-4 mb-12 flex flex-col gap-2">
+                <span class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-rose-500">Micro-Interações</span>
+                <h2 class="text-3xl font-serif text-rose-950">Movimento &amp; Delicadeza</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Scale -->
+                <div class="bg-white border border-stone-100 p-8 rounded-[2rem] shadow-[0_4px_20px_rgb(0,0,0,0.02)] text-center group cursor-pointer hover:shadow-lg hover:border-rose-100 transition-all">
+                    <div class="w-16 h-16 bg-rose-50 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:bg-rose-100 transition-all duration-500">
+                        <i data-lucide="heart" class="w-6 h-6 text-rose-500"></i>
+                    </div>
+                    <h4 class="font-serif text-lg text-stone-800 mb-2">Escala Suave</h4>
+                    <p class="text-[0.65rem] text-stone-400 font-mono tracking-wide">group-hover:scale-110</p>
+                </div>
+                
+                <!-- Translate Y -->
+                <div class="bg-white border border-stone-100 p-8 rounded-[2rem] shadow-[0_4px_20px_rgb(0,0,0,0.02)] text-center group cursor-pointer hover:shadow-lg hover:border-rose-100 transition-all">
+                    <div class="w-16 h-16 bg-stone-50 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:-translate-y-2 group-hover:bg-stone-100 transition-all duration-500">
+                        <i data-lucide="book-open" class="w-6 h-6 text-stone-500"></i>
+                    </div>
+                    <h4 class="font-serif text-lg text-stone-800 mb-2">Translate Vertical</h4>
+                    <p class="text-[0.65rem] text-stone-400 font-mono tracking-wide">group-hover:-translate-y-2</p>
+                </div>
+
+                <!-- Rotate -->
+                <div class="bg-white border border-stone-100 p-8 rounded-[2rem] shadow-[0_4px_20px_rgb(0,0,0,0.02)] text-center group cursor-pointer hover:shadow-lg hover:border-rose-100 transition-all">
+                    <div class="w-16 h-16 bg-rose-900 rounded-2xl flex items-center justify-center mx-auto mb-6 transform -rotate-6 group-hover:rotate-0 group-hover:bg-rose-950 transition-all duration-500">
+                        <span class="font-serif italic text-white text-3xl">E</span>
+                    </div>
+                    <h4 class="font-serif text-lg text-stone-800 mb-2">Rotação Elegante</h4>
+                    <p class="text-[0.65rem] text-stone-400 font-mono tracking-wide">group-hover:rotate-0</p>
+                </div>
+
+                <!-- Pulse (ambient) -->
+                <div class="bg-white border border-stone-100 p-8 rounded-[2rem] shadow-[0_4px_20px_rgb(0,0,0,0.02)] text-center">
+                    <div class="w-16 h-16 bg-gradient-to-tr from-rose-200 to-rose-50 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-slow">
+                        <i data-lucide="sparkles" class="w-6 h-6 text-rose-600"></i>
+                    </div>
+                    <h4 class="font-serif text-lg text-stone-800 mb-2">Pulso Lento</h4>
+                    <p class="text-[0.65rem] text-stone-400 font-mono tracking-wide">animate-pulse-slow</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6) Icons Section -->
+        <section id="icons" class="scroll-mt-24">
+            <div class="border-b border-rose-100 pb-4 mb-12 flex flex-col gap-2">
+                <span class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-rose-500">Recursos Visuais</span>
+                <h2 class="text-3xl font-serif text-rose-950">Sistema de Ícones</h2>
+                <p class="text-base text-stone-600 font-light mt-4 max-w-3xl leading-relaxed">
+                    Utilizamos a biblioteca <strong class="font-medium text-stone-800">Lucide Icons</strong> configurada com espessura fina (<code class="bg-stone-100 px-2 py-0.5 rounded text-sm mx-1">stroke-width="1.5"</code>) para garantir que a iconografia mantenha a leveza visual e harmonize perfeitamente com a tipografia Playfair Display.
+                </p>
+            </div>
+
+            <div class="bg-white/50 backdrop-blur-md rounded-[3rem] p-12 border border-stone-100 shadow-sm">
+                <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-y-12 gap-x-6">
+                    <!-- Icon items -->
+                    <div class="flex flex-col items-center gap-4 group cursor-pointer">
+                        <div class="bg-stone-50 p-4 rounded-full group-hover:bg-rose-50 transition-colors">
+                            <i data-lucide="feather" stroke-width="1.5" class="w-6 h-6 text-stone-700 group-hover:text-rose-700 transition-colors"></i>
+                        </div>
+                        <span class="text-[0.65rem] text-stone-500 font-mono">feather</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 group cursor-pointer">
+                        <div class="bg-stone-50 p-4 rounded-full group-hover:bg-rose-50 transition-colors">
+                            <i data-lucide="book-open" stroke-width="1.5" class="w-6 h-6 text-stone-700 group-hover:text-rose-700 transition-colors"></i>
+                        </div>
+                        <span class="text-[0.65rem] text-stone-500 font-mono">book-open</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 group cursor-pointer">
+                        <div class="bg-stone-50 p-4 rounded-full group-hover:bg-rose-50 transition-colors">
+                            <i data-lucide="quill" stroke-width="1.5" class="w-6 h-6 text-stone-700 group-hover:text-rose-700 transition-colors"></i>
+                        </div>
+                        <span class="text-[0.65rem] text-stone-500 font-mono">quill</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 group cursor-pointer">
+                        <div class="bg-stone-50 p-4 rounded-full group-hover:bg-rose-50 transition-colors">
+                            <i data-lucide="bookmark" stroke-width="1.5" class="w-6 h-6 text-stone-700 group-hover:text-rose-700 transition-colors"></i>
+                        </div>
+                        <span class="text-[0.65rem] text-stone-500 font-mono">bookmark</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 group cursor-pointer">
+                        <div class="bg-stone-50 p-4 rounded-full group-hover:bg-rose-50 transition-colors">
+                            <i data-lucide="coffee" stroke-width="1.5" class="w-6 h-6 text-stone-700 group-hover:text-rose-700 transition-colors"></i>
+                        </div>
+                        <span class="text-[0.65rem] text-stone-500 font-mono">coffee</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 group cursor-pointer">
+                        <div class="bg-stone-50 p-4 rounded-full group-hover:bg-rose-50 transition-colors">
+                            <i data-lucide="moon" stroke-width="1.5" class="w-6 h-6 text-stone-700 group-hover:text-rose-700 transition-colors"></i>
+                        </div>
+                        <span class="text-[0.65rem] text-stone-500 font-mono">moon</span>
+                    </div>
+                    
+                    <!-- Line 2 -->
+                    <div class="flex flex-col items-center gap-4 group cursor-pointer">
+                        <div class="bg-stone-50 p-4 rounded-full group-hover:bg-rose-50 transition-colors">
+                            <i data-lucide="sparkles" stroke-width="1.5" class="w-6 h-6 text-stone-700 group-hover:text-rose-700 transition-colors"></i>
+                        </div>
+                        <span class="text-[0.65rem] text-stone-500 font-mono">sparkles</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 group cursor-pointer">
+                        <div class="bg-stone-50 p-4 rounded-full group-hover:bg-rose-50 transition-colors">
+                            <i data-lucide="heart" stroke-width="1.5" class="w-6 h-6 text-stone-700 group-hover:text-rose-700 transition-colors"></i>
+                        </div>
+                        <span class="text-[0.65rem] text-stone-500 font-mono">heart</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 group cursor-pointer">
+                        <div class="bg-stone-50 p-4 rounded-full group-hover:bg-rose-50 transition-colors">
+                            <i data-lucide="instagram" stroke-width="1.5" class="w-6 h-6 text-stone-700 group-hover:text-rose-700 transition-colors"></i>
+                        </div>
+                        <span class="text-[0.65rem] text-stone-500 font-mono">instagram</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 group cursor-pointer">
+                        <div class="bg-stone-50 p-4 rounded-full group-hover:bg-rose-50 transition-colors">
+                            <i data-lucide="message-circle" stroke-width="1.5" class="w-6 h-6 text-stone-700 group-hover:text-rose-700 transition-colors"></i>
+                        </div>
+                        <span class="text-[0.65rem] text-stone-500 font-mono">messages</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 group cursor-pointer">
+                        <div class="bg-stone-50 p-4 rounded-full group-hover:bg-rose-50 transition-colors">
+                            <i data-lucide="mail" stroke-width="1.5" class="w-6 h-6 text-stone-700 group-hover:text-rose-700 transition-colors"></i>
+                        </div>
+                        <span class="text-[0.65rem] text-stone-500 font-mono">mail</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 group cursor-pointer">
+                        <div class="bg-stone-50 p-4 rounded-full group-hover:bg-rose-50 transition-colors">
+                            <i data-lucide="arrow-right" stroke-width="1.5" class="w-6 h-6 text-stone-700 group-hover:text-rose-700 transition-colors"></i>
+                        </div>
+                        <span class="text-[0.65rem] text-stone-500 font-mono">arrow-right</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="pt-20 pb-12 border-t border-rose-100 flex flex-col md:flex-row justify-between items-center gap-6 mt-32">
+            <div class="flex items-center gap-3">
+                <i data-lucide="feather" stroke-width="1.5" class="w-5 h-5 text-rose-800"></i>
+                <span class="font-serif italic text-xl text-stone-900">Elegance DS</span>
+            </div>
+            <p class="text-[0.65rem] uppercase tracking-widest text-stone-400 font-semibold">&copy; 2024 Design System Literário.</p>
+        </footer>
+
+    </main>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

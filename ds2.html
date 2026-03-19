@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Design System - Escritora Elegante</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        playfair: ['"Playfair Display"', 'serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        writer: {
+                            bg: '#FAF9F8',
+                            surface: '#FFFFFF',
+                            text: '#2D2D2D',
+                            muted: '#6B7280',
+                            accent: '#D49A89',
+                            accentLight: '#E5B5A9',
+                            accentDark: '#B57B6C'
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                        'slide-up': 'slideUp 1s ease-out forwards',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-writer-bg text-writer-text antialiased min-h-screen selection:bg-writer-accentLight/30 selection:text-writer-accentDark">
+
+<!-- Navigation -->
+<nav class="sticky top-0 z-50 bg-writer-surface/80 backdrop-blur-md border-b border-writer-accentLight/20 py-4 mb-8">
+    <div class="mx-auto max-w-7xl px-6 flex justify-between items-center">
+        <a href="#" class="font-playfair font-semibold text-xl tracking-wide text-writer-accentDark italic cursor-pointer transition-opacity hover:opacity-80">Elisa<span class="text-writer-text">.</span></a>
+        
+        <div class="hidden md:flex items-center gap-8 text-[0.7rem] tracking-[0.2em] uppercase font-medium">
+            <a href="#hero" class="text-writer-muted hover:text-writer-accentDark transition-colors">Hero</a>
+            <a href="#typography" class="text-writer-muted hover:text-writer-accentDark transition-colors">Tipografia</a>
+            <a href="#colors" class="text-writer-muted hover:text-writer-accentDark transition-colors">Cores</a>
+            <a href="#components" class="text-writer-muted hover:text-writer-accentDark transition-colors">Componentes</a>
+        </div>
+        
+        <button class="md:hidden p-2 text-writer-text rounded-md hover:bg-writer-bg transition-colors">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+    </div>
+</nav>
+
+<main class="mx-auto max-w-7xl px-6 pb-20 space-y-24">
+    
+    <!-- Hero Section -->
+    <section id="hero" class="bg-writer-surface rounded-[3rem] p-10 lg:p-20 shadow-sm border border-black/5 animate-fade-in">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="order-2 lg:order-1 relative z-10">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-writer-bg rounded-full border border-black/5 mb-8 animate-slide-up">
+                    <span class="w-2 h-2 rounded-full bg-writer-accent animate-pulse-slow"></span>
+                    <span class="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-writer-muted">Design System v2.0</span>
+                </div>
+                
+                <h1 class="font-playfair text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight text-writer-text animate-slide-up" style="animation-delay: 0.2s;">
+                    O poder de uma <br><span class="italic text-writer-accentDark">bela história.</span>
+                </h1>
+                
+                <p class="text-base md:text-lg text-writer-muted leading-relaxed font-light mb-10 max-w-lg animate-slide-up" style="animation-delay: 0.4s;">
+                    Um padrão de design construído para transparecer a elegância, suavidade e profissionalismo das palavras de uma autora. Documentação de componentes, cores e tipografia.
+                </p>
+                
+                <div class="flex flex-wrap items-center gap-4 animate-slide-up" style="animation-delay: 0.6s;">
+                    <a href="#typography" class="inline-flex items-center justify-center gap-2 bg-writer-text text-white text-[0.65rem] font-medium uppercase tracking-[0.2em] px-8 py-4 rounded-full hover:bg-black hover:scale-105 transition-all shadow-lg shadow-black/10">
+                        Ver Padrões <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                    </a>
+                    <a href="#components" class="inline-flex items-center justify-center gap-2 bg-transparent text-writer-text border border-writer-text/10 text-[0.65rem] font-medium uppercase tracking-[0.2em] px-8 py-4 rounded-full hover:bg-writer-bg transition-colors">
+                        Componentes
+                    </a>
+                </div>
+            </div>
+            <div class="order-1 lg:order-2 relative h-[50vh] lg:h-[70vh] rounded-[2.5rem] overflow-hidden group shadow-2xl animate-fade-in">
+                <!-- Fallback to a nice abstract/book image if local assets are missing -->
+                <img src="https://images.unsplash.com/photo-1455390582262-044cdead27d8?auto=format&fit=crop&q=80&w=800" alt="Livro e rosas" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[3000ms] group-hover:scale-110 group-hover:rotate-1">
+                <div class="absolute inset-0 bg-gradient-to-tr from-writer-accentDark/30 to-writer-bg/10 mix-blend-overlay"></div>
+                <div class="absolute inset-0 bg-black/10 transition-opacity duration-700 group-hover:opacity-0"></div>
+                
+                <!-- Floating badge -->
+                <div class="absolute bottom-8 right-8 px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-white/90 text-[0.6rem] font-medium uppercase tracking-widest shadow-xl">
+                    Estética Minimalista
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Typography -->
+    <section id="typography" class="animate-slide-up opacity-0" style="animation-duration: 1s; animation-fill-mode: forwards;">
+        <div class="mb-12">
+            <p class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-writer-accent mb-2">Fundação Visual</p>
+            <h2 class="font-playfair text-4xl text-writer-text">Tipografia &amp; Escala</h2>
+        </div>
+        
+        <div class="bg-writer-surface rounded-[2.5rem] p-8 md:p-16 shadow-sm border border-black/5 space-y-12">
+            <!-- H1 -->
+            <div class="flex flex-col md:flex-row md:items-start justify-between gap-8 pb-8 border-b border-black/5">
+                <div class="flex-1">
+                    <p class="text-[0.65rem] uppercase tracking-[0.25em] text-writer-muted mb-4">Título Principal (H1)</p>
+                    <h1 class="font-playfair text-5xl md:text-6xl lg:text-[5rem] italic leading-tight text-writer-text">
+                        A Arte da Palavra
+                    </h1>
+                </div>
+                <div class="text-left md:text-right text-xs text-writer-muted font-mono pt-4 space-y-1">
+                    <div>Playfair Display</div>
+                    <div>Italic / 500</div>
+                    <div>5rem (80px)</div>
+                </div>
+            </div>
+
+            <!-- H2 -->
+            <div class="flex flex-col md:flex-row md:items-start justify-between gap-8 pb-8 border-b border-black/5">
+                <div class="flex-1">
+                    <p class="text-[0.65rem] uppercase tracking-[0.25em] text-writer-muted mb-4">Secundário (H2)</p>
+                    <h2 class="font-playfair text-3xl md:text-4xl text-writer-text">
+                        O Som do Silêncio
+                    </h2>
+                </div>
+                <div class="text-left md:text-right text-xs text-writer-muted font-mono pt-4 space-y-1">
+                    <div>Playfair Display</div>
+                    <div>Regular / 400</div>
+                    <div>2.25rem (36px)</div>
+                </div>
+            </div>
+
+            <!-- Paragraph -->
+            <div class="flex flex-col md:flex-row md:items-start justify-between gap-8 pb-8 border-b border-black/5">
+                <div class="flex-1">
+                    <p class="text-[0.65rem] uppercase tracking-[0.25em] text-writer-muted mb-4">Corpo de Texto</p>
+                    <p class="font-inter text-base lg:text-lg text-writer-muted leading-relaxed font-light max-w-2xl">
+                        A vírgula não é uma pausa no papel, é a respiração de quem lê. Este é o estilo de corpo de texto projetado para leituras longas e confortáveis, garantindo que o leitor mergulhe na história sem cansaço visual.
+                    </p>
+                </div>
+                <div class="text-left md:text-right text-xs text-writer-muted font-mono pt-4 space-y-1">
+                    <div>Inter</div>
+                    <div>Light / 300</div>
+                    <div>1.125rem (18px)</div>
+                </div>
+            </div>
+
+            <!-- Labels -->
+            <div class="flex flex-col md:flex-row md:items-start justify-between gap-8">
+                <div class="flex-1">
+                    <p class="text-[0.65rem] uppercase tracking-[0.25em] text-writer-muted mb-4">Micro-textos &amp; Botões</p>
+                    <span class="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-writer-accentDark bg-writer-accentLight/10 px-4 py-2 rounded">
+                        Categoria • Botões • Tags
+                    </span>
+                </div>
+                <div class="text-left md:text-right text-xs text-writer-muted font-mono pt-4 space-y-1">
+                    <div>Inter</div>
+                    <div>Semibold / 600</div>
+                    <div>0.65rem (10px)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Colors -->
+    <section id="colors" class="mb-24">
+        <div class="mb-12">
+            <p class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-writer-accent mb-2">Estética Visual</p>
+            <h2 class="font-playfair text-4xl text-writer-text">Cores e Tom</h2>
+        </div>
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Color Swatch -->
+            <div class="space-y-4">
+                <div class="h-32 rounded-[1.5rem] bg-writer-bg border border-black/5 shadow-sm"></div>
+                <div>
+                    <p class="text-sm font-medium text-writer-text">Fundo Principal</p>
+                    <p class="text-[0.65rem] font-mono text-writer-muted uppercase mt-1">#FAF9F8</p>
+                    <p class="text-xs text-writer-muted mt-2 font-light">Papel levemente envelhecido, relaxante para os olhos.</p>
+                </div>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="h-32 rounded-[1.5rem] bg-writer-surface border border-black/5 shadow-md"></div>
+                <div>
+                    <p class="text-sm font-medium text-writer-text">Superfície (Cards)</p>
+                    <p class="text-[0.65rem] font-mono text-writer-muted uppercase mt-1">#FFFFFF</p>
+                    <p class="text-xs text-writer-muted mt-2 font-light">Branco puro para destacar o conteúdo interno dos blocos.</p>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="h-32 rounded-[1.5rem] bg-writer-text shadow-xl"></div>
+                <div>
+                    <p class="text-sm font-medium text-writer-text">Tinta (Texto 1)</p>
+                    <p class="text-[0.65rem] font-mono text-writer-muted uppercase mt-1">#2D2D2D</p>
+                    <p class="text-xs text-writer-muted mt-2 font-light">Charcoal profundo. Mais suave e elegante do que o preto absoluto.</p>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="h-32 rounded-[1.5rem] bg-writer-accentDark shadow-md"></div>
+                <div>
+                    <p class="text-sm font-medium text-writer-text">Rosa Sóbrio / Destaque</p>
+                    <p class="text-[0.65rem] font-mono text-writer-muted uppercase mt-1">#B57B6C</p>
+                    <p class="text-xs text-writer-muted mt-2 font-light">Para elementos interativos fortes, hovers e títulos em destaque.</p>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="h-32 rounded-[1.5rem] bg-writer-accent shadow-sm"></div>
+                <div>
+                    <p class="text-sm font-medium text-writer-text">Rosa Clássico</p>
+                    <p class="text-[0.65rem] font-mono text-writer-muted uppercase mt-1">#D49A89</p>
+                    <p class="text-xs text-writer-muted mt-2 font-light">Elemento de cor intermediário, tags e badges principais.</p>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="h-32 rounded-[1.5rem] bg-writer-accentLight shadow-sm"></div>
+                <div>
+                    <p class="text-sm font-medium text-writer-text">Rosa Suave (Fundo)</p>
+                    <p class="text-[0.65rem] font-mono text-writer-muted uppercase mt-1">#E5B5A9</p>
+                    <p class="text-xs text-writer-muted mt-2 font-light">Usado com opacidade (10-20%) para fundos de botões sutis e hover.</p>
+                </div>
+            </div>
+
+            <div class="space-y-4 col-span-2">
+                <div class="h-32 rounded-[1.5rem] bg-gradient-to-br from-writer-accentLight/20 via-writer-bg to-white border border-black/5 shadow-sm"></div>
+                <div>
+                    <p class="text-sm font-medium text-writer-text">Gradiente Elegante</p>
+                    <p class="text-[0.65rem] font-mono text-writer-muted uppercase mt-1">from-accentLight/20 to-white</p>
+                    <p class="text-xs text-writer-muted mt-2 font-light">Usado em backgrounds de seções especiais ou cards em destaque para criar profundidade sutil.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UI Components -->
+    <section id="components" class="mb-24">
+        <div class="mb-12">
+            <p class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-writer-accent mb-2">Interatividade</p>
+            <h2 class="font-playfair text-4xl text-writer-text">Componentes de IU</h2>
+        </div>
+
+        <div class="bg-writer-surface rounded-[2.5rem] p-8 md:p-16 shadow-sm border border-black/5 space-y-16">
+            
+            <!-- Buttons -->
+            <div>
+                <h3 class="font-playfair text-2xl text-writer-text mb-8 border-b border-black/5 pb-4">Botões</h3>
+                <div class="flex flex-wrap items-center gap-6">
+                    <!-- Primary -->
+                    <button class="inline-flex items-center justify-center gap-2 bg-writer-text text-white text-[0.65rem] font-medium uppercase tracking-[0.2em] px-8 py-4 rounded-full hover:bg-black hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10 transition-all duration-300">
+                        Comprar Livro <i data-lucide="book-open" class="w-3 h-3"></i>
+                    </button>
+                    
+                    <!-- Secondary -->
+                    <button class="inline-flex items-center justify-center gap-2 bg-writer-accentLight/10 border border-writer-accent/30 text-writer-accentDark text-[0.65rem] font-medium uppercase tracking-[0.2em] px-8 py-4 rounded-full hover:bg-writer-accent hover:text-white hover:border-writer-accent hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+                        Ler Amostra
+                    </button>
+
+                    <!-- Link -->
+                    <a href="#" class="inline-flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-writer-muted hover:text-writer-accentDark transition-colors group">
+                        Ver resenhas 
+                        <span class="w-6 h-[1px] bg-writer-muted group-hover:bg-writer-accentDark group-hover:w-8 transition-all duration-300"></span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Cards -->
+            <div>
+                <h3 class="font-playfair text-2xl text-writer-text mb-8 border-b border-black/5 pb-4">Cards Literários</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Book Card -->
+                    <div class="group bg-writer-bg/50 rounded-[2rem] p-6 border border-black/5 hover:bg-white hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 cursor-pointer flex flex-col md:flex-row gap-8 items-center">
+                        <div class="w-28 h-40 bg-gray-200 rounded-lg overflow-hidden shadow-md relative shrink-0">
+                            <!-- Placeholder image representing a book cover -->
+                            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=400" alt="Capa" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        </div>
+                        <div class="flex-1 space-y-3 text-center md:text-left">
+                            <span class="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-writer-accent">Romance • 2024</span>
+                            <h4 class="font-playfair text-2xl italic text-writer-text">Fragmentos do Tempo</h4>
+                            <p class="text-sm text-writer-muted font-light leading-relaxed">Uma jornada poética através de memórias perdidas e encontros marcados pelo destino na cidade grande.</p>
+                        </div>
+                    </div>
+
+                    <!-- Quote Card -->
+                    <div class="bg-gradient-to-br from-writer-accentLight/10 to-transparent rounded-[2rem] p-8 border border-writer-accent/10 relative overflow-hidden group hover:border-writer-accent/30 transition-colors duration-500 flex items-center">
+                        <i data-lucide="quote" class="w-24 h-24 text-writer-accent/10 absolute -top-4 -left-4 transform -rotate-12 group-hover:rotate-0 group-hover:scale-110 transition-transform duration-700"></i>
+                        <div class="relative z-10">
+                            <p class="font-playfair text-xl md:text-2xl text-writer-text italic leading-relaxed">
+                                "Porque no fim das contas, somos feitos das linhas que sublinhamos nos livros que amamos."
+                            </p>
+                            <p class="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-writer-muted mt-6">
+                                — Capítulo 4, O Eco
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inputs & Badges -->
+            <div>
+                <h3 class="font-playfair text-2xl text-writer-text mb-8 border-b border-black/5 pb-4">Inputs &amp; Etiquetas</h3>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 rounded-full bg-writer-accentLight/20 text-writer-accentDark text-[0.6rem] font-semibold uppercase tracking-[0.2em] border border-writer-accentLight/30">
+                            Poesia
+                        </span>
+                        <span class="px-4 py-2 rounded-full bg-writer-bg border border-black/10 text-writer-muted hover:text-writer-text hover:border-black/30 transition-colors cursor-pointer text-[0.6rem] font-semibold uppercase tracking-[0.2em]">
+                            Contos
+                        </span>
+                        <span class="px-4 py-2 rounded-full bg-writer-text shadow-lg text-white text-[0.6rem] font-semibold uppercase tracking-[0.2em]">
+                            Newsletter
+                        </span>
+                    </div>
+
+                    <div class="relative group">
+                        <input type="email" placeholder="Seu melhor e-mail para receber novidades..." class="w-full bg-transparent border-b border-writer-muted/30 pb-3 pl-2 pr-10 text-sm md:text-base text-writer-text focus:outline-none focus:border-writer-accent transition-colors placeholder:text-writer-muted/50 font-light font-inter">
+                        <button class="absolute right-0 bottom-3 text-writer-muted group-hover:text-writer-accent transition-colors">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hover Animation Examples -->
+            <div>
+                <h3 class="font-playfair text-2xl text-writer-text mb-8 border-b border-black/5 pb-4">Animações Sutis (Hover)</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="bg-writer-bg rounded-2xl p-6 text-center cursor-pointer group hover:-translate-y-2 transition-transform duration-300">
+                        <i data-lucide="feather" class="w-6 h-6 mx-auto mb-3 text-writer-muted group-hover:text-writer-accent transition-colors"></i>
+                        <p class="text-xs font-medium text-writer-text">Translate Y</p>
+                    </div>
+                    
+                    <div class="bg-writer-bg rounded-2xl p-6 text-center cursor-pointer group hover:shadow-xl hover:shadow-writer-accent/10 transition-shadow duration-500">
+                        <i data-lucide="sparkles" class="w-6 h-6 mx-auto mb-3 text-writer-muted group-hover:text-writer-accent transition-colors"></i>
+                        <p class="text-xs font-medium text-writer-text">Shadow Fade</p>
+                    </div>
+
+                    <div class="bg-writer-bg rounded-2xl p-6 text-center cursor-pointer group hover:bg-writer-accentLight/20 transition-colors duration-500">
+                        <i data-lucide="heart" class="w-6 h-6 mx-auto mb-3 text-writer-muted group-hover:text-writer-accent transition-colors"></i>
+                        <p class="text-xs font-medium text-writer-text">Background Fade</p>
+                    </div>
+
+                    <div class="bg-writer-bg rounded-2xl p-6 text-center cursor-pointer group overflow-hidden relative">
+                        <div class="absolute inset-0 bg-writer-accent opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                        <i data-lucide="book" class="w-6 h-6 mx-auto mb-3 text-writer-muted group-hover:scale-125 transition-transform duration-500"></i>
+                        <p class="text-xs font-medium text-writer-text relative z-10">Scale Icon</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    
+    <!-- Footer Pattern -->
+    <footer class="text-center py-12 border-t border-black/5">
+        <p class="font-playfair italic text-writer-muted">"A beleza das palavras está no espaço que deixamos entre elas."</p>
+        <p class="text-[0.65rem] uppercase tracking-widest text-writer-muted mt-6 font-semibold">© 2026 Elisa Literatura</p>
+    </footer>
+</main>
+
+<script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+    
+    // Intersection Observer to trigger scroll animations elegantly
+    document.addEventListener("DOMContentLoaded", function() {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-slide-up');
+                    entry.target.style.opacity = 1;
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section:not(#hero)').forEach(section => {
+            section.style.opacity = 0;
+            observer.observe(section);
+        });
+    });
+</script>
+
+</body>
+</html>
