@@ -160,18 +160,26 @@
         </div>
     </header>
 
-    <main class="mx-auto max-w-7xl px-6 lg:px-8 mt-12 space-y-32">
+    <!-- 0) Hero Section (Full Width) -->
+    <section id="hero" class="relative w-full pt-12 pb-28 hero-flashlight overflow-hidden">
+        <!-- Mouse Tracking Glow Background -->
+        <div class="absolute inset-0 opacity-0 transition-opacity duration-1000 pointer-events-none hero-glow z-[-1]" style="background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(192, 113, 135, 0.15), transparent 40%); mix-blend-mode: multiply;"></div>
         
-        <!-- 0) Hero Section -->
-        <section id="hero" class="relative pt-12 pb-20">
+        <!-- Constant Ambient Glow (Predominant Color) -->
+        <div class="absolute inset-0 z-[-2] pointer-events-none">
+            <div class="absolute -top-40 -left-60 w-[800px] h-[800px] bg-writer-100/70 rounded-full filter blur-[100px] animate-[pulse_8s_ease-in-out_infinite]"></div>
+            <div class="absolute top-20 -right-40 w-[800px] h-[800px] bg-writer-700/5 rounded-full filter blur-[120px] animate-[pulse_12s_ease-in-out_infinite_reverse]"></div>
+        </div>
+
+        <div class="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="z-10 relative">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-writer-200 bg-white/60 backdrop-blur-sm mb-8 [animation:animationIn_0.8s_ease-out_0s_both] animate-on-scroll">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-writer-200 bg-white/60 backdrop-blur-md mb-8 [animation:animationIn_0.8s_ease-out_0s_both] animate-on-scroll shadow-sm">
                         <i data-lucide="pen-tool" class="w-4 h-4 text-writer-600"></i>
                         <span class="text-xs font-semibold uppercase tracking-widest text-writer-700">Design System</span>
                     </div>
                     
-                    <h1 class="text-5xl lg:text-7xl font-serif text-writer-dark leading-[1.1] mb-8 [animation:animationIn_1.2s_ease-out_0.2s_both] animate-on-scroll">
+                    <h1 class="text-5xl lg:text-[5rem] font-serif text-writer-dark leading-[1.05] mb-8 [animation:animationIn_1.2s_ease-out_0.2s_both] animate-on-scroll">
                         A elegância e o <br/>
                         <span class="italic text-gradient">poder da palavra.</span>
                     </h1>
@@ -191,38 +199,46 @@
                             </span>
                         </button>
 
-                        <a href="#typography" class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-transparent border border-writer-300 text-writer-800 font-medium tracking-wide hover:bg-white hover:border-writer-400 transition-all duration-300">
+                        <a href="#typography" class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-white/50 border border-writer-300 text-writer-800 font-medium tracking-wide hover:bg-white hover:border-writer-400 hover:shadow-sm transition-all duration-300">
                             Ver Tipografia
                         </a>
                     </div>
                 </div>
                 
                 <div class="relative [animation:animationIn_1.2s_ease-out_0.8s_both] animate-on-scroll group">
-                    <!-- Image Showcase Card -->
-                    <div class="relative rounded-[2.5rem] overflow-hidden aspect-[4/5] shadow-elegant">
-                        <img src="https://images.unsplash.com/photo-1455390582262-044cdead2708?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Máquina de escrever" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out"/>
-                        <!-- Elegant overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-writer-900/60 via-writer-900/10 to-transparent"></div>
+                    <!-- Original Elegantly Rounded Image Showcase Card -->
+                    <div class="relative rounded-[2.5rem] overflow-hidden aspect-[4/5] shadow-elegant cursor-pointer border border-white/50">
+                        <!-- The Image with Grayscale to Color transition -->
+                        <img src="https://images.unsplash.com/photo-1455390582262-044cdead2708?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Máquina de escrever" class="absolute inset-0 w-full h-full object-cover grayscale-[80%] opacity-90 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-[2s] ease-out"/>
                         
+                        <!-- Elegant overlay -->
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,rgba(117,59,73,0.1)_100%)] pointer-events-none"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-writer-900/60 via-writer-900/10 to-transparent mix-blend-multiply opacity-80 group-hover:opacity-40 transition-opacity duration-1000 pointer-events-none"></div>
+
                         <div class="absolute bottom-10 left-10">
-                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/30 bg-white/20 backdrop-blur-md text-white">
-                                <i data-lucide="book-open" class="w-4 h-4"></i>
-                                <span class="text-xs font-semibold tracking-widest uppercase">Padrões Visuais</span>
+                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/30 bg-white/20 backdrop-blur-md text-white overflow-hidden relative shadow-sm">
+                                <!-- Edge flash light specific to the badge -->
+                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-1000 delay-300"></div>
+                                <i data-lucide="book-open" class="w-4 h-4 relative z-10"></i>
+                                <span class="text-xs font-semibold tracking-widest uppercase relative z-10">Padrões Visuais</span>
                             </div>
                         </div>
                         
-                        <!-- Light Swipe Hover Effect over Image -->
-                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out"></div>
+                        <!-- Light Sweep Hover Effect over Image -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 -translate-x-[100%] translate-y-[100%] group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-[1.5s] ease-out pointer-events-none"></div>
                     </div>
                     
                     <!-- Floating abstract badge -->
-                    <div class="absolute -right-8 top-1/4 w-32 h-32 rounded-full bg-white glass-panel flex flex-col items-center justify-center p-4 animate-[bounce_6s_infinite] shadow-elegant hidden lg:flex">
+                    <div class="absolute -right-8 top-1/4 w-32 h-32 rounded-full bg-white glass-panel flex flex-col items-center justify-center p-4 animate-[bounce_6s_infinite] shadow-elegant hidden lg:flex group/badge hover:scale-110 transition-transform cursor-pointer">
                         <span class="font-serif italic text-3xl text-writer-700">"Elisa"</span>
                         <span class="text-[0.6rem] uppercase tracking-widest font-semibold text-writer-800/60 mt-2">Autora</span>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+
+    <main class="mx-auto max-w-7xl px-6 lg:px-8 mt-12 space-y-32">
 
         <!-- Divider -->
         <div class="w-full overflow-hidden relative py-8 border-y border-writer-200/50 [animation:animationIn_1.2s_ease-out_0.3s_both] animate-on-scroll">
@@ -637,7 +653,7 @@
                 window.__inViewIO.observe(el); 
             });
 
-            // Flashlight Effect Tracking
+            // Flashlight Effect Tracking for Cards
             document.querySelectorAll('.card-flashlight').forEach((card) => {
                 card.addEventListener('mousemove', (e) => {
                     const rect = card.getBoundingClientRect();
@@ -645,6 +661,23 @@
                     const y = e.clientY - rect.top;
                     card.style.setProperty('--mouse-x', `${x}px`);
                     card.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
+
+            // Flashlight Effect Tracking for Hero Background
+            document.querySelectorAll('.hero-flashlight').forEach((section) => {
+                const glow = section.querySelector('.hero-glow');
+                if(!glow) return;
+                section.addEventListener('mousemove', (e) => {
+                    const rect = section.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    glow.style.setProperty('--mouse-x', `${x}px`);
+                    glow.style.setProperty('--mouse-y', `${y}px`);
+                    glow.style.opacity = '1';
+                });
+                section.addEventListener('mouseleave', () => {
+                    glow.style.opacity = '0';
                 });
             });
         });

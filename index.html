@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Nascidas para serem Amadas – Elisa</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Design System Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        writer: {
+                            50: '#fdf8f9', 100: '#f9edf0', 200: '#f1dce2', 300: '#e5c0ca',
+                            400: '#d39bab', 500: '#c07187', 600: '#a7556d', 700: '#8c4355',
+                            800: '#753b49', 900: '#643440', dark: '#2d2426'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glass': '0 10px 40px -10px rgba(117, 59, 73, 0.08)',
+                        'elegant': '0 20px 40px -5px rgba(117, 59, 73, 0.1), 0 8px 10px -6px rgba(117, 59, 73, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #ffffff; 
+            color: #2d2426; 
+            scroll-behavior: smooth;
+        }
+        
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 1);
+            box-shadow: 0 10px 40px -10px rgba(117, 59, 73, 0.08);
+        }
+        
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(253, 248, 249, 0.4) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px 0 rgba(117, 59, 73, 0.05);
+        }
+
+        /* Intro Sequence Animations (Fade + Blur In) */
+        @keyframes animationIn {
+            0% { opacity: 0; transform: translateY(30px); filter: blur(8px); }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0px); }
+        }
+        /* Paused default, Activated by JS */
+        .animate-on-scroll { animation-play-state: paused !important; }
+        .animate-on-scroll.animate { animation-play-state: running !important; }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #2d2426 0%, #8c4355 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .bg-mesh {
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(347, 45%, 96%, 1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(347, 45%, 94%, 1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(347, 45%, 96%, 1) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(0, 0%, 100%, 1) 0px, transparent 50%);
+        }
+        
+        .selection-pink *::selection {
+            background-color: #f1dce2;
+            color: #753b49;
+        }
+    </style>
+</head>
+<body class="selection-pink bg-mesh relative overflow-x-hidden">
+
+    <!-- Ambient Background Elements -->
+    <div class="fixed top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-writer-100 blur-[100px] opacity-60 z-[-1] pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-writer-50 blur-[120px] opacity-80 z-[-1] pointer-events-none"></div>
+
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-white/50 transition-all duration-300">
+        <div class="mx-auto max-w-7xl px-8 py-5 flex items-center justify-between">
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-writer-50 flex items-center justify-center border border-writer-200 group-hover:scale-105 transition-transform duration-500">
+                    <i data-lucide="feather" class="w-5 h-5 text-writer-700"></i>
+                </div>
+                <span class="font-serif italic font-semibold text-xl tracking-wide text-writer-dark group-hover:text-writer-700 transition-colors">Elisa</span>
+            </a>
+            
+            <nav class="hidden md:flex items-center gap-10 text-sm font-medium tracking-widest uppercase">
+                <a href="#sobre" class="text-writer-800/60 hover:text-writer-800 transition-colors">O Curso</a>
+                <a href="#modulos" class="text-writer-800/60 hover:text-writer-800 transition-colors">Módulos</a>
+                <a href="#depoimentos" class="text-writer-800/60 hover:text-writer-800 transition-colors">Depoimentos</a>
+            </nav>
+            
+            <a href="#oferta" class="hidden md:inline-flex group overflow-hidden transition-all duration-300 hover:-translate-y-0.5 rounded-full p-[1px] relative items-center justify-center shadow-sm">
+                <span class="absolute inset-[-100%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,transparent_75%,#d39bab_100%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+                <span class="absolute inset-0 rounded-full bg-transparent border border-writer-200 transition-opacity duration-300 group-hover:opacity-0"></span>
+                <span class="flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-white text-writer-800 text-xs font-semibold tracking-[0.2em] uppercase relative z-10 transition-colors duration-300">
+                    Garantir Vaga
+                </span>
+            </a>
+            
+            <button class="md:hidden text-writer-dark">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- DOBRA 1: HERO -->
+    <section id="hero" class="relative w-full pt-12 pb-28 hero-flashlight overflow-hidden cursor-default">
+        <!-- Glow Overlay -->
+        <div class="absolute inset-0 opacity-0 transition-opacity duration-1000 pointer-events-none hero-glow z-[-1]" style="background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(192, 113, 135, 0.15), transparent 40%); mix-blend-mode: multiply;"></div>
+        
+        <!-- Constant Ambient Glow -->
+        <div class="absolute inset-0 z-[-2] pointer-events-none">
+            <div class="absolute -top-40 -left-60 w-[800px] h-[800px] bg-writer-100/70 rounded-full filter blur-[100px] animate-[pulse_8s_ease-in-out_infinite]"></div>
+            <div class="absolute top-20 -right-40 w-[800px] h-[800px] bg-writer-700/5 rounded-full filter blur-[120px] animate-[pulse_12s_ease-in-out_infinite_reverse]"></div>
+        </div>
+
+        <div class="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="z-10 relative">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-writer-200 bg-white/60 backdrop-blur-md mb-8 [animation:animationIn_0.8s_ease-out_0s_both] shadow-sm">
+                        <i data-lucide="heart" class="w-4 h-4 text-writer-600"></i>
+                        <span class="text-xs font-semibold uppercase tracking-widest text-writer-700">As Inscrições Estão Abertas</span>
+                    </div>
+                    
+                    <h1 class="text-5xl lg:text-[4.5rem] font-serif text-writer-dark leading-[1.05] mb-8 [animation:animationIn_1.2s_ease-out_0.2s_both]">
+                        Você não nasceu para viver rejeitada.<br/>
+                        <span class="italic text-gradient">Você nasceu para ser AMADA.</span>
+                    </h1>
+                    
+                    <p class="text-lg text-writer-800/70 font-sans leading-relaxed max-w-xl mb-12 [animation:animationIn_1.2s_ease-out_0.4s_both]">
+                        Se você carrega dores do passado, marcas emocionais que ainda doem no presente ou sente dificuldade de se perceber como filha amada de Deus, este caminho é para você.
+                    </p>
+                    <p class="text-lg text-writer-800/70 font-sans leading-relaxed max-w-xl mb-12 [animation:animationIn_1.2s_ease-out_0.5s_both]">
+                        O curso <strong>Nascidas para Serem Amadas</strong> é um processo de cura emocional, restauração da identidade e intimidade profunda com Deus, criado para mulheres que desejam viver leves, livres e inteiras.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-6 [animation:animationIn_1.2s_ease-out_0.6s_both]">
+                        <a href="#oferta" class="group inline-flex overflow-hidden transition-all duration-300 hover:-translate-y-[2px] rounded-full p-[1px] relative items-center justify-center hover:shadow-elegant">
+                            <span class="absolute inset-[-100%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,transparent_75%,#d39bab_100%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+                            <span class="absolute inset-0 rounded-full bg-writer-800 transition-opacity duration-300 group-hover:opacity-0"></span>
+                            <span class="flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-writer-800 hover:bg-writer-900 transition-colors duration-300 w-full h-full relative z-10 text-white font-medium tracking-wide">
+                                <span class="relative z-10">Quero iniciar minha cura</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 ml-2 relative z-10 transition-transform duration-300 group-hover:translate-x-1"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="relative [animation:animationIn_1.2s_ease-out_0.8s_both] group">
+                    <div class="relative rounded-[2.5rem] overflow-hidden aspect-[4/5] shadow-elegant cursor-pointer border border-white/50">
+                        <!-- Imagem da Hero -->
+                        <img src="https://images.unsplash.com/photo-1455390582262-044cdead2708?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Jornada da Cura" class="absolute inset-0 w-full h-full object-cover grayscale-[80%] opacity-90 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-[2s] ease-out"/>
+                        
+                        <!-- Transparent overlays -->
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,rgba(117,59,73,0.1)_100%)] pointer-events-none"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-writer-900/60 via-writer-900/10 to-transparent mix-blend-multiply opacity-80 group-hover:opacity-40 transition-opacity duration-1000 pointer-events-none"></div>
+
+                        <div class="absolute bottom-10 left-10">
+                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/30 bg-white/20 backdrop-blur-md text-white overflow-hidden relative shadow-sm">
+                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-1000 delay-300"></div>
+                                <i data-lucide="sun" class="w-4 h-4 relative z-10"></i>
+                                <span class="text-xs font-semibold tracking-widest uppercase relative z-10">Restauração</span>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 -translate-x-[100%] translate-y-[100%] group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-[1.5s] ease-out pointer-events-none"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider Decorativo -->
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-writer-200 to-transparent my-10 max-w-2xl mx-auto"></div>
+
+    <!-- DOBRA 2: IDENTIFICAÇÃO -->
+    <section class="scroll-mt-32 max-w-4xl mx-auto px-6 lg:px-8 pt-10 pb-20 cursor-default" id="identificacao">
+        <div class="text-center mb-12 [animation:animationIn_1.2s_ease-out_0.2s_both] animate-on-scroll">
+            <h2 class="text-3xl font-serif text-writer-dark mb-4">Se alguma dessas frases parece falar com você, continue…</h2>
+        </div>
+        
+        <div class="glass-card rounded-[2rem] p-10 lg:p-12 mb-16 shadow-sm border border-white/60 [animation:animationIn_1.2s_ease-out_0.4s_both] animate-on-scroll">
+            <ul class="space-y-6">
+                <li class="flex items-center gap-4 text-writer-800/80 font-sans text-lg">
+                    <span class="w-12 h-12 rounded-full flex items-center justify-center bg-writer-100 text-writer-700 shadow-sm shrink-0">
+                        <i data-lucide="circle-dashed" class="w-5 h-5"></i>
+                    </span>
+                    “Eu amo Jesus, mas não consigo descansar.”
+                </li>
+                <li class="flex items-center gap-4 text-writer-800/80 font-sans text-lg">
+                    <span class="w-12 h-12 rounded-full flex items-center justify-center bg-writer-100 text-writer-700 shadow-sm shrink-0">
+                        <i data-lucide="lock" class="w-5 h-5"></i>
+                    </span>
+                    “Sinto que algo dentro de mim está travado.”
+                </li>
+                <li class="flex items-center gap-4 text-writer-800/80 font-sans text-lg">
+                    <span class="w-12 h-12 rounded-full flex items-center justify-center bg-writer-100 text-writer-700 shadow-sm shrink-0">
+                        <i data-lucide="heart-off" class="w-5 h-5"></i>
+                    </span>
+                    “Tenho dificuldade de me sentir amada.”
+                </li>
+                <li class="flex items-center gap-4 text-writer-800/80 font-sans text-lg">
+                    <span class="w-12 h-12 rounded-full flex items-center justify-center bg-writer-100 text-writer-700 shadow-sm shrink-0">
+                        <i data-lucide="clock" class="w-5 h-5"></i>
+                    </span>
+                    “O passado ainda pesa mais do que eu gostaria.”
+                </li>
+            </ul>
+        </div>
+        
+        <div class="text-center max-w-3xl mx-auto [animation:animationIn_1.2s_ease-out_0.6s_both] animate-on-scroll">
+            <h3 class="text-2xl font-serif text-writer-dark mb-8">Nada disso te define. Isso apenas revela onde Deus quer tocar.</h3>
+            
+            <div class="p-8 pb-4 relative">
+                <!-- Quote floating icon similar to Review card in ds3 -->
+                <div class="absolute top-0 right-1/2 translate-x-1/2 w-10 h-10 rounded-full bg-writer-700 text-writer-100 flex items-center justify-center shadow-elegant z-20 opacity-90 backdrop-blur-md">
+                    <i data-lucide="quote" class="w-4 h-4 fill-current"></i>
+                </div>
+                <blockquote class="text-3xl font-serif italic text-gradient leading-relaxed mb-6 pt-4 relative z-10">
+                    A Rejeição Paralisa.<br> O amor revela quem você sempre foi.
+                </blockquote>
+            </div>
+
+            <p class="text-lg text-writer-800/70">
+                Você não precisa continuar vivendo presa às marcas do passado. A cura começa quando <strong>a verdade encontra o coração</strong>.
+            </p>
+        </div>
+    </section>
+
+    <!-- DOBRA 3: O QUE É O CURSO -->
+    <section id="sobre" class="relative bg-writer-50 border-y border-writer-200/50 py-24 scroll-mt-24 cursor-default overflow-hidden">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16 [animation:animationIn_1.2s_ease-out_0.2s_both] animate-on-scroll">
+                <div class="flex items-center justify-center gap-3 mb-4">
+                    <span class="w-12 h-px bg-writer-300"></span>
+                    <span class="text-xs font-semibold uppercase tracking-widest text-writer-500">A Jornada</span>
+                    <span class="w-12 h-px bg-writer-300"></span>
+                </div>
+                <h2 class="text-4xl font-serif text-writer-dark mb-6">O que é o Nascidas para Serem Amadas?</h2>
+                <p class="text-lg text-writer-800/80 mb-6 font-sans">
+                    O Nascidas para Serem Amadas é um curso cristão de cura emocional e restauração da identidade, fundamentado na Palavra de Deus e em processos espirituais práticos. 
+                </p>
+                <p class="text-lg text-writer-800/80 mb-8 font-sans">
+                    Ele nasceu após um encontro real de Elisa com Jesus, onde Ele disse:
+                </p>
+                
+                <blockquote class="text-2xl font-serif italic text-writer-700 border-l-4 border-writer-300 pl-6 py-2 mx-auto inline-block text-left mb-8 shadow-sm p-4 bg-white/50 backdrop-blur-sm rounded-r-xl">
+                    “Abra a sua boca e fale, porque Eu vou curar mulheres através de você.”
+                </blockquote>
+                
+                <p class="text-xl font-medium text-writer-dark font-sans">
+                    Este curso não é apenas conteúdo.<br> É um processo. Uma jornada de retorno ao lugar de filha.
+                </p>
+            </div>
+
+            <h3 class="text-center text-3xl font-serif text-writer-dark my-16 [animation:animationIn_1.2s_ease-out_0.4s_both] animate-on-scroll">É para você que…</h3>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 [animation:animationIn_1.2s_ease-out_0.6s_both] animate-on-scroll">
+                <!-- Card 1 -->
+                <div class="group card-flashlight glass-card rounded-[2rem] p-8 transition-transform duration-500 hover:-translate-y-2 border border-white/60 relative overflow-hidden flex flex-col items-center justify-center text-center h-full">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style="background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(229, 192, 202, 0.4), transparent 40%);"></div>
+                    <div class="w-12 h-12 rounded-full bg-writer-100 flex items-center justify-center text-writer-700 mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm border border-writer-200">
+                        <i data-lucide="cloud-off" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="text-lg font-serif text-writer-dark transition-colors group-hover:text-writer-700">Está cansada de carregar tudo sozinha</h4>
+                </div>
+                <!-- Card 2 -->
+                <div class="group card-flashlight glass-card rounded-[2rem] p-8 transition-transform duration-500 hover:-translate-y-2 border border-white/60 relative overflow-hidden flex flex-col items-center justify-center text-center h-full">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style="background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(229, 192, 202, 0.4), transparent 40%);"></div>
+                    <div class="w-12 h-12 rounded-full bg-writer-100 flex items-center justify-center text-writer-700 mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm border border-writer-200">
+                        <i data-lucide="feather" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="text-lg font-serif text-writer-dark transition-colors group-hover:text-writer-700">Quer viver a fé com mais leveza</h4>
+                </div>
+                <!-- Card 3 -->
+                <div class="group card-flashlight glass-card rounded-[2rem] p-8 transition-transform duration-500 hover:-translate-y-2 border border-white/60 relative overflow-hidden flex flex-col items-center justify-center text-center h-full">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style="background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(229, 192, 202, 0.4), transparent 40%);"></div>
+                    <div class="w-12 h-12 rounded-full bg-writer-100 flex items-center justify-center text-writer-700 mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm border border-writer-200">
+                        <i data-lucide="heart" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="text-lg font-serif text-writer-dark transition-colors group-hover:text-writer-700">Deseja se sentir amada de verdade</h4>
+                </div>
+                <!-- Card 4 -->
+                <div class="group card-flashlight glass-card rounded-[2rem] p-8 transition-transform duration-500 hover:-translate-y-2 border border-white/60 relative overflow-hidden flex flex-col items-center justify-center text-center h-full">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style="background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(229, 192, 202, 0.4), transparent 40%);"></div>
+                    <div class="w-12 h-12 rounded-full bg-writer-100 flex items-center justify-center text-writer-700 mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm border border-writer-200">
+                        <i data-lucide="compass" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="text-lg font-serif text-writer-dark transition-colors group-hover:text-writer-700">Precisa se reconectar com o próprio coração</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOBRA 4: CONTEÚDO PROGRAMÁTICO (Módulos) -->
+    <section id="modulos" class="mx-auto max-w-7xl px-6 lg:px-8 py-24 scroll-mt-20">
+        <div class="text-center mb-16 [animation:animationIn_1.2s_ease-out_0.2s_both] animate-on-scroll">
+            <h2 class="text-4xl font-serif text-writer-dark mb-4">O caminho de cura é construído passo a passo!</h2>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8 mb-16 [animation:animationIn_1.2s_ease-out_0.4s_both] animate-on-scroll">
+            
+            <!-- Modulo 1 -->
+            <div class="glass-panel p-8 rounded-[2rem] border-l-4 border-l-writer-400 border-white/60 shadow-sm hover:shadow-elegant transition-shadow duration-300 group">
+                <div class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-writer-500 mb-2">Pilar Fundacional</div>
+                <h3 class="text-2xl font-serif text-writer-dark mb-4 group-hover:text-writer-700 transition-colors">Módulo 1 | Identidade</h3>
+                <p class="text-writer-800/80 font-sans">Quem você é de verdade e como sua identidade foi sendo distorcida.</p>
+            </div>
+
+            <!-- Modulo 2 -->
+            <div class="glass-panel p-8 rounded-[2rem] border-l-4 border-l-writer-500 border-white/60 shadow-sm hover:shadow-elegant transition-shadow duration-300 group">
+                <div class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-writer-500 mb-2">Desatando Nós</div>
+                <h3 class="text-2xl font-serif text-writer-dark mb-4 group-hover:text-writer-700 transition-colors">Módulo 2 | Emocional</h3>
+                <p class="text-writer-800/80 font-sans">Emoções, pensamentos, gatilhos e padrões que precisam ser curados.</p>
+            </div>
+
+            <!-- Modulo 3 -->
+            <div class="glass-panel p-8 rounded-[2rem] border-l-4 border-l-writer-600 border-white/60 shadow-sm hover:shadow-elegant transition-shadow duration-300 group">
+                <div class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-writer-500 mb-2">Limpeza</div>
+                <h3 class="text-2xl font-serif text-writer-dark mb-4 group-hover:text-writer-700 transition-colors">Módulo 3 | Curas do Passado</h3>
+                <p class="text-writer-800/80 font-sans">Rejeição, abandono, abusos, não merecimento e encerramento de ciclos.</p>
+            </div>
+
+            <!-- Modulo 4 -->
+            <div class="glass-panel p-8 rounded-[2rem] border-l-4 border-l-writer-700 border-white/60 shadow-sm hover:shadow-elegant transition-shadow duration-300 group">
+                <div class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-writer-500 mb-2">O Encontro</div>
+                <h3 class="text-2xl font-serif text-writer-dark mb-4 group-hover:text-writer-700 transition-colors">Módulo 4 | Amor e Intimidade</h3>
+                <p class="text-writer-800/80 font-sans">Aprender a descansar no amor do Pai e viver intimidade real.</p>
+            </div>
+        </div>
+
+        <!-- Info extra inline -->
+        <div class="flex flex-wrap items-center justify-center gap-6 lg:gap-12 [animation:animationIn_1.2s_ease-out_0.6s_both] animate-on-scroll">
+            <div class="flex items-center gap-2">
+                <i data-lucide="video" class="w-5 h-5 text-writer-600"></i>
+                <span class="font-medium text-writer-800/80 font-sans">+50hrs de conteúdo</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i data-lucide="users" class="w-5 h-5 text-writer-600"></i>
+                <span class="font-medium text-writer-800/80 font-sans">10 aulas ao vivo/ano</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i data-lucide="calendar-check" class="w-5 h-5 text-writer-600"></i>
+                <span class="font-medium text-writer-800/80 font-sans">1 ano de acesso</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i data-lucide="monitor" class="w-5 h-5 text-writer-600"></i>
+                <span class="font-medium text-writer-800/80 font-sans">Plataforma Exclusiva</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOBRA 5: BÔNUS -->
+    <section class="relative w-full overflow-hidden py-24 bg-[radial-gradient(circle_at_bottom_right,rgba(229,192,202,0.2)_0,transparent_60%)]">
+        <div class="mx-auto max-w-6xl px-6 lg:px-8">
+            <div class="glass-card rounded-[3rem] p-10 lg:p-16 border border-white/80 shadow-elegant [animation:animationIn_1.2s_ease-out_0.3s_both] animate-on-scroll">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-serif text-writer-dark">Um presente para aprofundar sua jornada</h2>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="relative flex justify-center order-2 md:order-1">
+                        <!-- Livro imagem original -->
+                        <div class="relative overflow-hidden group">
+                           <img src="assets/Livro-do-Site_09840032d7eb.png" alt="Livro Jornada da Rendição" class="w-full max-w-sm drop-shadow-2xl transition-transform duration-700 hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80';this.classList.add('rounded-2xl')">
+                        </div>
+                    </div>
+                    
+                    <div class="order-1 md:order-2 space-y-6">
+                        <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-writer-100 text-writer-700 text-xs font-semibold uppercase tracking-widest cursor-default">
+                            Bônus Especial
+                        </div>
+                        <h3 class="text-3xl font-serif text-writer-dark text-gradient">Livro físico <br>Jornada da Rendição</h3>
+                        <p class="text-lg text-writer-800/80 leading-relaxed max-w-sm">
+                            Incluso gratuitamente como bônus. Um convite para ouvir o céu, render atitudes e viver uma fé mais leve.
+                        </p>
+                        
+                        <div class="pt-4">
+                            <!-- Botão Secundário outline beam effect-->
+                            <a href="#oferta" class="group inline-flex overflow-hidden transition-all duration-300 hover:-translate-y-[2px] rounded-full p-[1px] relative items-center justify-center shadow-sm w-max">
+                                <span class="absolute inset-[-100%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,transparent_75%,#c07187_100%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+                                <span class="absolute inset-0 rounded-full border border-writer-300 bg-white transition-opacity duration-300 group-hover:opacity-0"></span>
+                                <span class="flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white text-writer-800 font-medium tracking-wide w-full h-full relative z-10 transition-colors duration-300 group-hover:text-writer-900 group-hover:bg-writer-50 group-hover:shadow-[inset_0_1px_3px_rgba(117,59,73,0.1)]">
+                                    Quero Garantir Meu Presente
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOBRA 6: PROVA SOCIAL -->
+    <section id="depoimentos" class="mx-auto max-w-7xl px-6 lg:px-8 py-24 scroll-mt-24">
+        <div class="text-center max-w-3xl mx-auto mb-16 [animation:animationIn_1.2s_ease-out_0.2s_both] animate-on-scroll">
+            <h2 class="text-4xl font-serif text-writer-dark mb-6">O que outras mulheres viveram nesse caminho</h2>
+            <p class="text-lg text-writer-800/80 font-sans">
+                Cada mulher que você vai ouvir aqui chegou com dores diferentes, histórias diferentes e feridas reais. O que elas têm em comum é o encontro com um processo de cura que trouxe clareza, leveza e restauração.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 [animation:animationIn_1.2s_ease-out_0.4s_both] animate-on-scroll">
+            <!-- Video 1 -->
+            <div class="glass-card rounded-[2rem] p-4 flex flex-col justify-center relative border border-white overflow-hidden shadow-sm hover:shadow-elegant transition-shadow duration-500 group">
+                <div class="aspect-[9/16] lg:aspect-video md:aspect-[4/5] bg-writer-100 rounded-xl overflow-hidden relative border border-white/50">
+                    <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/AhhC7MO8Xqg?controls=1&rel=0" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- Video 2 -->
+            <div class="glass-card rounded-[2rem] p-4 flex flex-col justify-center relative border border-white overflow-hidden shadow-sm hover:shadow-elegant transition-shadow duration-500 group">
+                <div class="aspect-[9/16] lg:aspect-video md:aspect-[4/5] bg-writer-100 rounded-xl overflow-hidden relative border border-white/50">
+                    <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/V78_T9GU_t4?controls=1&rel=0" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- Video 3 -->
+            <div class="glass-card rounded-[2rem] p-4 flex flex-col justify-center relative border border-white overflow-hidden shadow-sm hover:shadow-elegant transition-shadow duration-500 group">
+                <div class="aspect-[9/16] lg:aspect-video md:aspect-[4/5] bg-writer-100 rounded-xl overflow-hidden relative border border-white/50">
+                    <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/dSc4MwY5HaI?controls=1&rel=0" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- Video 4 -->
+            <div class="glass-card rounded-[2rem] p-4 flex flex-col justify-center relative border border-white overflow-hidden shadow-sm hover:shadow-elegant transition-shadow duration-500 group">
+                <div class="aspect-[9/16] lg:aspect-video md:aspect-[4/5] bg-writer-100 rounded-xl overflow-hidden relative border border-white/50">
+                    <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/fckqJrgDzRQ?controls=1&rel=0" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- Video 5 -->
+            <div class="glass-card rounded-[2rem] p-4 flex flex-col justify-center relative border border-white overflow-hidden shadow-sm hover:shadow-elegant transition-shadow duration-500 group">
+                <div class="aspect-[9/16] lg:aspect-video md:aspect-[4/5] bg-writer-100 rounded-xl overflow-hidden relative border border-white/50">
+                    <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/nsyiJXIeKrg?controls=1&rel=0" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- Video 6 -->
+            <div class="glass-card rounded-[2rem] p-4 flex flex-col justify-center relative border border-white overflow-hidden shadow-sm hover:shadow-elegant transition-shadow duration-500 group">
+                <div class="aspect-[9/16] lg:aspect-video md:aspect-[4/5] bg-writer-100 rounded-xl overflow-hidden relative border border-white/50">
+                    <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/YRTYeJSTGNg?controls=1&rel=0" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOBRA 7: OFERTA & GARANTIA -->
+    <section id="oferta" class="mx-auto max-w-4xl px-6 lg:px-8 py-24 scroll-mt-24">
+        <div class="text-center mb-16 [animation:animationIn_1.2s_ease-out_0.2s_both] animate-on-scroll">
+            <h2 class="text-4xl font-serif text-writer-dark">Chegou a hora de tomar sua Decisão!</h2>
+        </div>
+
+        <div class="relative [animation:animationIn_1.2s_ease-out_0.4s_both] animate-on-scroll mb-16">
+            <div class="glass-card rounded-[3rem] p-10 lg:p-14 border border-writer-200 shadow-elegant relative overflow-hidden bg-white/95">
+                <!-- Inner glow line on hover -->
+                <div class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-writer-400 to-transparent"></div>
+                
+                <div class="text-center mb-10 border-b border-writer-100 pb-8">
+                    <h3 class="text-3xl font-serif text-writer-800 mb-2">Garanta sua vaga!</h3>
+                    <p class="text-writer-500 uppercase tracking-widest text-sm font-semibold">Oferta Exclusiva</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-10">
+                    <!-- Benefícios (Esquerda) -->
+                    <div>
+                        <ul class="space-y-5">
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-6 h-6 text-writer-500 shrink-0"></i>
+                                <span class="text-writer-800 font-sans font-medium">Acesso ao Nascidas para Serem Amadas</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-6 h-6 text-writer-500 shrink-0"></i>
+                                <span class="text-writer-800 font-sans font-medium">Livro Físico Jornada da Rendição</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-6 h-6 text-writer-500 shrink-0"></i>
+                                <span class="text-writer-800 font-sans font-medium">Grupo no WhatsApp</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-6 h-6 text-writer-500 shrink-0"></i>
+                                <span class="text-writer-800 font-sans font-medium">Suporte e comunidade</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-6 h-6 text-writer-500 shrink-0"></i>
+                                <span class="text-writer-800 font-sans font-medium">Aulas ao vivo + gravações</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Preço e Botão (Direita) -->
+                    <div class="flex flex-col items-center justify-center bg-writer-50/50 rounded-3xl p-8 border border-writer-100">
+                        <div class="text-writer-600 font-semibold mb-2">12x de</div>
+                        <h4 class="text-5xl lg:text-6xl font-serif text-gradient font-bold leading-none mb-1">
+                            <span class="text-2xl font-sans inline-block align-top mt-2">R$</span> 20<span class="text-3xl font-sans">,37</span>
+                        </h4>
+                        <div class="text-writer-500 font-medium mt-2 mb-8">ou R$ 197,00 à vista</div>
+                        
+                        <!-- CTA Botão Principal -->
+                        <button class="group inline-flex overflow-hidden transition-all duration-300 hover:-translate-y-[2px] rounded-full p-[1px] relative items-center justify-center hover:shadow-elegant w-full">
+                            <span class="absolute inset-[-100%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,transparent_75%,#d39bab_100%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+                            <span class="absolute inset-0 rounded-full bg-writer-800 transition-opacity duration-300 group-hover:opacity-0"></span>
+                            <span class="flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-writer-800 hover:bg-writer-900 transition-colors duration-300 w-full h-full relative z-10 text-white font-medium tracking-wide">
+                                GARANTIR MINHA VAGA
+                                <i data-lucide="arrow-right" class="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Garantia -->
+        <div class="flex flex-col md:flex-row items-center gap-6 glass-panel p-8 rounded-[2rem] max-w-3xl mx-auto [animation:animationIn_1.2s_ease-out_0.6s_both] animate-on-scroll border border-white">
+            <div class="shrink-0 w-24">
+                <img src="assets/Garantia-15-dias-transparente-_d7f1c8e5b5ac.png" alt="Garantia" class="w-full drop-shadow-md" onerror="this.src='https://cdn-icons-png.flaticon.com/512/9329/9329188.png';this.style.width='80px'">
+            </div>
+            <div>
+                <p class="text-writer-800 font-sans mb-2">
+                    Durante <strong>15 dias</strong>, você poderá acessar todo o conteúdo do curso e sentir se esse processo é para você.
+                </p>
+                <p class="text-writer-800 font-sans">
+                    Se não fizer sentido, é só solicitar o reembolso e <strong>devolveremos o seu investimento integralmente</strong>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOBRA 8: AUTORA -->
+    <section class="border-t border-writer-200/50 bg-[radial-gradient(circle_at_top_left,rgba(229,192,202,0.1)_0,transparent_50%)] py-24">
+        <div class="mx-auto max-w-5xl px-6 lg:px-8">
+            <div class="grid md:grid-cols-[1.5fr_1fr] gap-16 items-center [animation:animationIn_1.2s_ease-out_0.3s_both] animate-on-scroll">
+                
+                <div class="order-2 md:order-1 space-y-6">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="w-12 h-px bg-writer-300"></span>
+                        <span class="text-xs font-semibold uppercase tracking-widest text-writer-500">A Autora</span>
+                    </div>
+                    <h2 class="text-4xl font-serif text-writer-dark mb-6">Quem é Elisa Chocada</h2>
+                    
+                    <div class="space-y-4 text-writer-800/80 font-sans text-lg">
+                        <p>
+                            Elisa é uma mulher que foi profundamente tocada e curada por Jesus — e que decidiu não guardar isso apenas para si.
+                        </p>
+                        <p>
+                            Sua história é marcada por processos reais de cura emocional, restauração da identidade e reencontro com o amor de Deus. Não a partir da teoria, mas da vida vivida com verdade, vulnerabilidade e entrega.
+                        </p>
+                        <p>
+                            A partir desse lugar, nasceu a <strong>CHOCADA</strong>: um ministério criado para conduzir mulheres feridas de volta ao lugar de filhas — amadas, seguras e livres.
+                        </p>
+                        <p>
+                            Hoje, Elisa caminha ao lado de mulheres que carregam dores silenciosas, ajudando-as a viver cura emocional, identidade restaurada e intimidade real com Deus.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="order-1 md:order-2">
+                    <div class="relative rounded-t-[10rem] rounded-b-[2rem] overflow-hidden aspect-[3/4] shadow-elegant p-2 bg-white/40 border border-white">
+                        <img src="assets/quem-e-Elisa-chocada-1024x1024_d972906b08cf.png" alt="Elisa Chocada" class="w-full h-full object-cover rounded-t-[10rem] rounded-b-2xl" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-writer-900/20 to-transparent pointer-events-none rounded-b-[2rem]"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-writer-200 bg-white/50 backdrop-blur-md">
+        <div class="mx-auto max-w-7xl px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="font-serif italic text-writer-700 text-2xl font-bold flex items-center gap-2">
+                 <i data-lucide="feather" class="w-5 h-5 text-writer-500"></i> Elisa
+            </div>
+            <p class="text-sm text-writer-500 text-center md:text-left">
+                Copyright © 2026 | Todos os direitos reservados – <a href="https://elisachocada.com.br/politica-de-privacidade" class="underline hover:text-writer-700 transition">Política de Privacidade</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Initialize Scripts -->
+    <script>
+        // Init Lucide Icons
+        lucide.createIcons();
+
+        // Reveal Animations on Scroll
+        document.addEventListener("DOMContentLoaded", () => {
+            const once = true; // Animate only once per element
+            if (!window.__inViewIO) {
+              window.__inViewIO = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    entry.target.classList.add("animate");
+                    if (once) window.__inViewIO.unobserve(entry.target);
+                  }
+                });
+              }, { threshold: 0.1, rootMargin: "0px -10% 0px -10%" });
+            }
+
+            document.querySelectorAll(".animate-on-scroll").forEach((el) => {
+                window.__inViewIO.observe(el); 
+            });
+
+            // Flashlight Effect Tracking for Cards
+            document.querySelectorAll('.card-flashlight').forEach((card) => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
+
+            // Flashlight Effect Tracking for Hero Background
+            document.querySelectorAll('.hero-flashlight').forEach((section) => {
+                const glow = section.querySelector('.hero-glow');
+                if(!glow) return;
+                section.addEventListener('mousemove', (e) => {
+                    const rect = section.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    glow.style.setProperty('--mouse-x', `${x}px`);
+                    glow.style.setProperty('--mouse-y', `${y}px`);
+                    glow.style.opacity = '1';
+                });
+                section.addEventListener('mouseleave', () => {
+                    glow.style.opacity = '0';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
