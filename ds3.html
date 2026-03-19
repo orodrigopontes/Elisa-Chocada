@@ -69,21 +69,27 @@
         
         .glass-card {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(253, 248, 249, 0.4) 100%);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.6);
             box-shadow: 0 8px 32px 0 rgba(117, 59, 73, 0.05);
         }
 
-        /* Animations */
-        .animate-fade-in { animation: fadeIn 1.2s ease-out forwards; opacity: 0; }
-        .animate-slide-up { animation: slideUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(40px); }
-        .animate-delay-200 { animation-delay: 0.2s; }
-        .animate-delay-400 { animation-delay: 0.4s; }
-        .animate-delay-600 { animation-delay: 0.6s; }
-        .animate-delay-800 { animation-delay: 0.8s; }
-        
-        @keyframes fadeIn { to { opacity: 1; } }
-        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+        /* Intro Sequence Animations (Fade + Blur In) */
+        @keyframes animationIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+                filter: blur(8px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0px);
+            }
+        }
+        /* Paused default, Activated by JS */
+        .animate-on-scroll { animation-play-state: paused !important; }
+        .animate-on-scroll.animate { animation-play-state: running !important; }
         
         /* Details & Gradients */
         .text-gradient {
@@ -103,6 +109,15 @@
         .selection-pink *::selection {
             background-color: #f1dce2;
             color: #753b49;
+        }
+
+        /* Continuous Animations */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            animation: marquee 20s linear infinite;
         }
     </style>
 </head>
@@ -129,8 +144,13 @@
                 <a href="#layout" class="text-writer-800/60 hover:text-writer-800 transition-colors">Layout</a>
             </nav>
             
-            <button class="hidden md:inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-writer-dark text-white text-xs font-semibold tracking-[0.2em] uppercase hover:bg-writer-800 transition-all hover:shadow-elegant hover:-translate-y-0.5 duration-300">
-                Ver Obras
+            <!-- CTA Outline Button with border hover effect -->
+            <button class="hidden md:inline-flex group overflow-hidden transition-all duration-300 hover:-translate-y-0.5 rounded-full p-[1px] relative items-center justify-center shadow-sm">
+                <span class="absolute inset-[-100%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,transparent_75%,#d39bab_100%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+                <span class="absolute inset-0 rounded-full bg-transparent border border-writer-200 transition-opacity duration-300 group-hover:opacity-0"></span>
+                <span class="flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-white text-writer-800 text-xs font-semibold tracking-[0.2em] uppercase relative z-10 transition-colors duration-300">
+                    Ver Obras
+                </span>
             </button>
             
             <!-- Mobile Menu Icon -->
@@ -146,32 +166,38 @@
         <section id="hero" class="relative pt-12 pb-20">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="z-10 relative">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-writer-200 bg-white/60 backdrop-blur-sm mb-8 animate-slide-up">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-writer-200 bg-white/60 backdrop-blur-sm mb-8 [animation:animationIn_0.8s_ease-out_0s_both] animate-on-scroll">
                         <i data-lucide="pen-tool" class="w-4 h-4 text-writer-600"></i>
                         <span class="text-xs font-semibold uppercase tracking-widest text-writer-700">Design System</span>
                     </div>
                     
-                    <h1 class="text-5xl lg:text-7xl font-serif text-writer-dark leading-[1.1] mb-8 animate-slide-up animate-delay-200">
+                    <h1 class="text-5xl lg:text-7xl font-serif text-writer-dark leading-[1.1] mb-8 [animation:animationIn_1.2s_ease-out_0.2s_both] animate-on-scroll">
                         A elegância e o <br/>
                         <span class="italic text-gradient">poder da palavra.</span>
                     </h1>
                     
-                    <p class="text-lg text-writer-800/70 font-sans leading-relaxed max-w-xl mb-12 animate-slide-up animate-delay-400">
-                        Um guia completo para a linguagem visual da autora, documentando tipografias serifadas, paletas de rosas sutis, componentes de interface fluidos e o layout ideal para a leitura em telas.
+                    <p class="text-lg text-writer-800/70 font-sans leading-relaxed max-w-xl mb-12 [animation:animationIn_1.2s_ease-out_0.4s_both] animate-on-scroll">
+                        Um guia completo para a linguagem visual da autora, documentando tipografias serifadas, paletas de rosas sutis, componentes de interface fluidos e ricos efeitos de apresentação.
                     </p>
                     
-                    <div class="flex flex-col sm:flex-row gap-6 animate-slide-up animate-delay-600">
-                        <a href="#components" class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-writer-800 text-white font-medium tracking-wide hover:bg-writer-700 hover:shadow-elegant transition-all duration-300 hover:-translate-y-1">
-                            Explorar Componentes
-                            <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
-                        </a>
-                        <a href="#typography" class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-transparent border border-writer-300 text-writer-800 font-medium tracking-wide hover:bg-writer-50 hover:border-writer-400 transition-all duration-300">
+                    <div class="flex flex-col sm:flex-row gap-6 [animation:animationIn_1.2s_ease-out_0.6s_both] animate-on-scroll">
+                        <!-- Border Beam Button -->
+                        <button class="group inline-flex overflow-hidden transition-all duration-300 hover:-translate-y-[2px] rounded-full p-[1px] relative items-center justify-center hover:shadow-elegant">
+                            <span class="absolute inset-[-100%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,transparent_75%,#d39bab_100%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+                            <span class="absolute inset-0 rounded-full bg-writer-800 transition-opacity duration-300 group-hover:opacity-0"></span>
+                            <span class="flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-writer-800 hover:bg-writer-900 transition-colors duration-300 w-full h-full relative z-10 text-white font-medium tracking-wide">
+                                <span class="relative z-10">Explorar Componentes</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 ml-2 relative z-10 transition-transform duration-300 group-hover:translate-x-1"></i>
+                            </span>
+                        </button>
+
+                        <a href="#typography" class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-transparent border border-writer-300 text-writer-800 font-medium tracking-wide hover:bg-white hover:border-writer-400 transition-all duration-300">
                             Ver Tipografia
                         </a>
                     </div>
                 </div>
                 
-                <div class="relative animate-slide-up animate-delay-800 group">
+                <div class="relative [animation:animationIn_1.2s_ease-out_0.8s_both] animate-on-scroll group">
                     <!-- Image Showcase Card -->
                     <div class="relative rounded-[2.5rem] overflow-hidden aspect-[4/5] shadow-elegant">
                         <img src="https://images.unsplash.com/photo-1455390582262-044cdead2708?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Máquina de escrever" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out"/>
@@ -184,6 +210,9 @@
                                 <span class="text-xs font-semibold tracking-widest uppercase">Padrões Visuais</span>
                             </div>
                         </div>
+                        
+                        <!-- Light Swipe Hover Effect over Image -->
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out"></div>
                     </div>
                     
                     <!-- Floating abstract badge -->
@@ -195,19 +224,40 @@
             </div>
         </section>
 
-        <hr class="border-writer-200/50">
+        <!-- Divider -->
+        <div class="w-full overflow-hidden relative py-8 border-y border-writer-200/50 [animation:animationIn_1.2s_ease-out_0.3s_both] animate-on-scroll">
+            <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#fdf9fa] to-transparent z-10"></div>
+            <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#fdf9fa] to-transparent z-10"></div>
+            <!-- Marquee Content -->
+            <div class="flex w-[200%] animate-marquee">
+                <div class="flex justify-around w-1/2 text-writer-500/50 uppercase tracking-[0.3em] font-serif italic text-sm">
+                    <span>Elegância</span>
+                    <span>Inspiração</span>
+                    <span>Arte</span>
+                    <span>Poesia</span>
+                    <span>Refinamento</span>
+                </div>
+                <div class="flex justify-around w-1/2 text-writer-500/50 uppercase tracking-[0.3em] font-serif italic text-sm">
+                    <span>Elegância</span>
+                    <span>Inspiração</span>
+                    <span>Arte</span>
+                    <span>Poesia</span>
+                    <span>Refinamento</span>
+                </div>
+            </div>
+        </div>
 
         <!-- 1) Typography -->
         <section id="typography" class="scroll-mt-32">
-            <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center gap-3 mb-4 [animation:animationIn_1.2s_ease-out_0.1s_both] animate-on-scroll">
                 <span class="w-12 h-px bg-writer-300"></span>
                 <span class="text-xs font-semibold uppercase tracking-widest text-writer-500">Fundação Visual</span>
             </div>
-            <h2 class="text-4xl font-serif text-writer-dark mb-16">Tipografia e Hierarquia</h2>
+            <h2 class="text-4xl font-serif text-writer-dark mb-16 [animation:animationIn_1.2s_ease-out_0.2s_both] animate-on-scroll">Tipografia e Hierarquia</h2>
 
-            <div class="glass-card rounded-[2rem] p-10 lg:p-16 space-y-12">
+            <div class="glass-card rounded-[2rem] p-10 lg:p-16 space-y-12 shadow-sm border-white [animation:animationIn_1.2s_ease-out_0.4s_both] animate-on-scroll">
                 
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-writer-200/60">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-writer-200/60 transition-colors hover:bg-white/40 p-4 rounded-xl -m-4 cursor-default">
                     <div class="flex-1">
                         <div class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-writer-500 mb-4">Título Principal (H1)</div>
                         <h1 class="text-5xl lg:text-7xl font-serif text-writer-dark leading-tight">A Arte de Escrever</h1>
@@ -215,7 +265,7 @@
                     <div class="text-sm font-mono text-writer-600/60">Playfair Display / Serif</div>
                 </div>
 
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-writer-200/60">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-writer-200/60 transition-colors hover:bg-white/40 p-4 rounded-xl -m-4 cursor-default">
                     <div class="flex-1">
                         <div class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-writer-500 mb-4">Subtítulo (H2)</div>
                         <h2 class="text-3xl lg:text-4xl font-serif italic text-writer-700">Capítulo 1: O Início da Jornada</h2>
@@ -223,7 +273,7 @@
                     <div class="text-sm font-mono text-writer-600/60">Playfair Itálico</div>
                 </div>
 
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-writer-200/60">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-writer-200/60 transition-colors hover:bg-white/40 p-4 rounded-xl -m-4 cursor-default">
                     <div class="flex-1">
                         <div class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-writer-500 mb-4">Título de Seção (H3)</div>
                         <h3 class="text-xl lg:text-2xl font-sans font-medium text-writer-dark tracking-tight">Obras Publicadas</h3>
@@ -231,7 +281,7 @@
                     <div class="text-sm font-mono text-writer-600/60">Inter / Sans-serif / Medium</div>
                 </div>
 
-                <div class="flex flex-col md:flex-row items-start justify-between gap-6 pb-12 border-b border-writer-200/60">
+                <div class="flex flex-col md:flex-row items-start justify-between gap-6 pb-12 border-b border-writer-200/60 transition-colors hover:bg-white/40 p-4 rounded-xl -m-4 cursor-default">
                     <div class="flex-1 max-w-2xl">
                         <div class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-writer-500 mb-4">Parágrafo Corpo de Texto (P)</div>
                         <p class="text-lg text-writer-800/80 font-sans leading-[1.8]">
@@ -241,7 +291,7 @@
                     <div class="text-sm font-mono text-writer-600/60 pt-6">Inter / 18px / 1.8</div>
                 </div>
 
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 transition-colors hover:bg-white/40 p-4 rounded-xl -m-4 cursor-default">
                     <div class="flex-1">
                         <div class="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-writer-500 mb-4">Citação Visual (Blockquote)</div>
                         <blockquote class="text-2xl font-serif italic text-writer-700 border-l-4 border-writer-300 pl-6 py-2">
@@ -256,46 +306,46 @@
 
         <!-- 2) Colors -->
         <section id="colors" class="scroll-mt-32">
-            <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center gap-3 mb-4 [animation:animationIn_1.2s_ease-out_0.1s_both] animate-on-scroll">
                 <span class="w-12 h-px bg-writer-300"></span>
                 <span class="text-xs font-semibold uppercase tracking-widest text-writer-500">Atmosfera</span>
             </div>
-            <h2 class="text-4xl font-serif text-writer-dark mb-16">Cores e Superfícies</h2>
+            <h2 class="text-4xl font-serif text-writer-dark mb-16 [animation:animationIn_1.2s_ease-out_0.2s_both] animate-on-scroll">Cores e Superfícies</h2>
 
             <!-- Palette Grid -->
             <div class="grid grid-cols-2 md:grid-cols-5 gap-6 mb-16">
                 <!-- Color Cards -->
-                <div class="group">
+                <div class="group [animation:animationIn_1s_ease-out_0.2s_both] animate-on-scroll">
                     <div class="h-32 rounded-[2rem] bg-writer-50 border border-writer-200 mb-4 shadow-sm group-hover:-translate-y-2 transition-transform duration-300"></div>
                     <div class="text-sm font-semibold text-writer-dark">Writer 50</div>
                     <div class="text-xs font-mono text-writer-500">#fdf8f9</div>
                 </div>
-                <div class="group">
+                <div class="group [animation:animationIn_1s_ease-out_0.3s_both] animate-on-scroll">
                     <div class="h-32 rounded-[2rem] bg-writer-100 border border-writer-200 mb-4 shadow-sm group-hover:-translate-y-2 transition-transform duration-300"></div>
                     <div class="text-sm font-semibold text-writer-dark">Writer 100</div>
                     <div class="text-xs font-mono text-writer-500">#f9edf0</div>
                 </div>
-                <div class="group">
+                <div class="group [animation:animationIn_1s_ease-out_0.4s_both] animate-on-scroll">
                     <div class="h-32 rounded-[2rem] bg-writer-300 border border-writer-200 mb-4 shadow-sm group-hover:-translate-y-2 transition-transform duration-300"></div>
                     <div class="text-sm font-semibold text-writer-dark">Writer 300</div>
                     <div class="text-xs font-mono text-writer-500">#e5c0ca</div>
                 </div>
-                <div class="group">
+                <div class="group [animation:animationIn_1s_ease-out_0.5s_both] animate-on-scroll">
                     <div class="h-32 rounded-[2rem] bg-writer-500 mb-4 shadow-sm group-hover:-translate-y-2 transition-transform duration-300"></div>
                     <div class="text-sm font-semibold text-writer-dark">Writer 500</div>
                     <div class="text-xs font-mono text-writer-500">#c07187</div>
                 </div>
-                <div class="group">
+                <div class="group [animation:animationIn_1s_ease-out_0.6s_both] animate-on-scroll">
                     <div class="h-32 rounded-[2rem] bg-writer-700 mb-4 shadow-sm group-hover:-translate-y-2 transition-transform duration-300"></div>
                     <div class="text-sm font-semibold text-writer-dark">Writer 700 (Primária)</div>
                     <div class="text-xs font-mono text-writer-500">#8c4355</div>
                 </div>
-                <div class="group">
+                <div class="group [animation:animationIn_1s_ease-out_0.7s_both] animate-on-scroll">
                     <div class="h-32 rounded-[2rem] bg-writer-800 mb-4 shadow-sm group-hover:-translate-y-2 transition-transform duration-300"></div>
                     <div class="text-sm font-semibold text-writer-dark">Writer 800</div>
                     <div class="text-xs font-mono text-writer-500">#753b49</div>
                 </div>
-                <div class="group">
+                <div class="group [animation:animationIn_1s_ease-out_0.8s_both] animate-on-scroll">
                     <div class="h-32 rounded-[2rem] bg-writer-dark mb-4 shadow-sm group-hover:-translate-y-2 transition-transform duration-300"></div>
                     <div class="text-sm font-semibold text-writer-dark">Writer Dark</div>
                     <div class="text-xs font-mono text-writer-500">#2d2426</div>
@@ -304,7 +354,7 @@
 
             <div class="grid lg:grid-cols-2 gap-12">
                 <!-- Surfaces -->
-                <div>
+                <div class="[animation:animationIn_1.2s_ease-out_0.3s_both] animate-on-scroll">
                     <h3 class="text-xl font-sans font-medium mb-6">Tratamento de Superfície</h3>
                     
                     <div class="space-y-6">
@@ -315,16 +365,16 @@
                             </div>
                         </div>
 
-                        <div class="glass-panel h-40 rounded-[2rem] p-8 flex items-center justify-center relative shadow-glass overflow-hidden">
+                        <div class="glass-panel h-40 rounded-[2rem] p-8 flex items-center justify-center relative shadow-glass overflow-hidden group">
                             <!-- Background gradient block behind glass -->
-                            <div class="absolute top-0 right-0 w-32 h-32 bg-writer-300 rounded-full blur-3xl opacity-50 -z-10"></div>
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-writer-300 rounded-full blur-3xl opacity-50 -z-10 transition-transform duration-[2s] group-hover:scale-150 group-hover:bg-writer-400"></div>
                             <span class="text-writer-800 font-sans font-medium">Card Glassmorphism (bg-white/85)</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Gradients -->
-                <div>
+                <div class="[animation:animationIn_1.2s_ease-out_0.5s_both] animate-on-scroll">
                     <h3 class="text-xl font-sans font-medium mb-6">Gradientes</h3>
                     <div class="space-y-6">
                         <div class="h-28 rounded-[2rem] bg-gradient-to-r from-writer-100 to-writer-50 border border-writer-200 flex items-center px-8">
@@ -333,7 +383,8 @@
                                 <div class="text-xs font-mono text-writer-500">from-writer-100 to-writer-50</div>
                             </div>
                         </div>
-                        <div class="h-28 rounded-[2rem] bg-gradient-to-br from-writer-800 to-writer-700 flex items-center px-8 shadow-elegant">
+                        <div class="h-28 rounded-[2rem] bg-gradient-to-br from-writer-800 to-writer-700 flex items-center px-8 shadow-elegant group relative overflow-hidden">
+                            <div class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-writer-300 to-transparent -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
                             <div>
                                 <div class="font-medium text-white mb-1">Gradiente Destacado</div>
                                 <div class="text-xs font-mono text-white/70">from-writer-800 to-writer-700</div>
@@ -351,38 +402,46 @@
 
         <!-- 3) UI Components & Cards -->
         <section id="components" class="scroll-mt-32">
-            <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center gap-3 mb-4 [animation:animationIn_1.2s_ease-out_0.1s_both] animate-on-scroll">
                 <span class="w-12 h-px bg-writer-300"></span>
                 <span class="text-xs font-semibold uppercase tracking-widest text-writer-500">Elementos</span>
             </div>
-            <h2 class="text-4xl font-serif text-writer-dark mb-16">Componentes de Interface</h2>
+            <h2 class="text-4xl font-serif text-writer-dark mb-16 [animation:animationIn_1.2s_ease-out_0.2s_both] animate-on-scroll">Componentes de Interface</h2>
 
             <div class="space-y-16">
                 <!-- Buttons & Badges -->
-                <div>
+                <div class="[animation:animationIn_1.2s_ease-out_0.4s_both] animate-on-scroll">
                     <h3 class="text-xl font-sans font-medium mb-8">Botões e Tags</h3>
                     <div class="flex flex-wrap items-center gap-6">
-                        <!-- Botão Primário -->
-                        <button class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-writer-800 text-white text-sm font-medium tracking-wide hover:bg-writer-700 hover:shadow-elegant transition-all duration-300 hover:-translate-y-1">
-                            Botão Primário
-                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        <!-- Border Beam Primário -->
+                        <button class="group inline-flex overflow-hidden transition-all duration-300 hover:-translate-y-[2px] rounded-full p-[1px] relative items-center justify-center hover:shadow-elegant">
+                            <span class="absolute inset-[-100%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,transparent_75%,#d39bab_100%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+                            <span class="absolute inset-0 rounded-full bg-writer-800 transition-opacity duration-300 group-hover:opacity-0"></span>
+                            <span class="flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-writer-800 hover:bg-writer-900 transition-colors duration-300 w-full h-full relative z-10 text-white font-medium tracking-wide">
+                                Botão Primário
+                                <i data-lucide="arrow-up-right" class="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"></i>
+                            </span>
                         </button>
                         
-                        <!-- Botão Secundário -->
-                        <button class="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-writer-300 bg-white text-writer-800 text-sm font-medium tracking-wide hover:bg-writer-50 hover:border-writer-400 transition-all duration-300">
-                            Botão Secundário
+                        <!-- Botão Secundário outline beam effect-->
+                        <button class="group inline-flex overflow-hidden transition-all duration-300 hover:-translate-y-[2px] rounded-full p-[1px] relative items-center justify-center shadow-sm">
+                            <span class="absolute inset-[-100%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,transparent_75%,#c07187_100%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+                            <span class="absolute inset-0 rounded-full border border-writer-300 bg-white transition-opacity duration-300 group-hover:opacity-0"></span>
+                            <span class="flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white text-writer-800 font-medium tracking-wide w-full h-full relative z-10 transition-colors duration-300 group-hover:text-writer-900 group-hover:bg-writer-50 group-hover:shadow-[inset_0_1px_3px_rgba(117,59,73,0.1)]">
+                                Botão Secundário
+                            </span>
                         </button>
 
                         <!-- Botão Ícone -->
-                        <button class="w-12 h-12 rounded-full border border-writer-200 bg-white shadow-sm flex items-center justify-center text-writer-700 hover:bg-writer-50 hover:scale-110 transition-all duration-300">
+                        <button class="w-12 h-12 rounded-full border border-writer-200 bg-white shadow-sm flex items-center justify-center text-writer-700 hover:bg-writer-50 hover:scale-110 hover:shadow-elegant transition-all duration-300 focus:ring-2 focus:ring-writer-300 focus:outline-none">
                             <i data-lucide="heart" class="w-5 h-5"></i>
                         </button>
 
                         <!-- Tags / Badges -->
-                        <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-writer-100 text-writer-700 text-xs font-semibold uppercase tracking-widest">
+                        <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-writer-100 text-writer-700 text-xs font-semibold uppercase tracking-widest transition-colors hover:bg-writer-200 cursor-default cursor-pointer">
                             Novo Livro
                         </div>
-                        <div class="inline-flex items-center px-4 py-1.5 rounded-full border border-writer-300 bg-transparent text-writer-600 text-xs font-semibold uppercase tracking-widest">
+                        <div class="inline-flex items-center px-4 py-1.5 rounded-full border border-writer-300 bg-transparent text-writer-600 text-xs font-semibold uppercase tracking-widest transition-colors hover:bg-writer-50 hover:border-writer-400 cursor-pointer">
                             Ficção
                         </div>
                     </div>
@@ -390,60 +449,67 @@
 
                 <!-- Cards -->
                 <div>
-                    <h3 class="text-xl font-sans font-medium mb-8">Padrões de Cartões</h3>
+                    <h3 class="text-xl font-sans font-medium mb-8 [animation:animationIn_1.2s_ease-out_0.2s_both] animate-on-scroll">Padrões de Cartões Interativos</h3>
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         
                         <!-- Book Card -->
-                        <div class="group glass-card rounded-[2rem] p-6 hover:-translate-y-2 transition-transform duration-500 cursor-pointer flex flex-col items-center text-center">
-                            <div class="relative w-40 h-56 rounded-xl overflow-hidden shadow-elegant mb-6 group-hover:shadow-[0_25px_50px_-12px_rgba(117,59,73,0.3)] transition-shadow duration-500">
+                        <div class="group card-flashlight glass-card rounded-[2rem] p-6 hover:-translate-y-2 transition-transform duration-500 cursor-pointer flex flex-col items-center text-center relative overflow-hidden [animation:animationIn_1.2s_ease-out_0.2s_both] animate-on-scroll border border-white/60">
+                            <!-- Flashlight effect setup via JS -->
+                            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style="background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(229, 192, 202, 0.4), transparent 40%);"></div>
+                            
+                            <div class="relative w-40 h-56 rounded-xl overflow-hidden shadow-elegant mb-6 group-hover:shadow-[0_25px_50px_-12px_rgba(117,59,73,0.3)] transition-shadow duration-500 z-10">
                                 <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="Book Cover" class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-writer-900/20 group-hover:bg-transparent transition-colors duration-500"></div>
                             </div>
-                            <div class="text-[0.65rem] font-semibold uppercase tracking-widest text-writer-500 mb-2">Romance</div>
-                            <h4 class="text-2xl font-serif text-writer-dark mb-2">Suspiros do Vento</h4>
-                            <p class="text-sm text-writer-600">Disponível na Amazon</p>
+                            <div class="text-[0.65rem] font-semibold uppercase tracking-widest text-writer-500 mb-2 z-10">Romance</div>
+                            <h4 class="text-2xl font-serif text-writer-dark mb-2 z-10 transition-colors group-hover:text-writer-700">Suspiros do Vento</h4>
+                            <p class="text-sm text-writer-600 z-10">Disponível na Amazon</p>
                         </div>
 
                         <!-- Content Card -->
-                        <div class="group glass-card rounded-[2rem] p-8 hover:-translate-y-2 transition-transform duration-500 border border-white relative overflow-hidden flex flex-col justify-between">
+                        <div class="group card-flashlight glass-card rounded-[2rem] p-8 hover:-translate-y-2 transition-transform duration-500 border border-white/60 relative overflow-hidden flex flex-col justify-between [animation:animationIn_1.2s_ease-out_0.4s_both] animate-on-scroll">
+                            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style="background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(229, 192, 202, 0.4), transparent 40%);"></div>
+
                             <div class="absolute top-0 right-0 w-32 h-32 bg-writer-100 rounded-bl-full -z-10 transition-transform duration-500 group-hover:scale-110"></div>
-                            <div>
-                                <div class="w-12 h-12 rounded-full bg-writer-100 flex items-center justify-center text-writer-700 mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <div class="z-10 pointer-events-none">
+                                <div class="w-12 h-12 rounded-full bg-writer-100 flex items-center justify-center text-writer-700 mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm border border-writer-200">
                                     <i data-lucide="scroll-text" class="w-6 h-6"></i>
                                 </div>
-                                <h4 class="text-xl font-serif text-writer-dark mb-4">Revisão Literária</h4>
+                                <h4 class="text-xl font-serif text-writer-dark mb-4 transition-colors group-hover:text-writer-700">Revisão Literária</h4>
                                 <p class="text-writer-600/80 text-sm leading-relaxed mb-6">
                                     Além da escrita, um olhar crítico sobre obras em desenvolvimento, refinando enredos e desenvolvimento de personagens.
                                 </p>
                             </div>
-                            <a href="#" class="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-writer-700 group-hover:text-writer-800 transition-colors">
-                                Saber mais <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            <a href="#" class="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-writer-700 group-hover:text-writer-800 transition-colors z-10">
+                                Saber mais <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
                             </a>
                         </div>
 
                         <!-- Review/Quote Card -->
-                        <div class="glass-panel rounded-[2rem] p-8 flex flex-col justify-center relative overflow-visible mt-8 lg:mt-0">
+                        <div class="card-flashlight glass-panel rounded-[2rem] p-8 flex flex-col justify-center relative border border-white overflow-hidden mt-8 lg:mt-0 group [animation:animationIn_1.2s_ease-out_0.6s_both] animate-on-scroll">
+                            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style="background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.9), transparent 40%);"></div>
+
                             <!-- Quoute icon floating -->
-                            <div class="absolute -top-6 left-8 w-12 h-12 rounded-full bg-writer-700 text-white flex items-center justify-center shadow-elegant">
-                                <i data-lucide="quote" class="w-5 h-5 fill-current"></i>
+                            <div class="absolute -top-4 -left-4 w-16 h-16 rounded-full bg-writer-700 text-writer-100 flex items-center justify-center shadow-elegant z-20 group-hover:scale-110 transition-transform duration-500 opacity-90 backdrop-blur-md mix-blend-multiply">
+                                <i data-lucide="quote" class="w-6 h-6 fill-current"></i>
                             </div>
                             
-                            <blockquote class="text-lg font-serif italic text-writer-800 leading-relaxed mb-6 pt-4">
+                            <blockquote class="text-lg font-serif italic text-writer-800 leading-relaxed mb-6 pt-4 relative z-10 transition-colors group-hover:text-writer-900">
                                 "Uma escrita delicada que penetra a alma e acalma o espírito. Ler Elisa é viajar para dentro de si mesma."
                             </blockquote>
                             
-                            <div class="flex items-center gap-4 border-t border-writer-200/50 pt-6">
-                                <div class="w-10 h-10 rounded-full bg-writer-300 overflow-hidden">
+                            <div class="flex items-center gap-4 border-t border-writer-200/50 pt-6 relative z-10">
+                                <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-writer-100 group-hover:shadow-md transition-shadow">
                                      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Reviewer" class="w-full h-full object-cover">
                                 </div>
                                 <div>
                                     <div class="text-sm font-semibold text-writer-dark">Clara Mendes</div>
                                     <div class="flex text-writer-400 gap-0.5">
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current group-hover:text-writer-500 transition-colors delay-[0ms]"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current group-hover:text-writer-500 transition-colors delay-[50ms]"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current group-hover:text-writer-500 transition-colors delay-[100ms]"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current group-hover:text-writer-500 transition-colors delay-[150ms]"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current group-hover:text-writer-500 transition-colors delay-[200ms]"></i>
                                     </div>
                                 </div>
                             </div>
@@ -456,78 +522,81 @@
 
         <!-- 4) Composition & Motion Effects -->
         <section id="layout" class="scroll-mt-32">
-             <div class="flex items-center gap-3 mb-4">
+             <div class="flex items-center gap-3 mb-4 [animation:animationIn_1.2s_ease-out_0.1s_both] animate-on-scroll">
                 <span class="w-12 h-px bg-writer-300"></span>
                 <span class="text-xs font-semibold uppercase tracking-widest text-writer-500">Comportamento</span>
             </div>
-            <h2 class="text-4xl font-serif text-writer-dark mb-16">Animações & Ícones</h2>
+            <h2 class="text-4xl font-serif text-writer-dark mb-16 [animation:animationIn_1.2s_ease-out_0.2s_both] animate-on-scroll">Animações Dinâmicas</h2>
 
             <div class="grid lg:grid-cols-2 gap-12">
                 
                 <!-- Hover Effects -->
-                <div class="glass-card p-10 rounded-[2rem]">
-                    <h3 class="text-xl font-sans font-medium mb-8">Feedback Visual Sutil</h3>
+                <div class="glass-card p-10 rounded-[2rem] shadow-sm [animation:animationIn_1.2s_ease-out_0.4s_both] animate-on-scroll border border-white">
+                    <h3 class="text-xl font-sans font-medium mb-8">Feedback Visual Vivo</h3>
                     <div class="space-y-6">
                         
-                        <div class="flex items-center justify-between p-4 rounded-xl hover:bg-white transition-colors cursor-pointer group border border-transparent hover:border-writer-100 hover:shadow-sm">
-                            <span class="font-medium text-writer-700">Mudança de Cor Suave</span>
-                            <span class="text-xs font-mono text-writer-400">hover:bg-white transition-colors</span>
+                        <div class="flex items-center justify-between p-4 rounded-xl hover:bg-white transition-all cursor-pointer group border border-transparent hover:border-writer-200 hover:shadow-elegant">
+                            <span class="font-medium text-writer-700">Hover Float & Blur-in</span>
+                            <span class="text-[10px] sm:text-xs font-mono text-writer-400">[animation:animationIn_*]</span>
                         </div>
                         
-                        <div class="flex items-center justify-between p-4 rounded-xl group cursor-pointer">
+                        <div class="flex items-center justify-between p-4 rounded-xl group cursor-pointer hover:bg-white/50 transition-colors">
                             <span class="font-medium text-writer-700">Transformação & Escala</span>
-                            <div class="w-10 h-10 rounded-full bg-writer-100 flex items-center justify-center group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300">
-                                <i data-lucide="arrow-up-right" class="w-4 h-4 text-writer-600"></i>
+                            <div class="w-10 h-10 rounded-full bg-writer-100 flex items-center justify-center group-hover:scale-110 group-hover:-translate-y-1 group-hover:bg-writer-200 transition-all duration-300 shadow-sm">
+                                <i data-lucide="arrow-up-right" class="w-4 h-4 text-writer-600 transition-transform group-hover:rotate-12"></i>
                             </div>
                         </div>
 
-                        <div class="flex items-center justify-between p-4 rounded-xl group cursor-pointer">
-                            <span class="font-medium text-writer-700">Animação Contínua (Pulse)</span>
+                        <div class="flex items-center justify-between p-4 rounded-xl group cursor-pointer hover:bg-white/50 transition-colors">
+                            <span class="font-medium text-writer-700">Border Flashlight Edge Tracking</span>
                             <div class="flex items-center gap-2">
                                 <span class="relative flex h-3 w-3">
                                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-writer-400 opacity-75"></span>
                                   <span class="relative inline-flex rounded-full h-3 w-3 bg-writer-500"></span>
                                 </span>
-                                <span class="text-xs font-mono text-writer-400">animate-ping</span>
+                                <span class="text-[10px] sm:text-xs font-mono text-writer-400">radial-gradient(mousemove)</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Icons Library -->
-                <div class="glass-card p-10 rounded-[2rem]">
+                <div class="glass-card p-10 rounded-[2rem] shadow-sm [animation:animationIn_1.2s_ease-out_0.6s_both] animate-on-scroll border border-white relative overflow-hidden group">
+                     <!-- Inner Background Beam -->
+                    <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-writer-300 to-transparent -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-1000 delay-100"></div>
+
                     <h3 class="text-xl font-sans font-medium mb-8">Ícones (Lucide) Selecionados</h3>
                     <div class="grid grid-cols-4 gap-6 text-center text-writer-600">
-                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
-                            <i data-lucide="pen-tool" class="w-6 h-6 group-hover:text-writer-800 transition-colors"></i>
+                        <div class="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform cursor-pointer">
+                            <i data-lucide="pen-tool" class="w-6 h-6 hover:text-writer-800 transition-colors"></i>
                             <span class="text-[0.6rem] font-mono">pen-tool</span>
                         </div>
-                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
-                            <i data-lucide="book-open" class="w-6 h-6 group-hover:text-writer-800 transition-colors"></i>
+                        <div class="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform cursor-pointer">
+                            <i data-lucide="book-open" class="w-6 h-6 hover:text-writer-800 transition-colors"></i>
                             <span class="text-[0.6rem] font-mono">book-open</span>
                         </div>
-                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
-                            <i data-lucide="feather" class="w-6 h-6 group-hover:text-writer-800 transition-colors"></i>
+                        <div class="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform cursor-pointer">
+                            <i data-lucide="feather" class="w-6 h-6 hover:text-writer-800 transition-colors"></i>
                             <span class="text-[0.6rem] font-mono">feather</span>
                         </div>
-                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
-                            <i data-lucide="bookmark" class="w-6 h-6 group-hover:text-writer-800 transition-colors"></i>
+                        <div class="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform cursor-pointer">
+                            <i data-lucide="bookmark" class="w-6 h-6 hover:text-writer-800 transition-colors"></i>
                             <span class="text-[0.6rem] font-mono">bookmark</span>
                         </div>
-                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
-                            <i data-lucide="coffee" class="w-6 h-6 group-hover:text-writer-800 transition-colors"></i>
+                        <div class="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform cursor-pointer">
+                            <i data-lucide="coffee" class="w-6 h-6 hover:text-writer-800 transition-colors"></i>
                             <span class="text-[0.6rem] font-mono">coffee</span>
                         </div>
-                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
-                            <i data-lucide="mail" class="w-6 h-6 group-hover:text-writer-800 transition-colors"></i>
+                        <div class="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform cursor-pointer">
+                            <i data-lucide="mail" class="w-6 h-6 hover:text-writer-800 transition-colors"></i>
                             <span class="text-[0.6rem] font-mono">mail</span>
                         </div>
-                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
-                            <i data-lucide="instagram" class="w-6 h-6 group-hover:text-writer-800 transition-colors"></i>
+                        <div class="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform cursor-pointer">
+                            <i data-lucide="instagram" class="w-6 h-6 hover:text-writer-800 transition-colors"></i>
                             <span class="text-[0.6rem] font-mono">instagram</span>
                         </div>
-                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
-                            <i data-lucide="scroll-text" class="w-6 h-6 group-hover:text-writer-800 transition-colors"></i>
+                        <div class="flex flex-col items-center gap-2 hover:-translate-y-1 transition-transform cursor-pointer">
+                            <i data-lucide="scroll-text" class="w-6 h-6 hover:text-writer-800 transition-colors"></i>
                             <span class="text-[0.6rem] font-mono">scroll-text</span>
                         </div>
                     </div>
@@ -538,16 +607,47 @@
 
     </main>
 
-    <footer class="mt-32 border-t border-writer-200">
+    <footer class="mt-32 border-t border-writer-200 bg-white/50 backdrop-blur-md">
         <div class="mx-auto max-w-7xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="font-serif italic text-writer-700 text-2xl">Elisa</div>
+            <div class="font-serif italic text-writer-700 text-2xl animate-pulse">Elisa</div>
             <p class="text-sm text-writer-500">Design System elegante construído para uma escrita que inspira.</p>
         </div>
     </footer>
 
-    <!-- Initialize Icons -->
+    <!-- Initialize Scripts -->
     <script>
+        // Init Lucide Icons
         lucide.createIcons();
+
+        // Reveal Animations on Scroll
+        document.addEventListener("DOMContentLoaded", () => {
+            const once = true; // Animate only once per element
+            if (!window.__inViewIO) {
+              window.__inViewIO = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    entry.target.classList.add("animate");
+                    if (once) window.__inViewIO.unobserve(entry.target);
+                  }
+                });
+              }, { threshold: 0.1, rootMargin: "0px -10% 0px -10%" });
+            }
+
+            document.querySelectorAll(".animate-on-scroll").forEach((el) => {
+                window.__inViewIO.observe(el); 
+            });
+
+            // Flashlight Effect Tracking
+            document.querySelectorAll('.card-flashlight').forEach((card) => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
+        });
     </script>
 </body>
 </html>
