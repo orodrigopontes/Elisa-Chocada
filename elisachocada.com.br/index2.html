@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -126,6 +126,9 @@
 </head>
 <body class="selection-pink bg-mesh relative overflow-x-hidden">
 
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-1.5 lg:h-2 bg-gradient-to-r from-writer-300 via-writer-500 to-writer-700 z-[100] transition-transform duration-75 ease-out origin-left shadow-[0_0_15px_rgba(192,113,135,0.8)]" style="transform: scaleX(0); width: 100%;"></div>
+
     <!-- Ambient Background Elements -->
     <div class="fixed top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-writer-100 blur-[100px] opacity-60 z-[-1] pointer-events-none"></div>
     <div class="fixed bottom-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-writer-50 blur-[120px] opacity-80 z-[-1] pointer-events-none"></div>
@@ -140,11 +143,12 @@
                 <span class="font-serif italic font-semibold text-xl tracking-wide text-writer-dark group-hover:text-writer-700 transition-colors">Elisa Chocada</span>
             </a>
             
-            <nav class="hidden md:flex items-center gap-10 text-sm font-medium tracking-widest uppercase">
+            <nav class="hidden md:flex items-center gap-6 lg:gap-8 text-xs lg:text-sm font-medium tracking-widest uppercase">
                 <a href="#hero" class="text-writer-800/60 hover:text-writer-800 transition-colors">Início</a>
-                <a href="#sobre" class="text-writer-800/60 hover:text-writer-800 transition-colors">O Curso</a>
-                <a href="#modulos" class="text-writer-800/60 hover:text-writer-800 transition-colors">Módulos</a>
+                <a href="#sobre-o-curso" class="text-writer-800/60 hover:text-writer-800 transition-colors">O Curso</a>
+                <a href="#conteudo" class="text-writer-800/60 hover:text-writer-800 transition-colors">Módulos</a>
                 <a href="#depoimentos" class="text-writer-800/60 hover:text-writer-800 transition-colors">Depoimentos</a>
+                <a href="#oferta" class="text-writer-800/60 hover:text-writer-800 transition-colors hidden lg:block">Oferta</a>
             </nav>
             
             <!-- Mobile Menu Icon -->
@@ -192,14 +196,14 @@
                     
                     <div class="flex flex-col sm:flex-row gap-6 [animation:animationIn_1.2s_ease-out_0.6s_both] animate-on-scroll">
                         <!-- Botão com Borda Animada Beam (Estilo ds3.html) -->
-                        <button class="group inline-flex overflow-hidden transition-all duration-500 hover:-translate-y-[2px] rounded-full p-[2px] relative items-center justify-center hover:shadow-[0_15px_30px_-5px_rgba(192,113,135,0.4)] w-max">
+                        <a href="https://pay.hotmart.com/R103490178D" class="group inline-flex overflow-hidden transition-all duration-500 hover:-translate-y-[2px] rounded-full p-[2px] relative items-center justify-center hover:shadow-[0_15px_30px_-5px_rgba(192,113,135,0.4)] w-max">
                             <span class="absolute inset-[-100%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,transparent_80%,#d39bab_100%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
                             <span class="absolute inset-x-0 inset-y-0 rounded-full bg-writer-800 transition-opacity duration-300 group-hover:opacity-0 z-0"></span>
                             <span class="flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-writer-800 hover:bg-writer-900 transition-colors duration-300 w-full h-full relative z-10 text-white shadow-inner-elegant">
                                 <span class="text-[0.75rem] font-bold tracking-[0.15em] uppercase text-white/90 group-hover:text-white transition-colors duration-300">Quero Iniciar Minha Cura</span>
                                 <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform duration-500 group-hover:translate-x-1.5 text-white/80 group-hover:text-white"></i>
                             </span>
-                        </button>
+                        </a>
                     </div>
                 </div>
                 
@@ -369,14 +373,14 @@
 
                     <!-- CTA Repetição Abaixo da Dobra -->
                     <div class="flex justify-center relative z-10 [animation:animationIn_1.2s_ease-out_0.6s_both] animate-on-scroll">
-                        <button class="group inline-flex overflow-hidden transition-all duration-500 hover:-translate-y-[2px] rounded-full p-[2px] relative items-center justify-center hover:shadow-[0_15px_30px_-5px_rgba(192,113,135,0.4)] w-max">
+                        <a href="https://pay.hotmart.com/R103490178D" class="group inline-flex overflow-hidden transition-all duration-500 hover:-translate-y-[2px] rounded-full p-[2px] relative items-center justify-center hover:shadow-[0_15px_30px_-5px_rgba(192,113,135,0.4)] w-max">
                             <span class="absolute inset-[-100%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,transparent_80%,#d39bab_100%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-0"></span>
                             <span class="absolute inset-[2px] rounded-full bg-writer-800 transition-opacity duration-300 group-hover:opacity-0 z-0"></span>
                             <span class="flex items-center justify-center gap-2 px-8 py-5 rounded-full bg-writer-800 hover:bg-writer-900 transition-colors duration-300 w-full h-full relative z-10 text-white shadow-inner-elegant">
                                 <span class="text-[0.75rem] font-bold tracking-[0.15em] uppercase text-white/90 group-hover:text-white transition-colors duration-300">Quero Iniciar Minha Cura</span>
                                 <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform duration-500 group-hover:translate-x-1.5 text-white/80 group-hover:text-white"></i>
                             </span>
-                        </button>
+                        </a>
                     </div>
 
                 </div>
@@ -782,13 +786,13 @@
             <!-- CTA at bottom of timeline -->
             <div class="mt-24 text-center [animation:animationIn_1.2s_ease-out_0.3s_both] animate-on-scroll">
                 <p class="text-writer-400 font-serif italic text-xl mb-10">Pronta para começar a sua jornada?</p>
-                <button class="group inline-flex overflow-hidden transition-all duration-500 hover:-translate-y-[2px] rounded-full p-[2px] relative items-center justify-center hover:shadow-[0_15px_40px_-5px_rgba(192,113,135,0.5)] w-max mx-auto">
+                <a href="https://pay.hotmart.com/R103490178D" class="group inline-flex overflow-hidden transition-all duration-500 hover:-translate-y-[2px] rounded-full p-[2px] relative items-center justify-center hover:shadow-[0_15px_40px_-5px_rgba(192,113,135,0.5)] w-max mx-auto">
                     <span class="absolute inset-[-100%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,transparent_75%,#c07187_100%)] opacity-80 group-hover:opacity-100 transition-opacity duration-300"></span>
                     <span class="flex items-center justify-center gap-3 px-10 py-5 rounded-full bg-writer-800 group-hover:bg-writer-900 transition-colors duration-300 w-full h-full relative z-10 text-white">
                         <span class="text-[0.75rem] font-bold tracking-[0.15em] uppercase group-hover:text-white transition-colors">Quero Iniciar Minha Cura</span>
                         <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1.5"></i>
                     </span>
-                </button>
+                </a>
             </div>
 
         </div>
@@ -888,7 +892,7 @@
 
                     <!-- Primary CTA — Border Beam -->
                     <div class="pt-2">
-                        <button class="group inline-flex overflow-hidden transition-all duration-500 hover:-translate-y-[2px] rounded-full p-[2px] relative items-center justify-center hover:shadow-[0_15px_30px_-5px_rgba(192,113,135,0.45)] w-max">
+                        <a href="https://pay.hotmart.com/R103490178D" class="group inline-flex overflow-hidden transition-all duration-500 hover:-translate-y-[2px] rounded-full p-[2px] relative items-center justify-center hover:shadow-[0_15px_30px_-5px_rgba(192,113,135,0.45)] w-max">
                             <span class="absolute inset-[-100%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,transparent_80%,#d39bab_100%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-0"></span>
                             <span class="absolute inset-[2px] rounded-full bg-writer-800 transition-opacity duration-300 group-hover:opacity-0 z-0"></span>
                             <span class="flex items-center justify-center gap-2 px-8 py-5 rounded-full bg-writer-800 hover:bg-writer-900 transition-colors duration-300 w-full h-full relative z-10 text-white shadow-inner-elegant">
@@ -896,7 +900,7 @@
                                 <span class="text-[0.75rem] font-bold tracking-[0.15em] uppercase text-white/90 group-hover:text-white transition-colors duration-300">Quero Garantir Meu Presente</span>
                                 <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform duration-500 group-hover:translate-x-1.5 text-white/80 group-hover:text-white"></i>
                             </span>
-                        </button>
+                        </a>
                     </div>
 
                     <p class="text-xs text-writer-400 font-sans">* O livro é enviado mediante confirmação de dados no momento da compra.</p>
@@ -1219,14 +1223,14 @@
                         </ul>
 
                         <!-- Primary CTA -->
-                        <button class="group relative inline-flex overflow-hidden transition-all duration-500 hover:-translate-y-[2px] rounded-full p-[2px] items-center justify-center hover:shadow-[0_15px_30px_-5px_rgba(255,255,255,0.15)] w-full">
+                        <a href="https://pay.hotmart.com/R103490178D" class="group relative inline-flex overflow-hidden transition-all duration-500 hover:-translate-y-[2px] rounded-full p-[2px] items-center justify-center hover:shadow-[0_15px_30px_-5px_rgba(255,255,255,0.15)] w-full">
                             <span class="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,transparent_80%,#ffffff_100%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-0"></span>
                             <span class="absolute inset-[2px] rounded-full bg-white transition-opacity duration-300 group-hover:opacity-0 z-0"></span>
                             <span class="flex items-center justify-center gap-2 px-8 py-5 rounded-full bg-white hover:bg-writer-50 transition-colors duration-300 w-full h-full relative z-10 text-writer-900 shadow-inner-elegant">
                                 <span class="text-[0.8rem] font-bold tracking-[0.15em] uppercase text-writer-900 transition-colors duration-300">Garantir Minha Vaga Agora</span>
                                 <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform duration-500 group-hover:translate-x-1.5 text-writer-800"></i>
                             </span>
-                        </button>
+                        </a>
                         <p class="text-center text-white/40 text-xs mt-5 font-sans flex items-center justify-center gap-1">
                             <i data-lucide="lock" class="w-3 h-3"></i> Compra 100% Segura
                         </p>
@@ -1440,6 +1444,17 @@
                 
                 bookWrap.addEventListener('mouseleave', () => {
                     bookTilt.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                });
+            }
+
+            // Scroll Progress Bar
+            const progressBar = document.getElementById('scroll-progress');
+            if (progressBar) {
+                window.addEventListener('scroll', () => {
+                    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = (winScroll / height);
+                    progressBar.style.transform = `scaleX(${scrolled})`;
                 });
             }
 
