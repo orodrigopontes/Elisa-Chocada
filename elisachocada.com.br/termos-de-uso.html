@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Termos de Uso | Elisa Chocada – Nascidas para serem Amadas</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Design System Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        writer: {
+                            50: '#fdf8f9',
+                            100: '#f9edf0',
+                            200: '#f1dce2',
+                            300: '#e5c0ca',
+                            400: '#d39bab',
+                            500: '#c07187',
+                            600: '#a7556d',
+                            700: '#8c4355',
+                            800: '#753b49',
+                            900: '#643440',
+                            dark: '#2d2426'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glass': '0 10px 40px -10px rgba(117, 59, 73, 0.08)',
+                        'elegant': '0 20px 40px -5px rgba(117, 59, 73, 0.1), 0 8px 10px -6px rgba(117, 59, 73, 0.05)',
+                        'inner-elegant': 'inset 0 2px 4px 0 rgba(117, 59, 73, 0.06)'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="selection-pink bg-mesh relative overflow-x-hidden">
+
+    <!-- Ambient Background Elements -->
+    <div class="fixed top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-writer-100 blur-[100px] opacity-60 z-[-1] pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-writer-50 blur-[120px] opacity-80 z-[-1] pointer-events-none"></div>
+
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-white/50 transition-all duration-300">
+        <div class="mx-auto max-w-7xl px-8 py-5 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-writer-50 flex items-center justify-center border border-writer-200 group-hover:scale-105 transition-transform duration-500">
+                    <i data-lucide="feather" class="w-5 h-5 text-writer-700"></i>
+                </div>
+                <span class="font-serif italic font-semibold text-xl tracking-wide text-writer-dark group-hover:text-writer-700 transition-colors">Elisa Chocada</span>
+            </a>
+            
+            <nav class="hidden md:flex items-center gap-6 lg:gap-8 text-xs lg:text-sm font-medium tracking-widest uppercase">
+                <a href="index.html#hero" class="text-writer-800/60 hover:text-writer-800 transition-colors">Início</a>
+                <a href="index.html#sobre-o-curso" class="text-writer-800/60 hover:text-writer-800 transition-colors">O Curso</a>
+                <a href="index.html#conteudo" class="text-writer-800/60 hover:text-writer-800 transition-colors">Módulos</a>
+                <a href="index.html#depoimentos" class="text-writer-800/60 hover:text-writer-800 transition-colors">Depoimentos</a>
+                <a href="https://pay.hotmart.com/R103490178D" class="text-writer-800/60 hover:text-writer-800 transition-colors hidden lg:block">Oferta</a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-writer-dark p-2 -mr-2 transition-transform active:scale-95">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full bg-writer-50/95 backdrop-blur-md border-b border-writer-200/50 shadow-glass overflow-hidden transition-all duration-300 max-h-0 opacity-0">
+            <nav class="flex flex-col px-8 py-6 gap-6 text-sm font-medium tracking-widest uppercase items-center text-center">
+                <a href="index.html#hero" class="mobile-menu-link text-writer-800/80 hover:text-writer-800 transition-colors w-full">Início</a>
+                <a href="index.html#sobre-o-curso" class="mobile-menu-link text-writer-800/80 hover:text-writer-800 transition-colors w-full">O Curso</a>
+                <a href="index.html#conteudo" class="mobile-menu-link text-writer-800/80 hover:text-writer-800 transition-colors w-full">Módulos</a>
+                <a href="index.html#depoimentos" class="mobile-menu-link text-writer-800/80 hover:text-writer-800 transition-colors w-full">Depoimentos</a>
+                <a href="https://pay.hotmart.com/R103490178D" class="mobile-menu-link text-writer-800/80 hover:text-writer-800 transition-colors w-full">Oferta</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const links = document.querySelectorAll('.mobile-menu-link');
+            
+            let isOpen = false;
+            
+            const toggleMenu = () => {
+                isOpen = !isOpen;
+                if(isOpen) {
+                    menu.classList.remove('max-h-0', 'opacity-0');
+                    menu.classList.add('max-h-96', 'opacity-100');
+                    btn.innerHTML = '<i data-lucide="x" class="w-6 h-6"></i>';
+                    lucide.createIcons();
+                } else {
+                    menu.classList.add('max-h-0', 'opacity-0');
+                    menu.classList.remove('max-h-96', 'opacity-100');
+                    btn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+                    lucide.createIcons();
+                }
+            };
+            
+            if(btn) btn.addEventListener('click', toggleMenu);
+            links.forEach(link => link.addEventListener('click', () => {
+                if(isOpen) toggleMenu();
+            }));
+        });
+    </script>
+
+    <main class="relative w-full py-24 lg:py-32">
+        <div class="mx-auto max-w-4xl px-6 lg:px-8">
+            <div class="mb-12">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-writer-100 border border-writer-200 mb-6 shadow-sm">
+                    <i data-lucide="scale" class="w-4 h-4 text-writer-600"></i>
+                    <span class="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-writer-600">Documento Legal</span>
+                </div>
+                <h1 class="text-4xl lg:text-5xl font-serif text-writer-dark mb-4 drop-shadow-sm">Termos de <span class="italic text-gradient">Uso</span></h1>
+                <p class="text-sm font-sans tracking-widest text-writer-500 uppercase">Última atualização: Março de 2026</p>
+            </div>
+            
+            <div class="prose prose-writer lg:prose-lg max-w-none font-sans text-writer-800/80 leading-relaxed bg-white/60 backdrop-blur-sm p-8 lg:p-12 rounded-[2.5rem] shadow-glass border border-white/50 space-y-8">
+                <section>
+                    <h2 class="text-2xl font-serif text-writer-700 mb-4 inline-flex items-center gap-3"><span class="w-8 h-px bg-writer-300"></span> 1. Aceitação dos Termos</h2>
+                    <p>Ao acessar e utilizar o site Elisa Chocada e ao adquirir o material e curso "Nascidas para serem Amadas", você manifesta sua concordância contínua e irrestrita com os presentes Termos de Uso. Caso discorde, ainda que parcialmente, você deve abster-se imediatamente de utilizar a plataforma e os nossos conteúdos.</p>
+                </section>
+                
+                <section>
+                    <h2 class="text-2xl font-serif text-writer-700 mb-4 inline-flex items-center gap-3"><span class="w-8 h-px bg-writer-300"></span> 2. Propriedade Intelectual e Uso do Conteúdo</h2>
+                    <p>Todo o conteúdo deste site, abarcando (mas não se limitando a) textos institucionais, aulas em vídeo, guias em PDF, metodologias ensinadas e o conteúdo integral do livro físico bônus "Jornada da Rendição", são protegidos pela Lei de Direitos Autorais e são de propriedade exclusiva de Elisa Vieira.</p>
+                    <p class="mt-4">Sendo assim, o seu acesso a este material é qualificado como <strong>pessoal e intrasferível</strong>. Concordando com estes termos, você compromete-se a:</p>
+                    <ul class="list-disc pl-6 mt-4 space-y-3">
+                        <li>Não reproduzir, gravar, copiar, distribuir, comercializar ou compartilhar (mesmo que de forma gratuita ou "venda fracionada") qualquer parcela do curso.</li>
+                        <li>Entender que o sistema bloqueia automaticamente contas que apresentam padrões de acesso suspeitos (múltiplos acessos de IPs diferentes).</li>
+                        <li>Proteger o seu login e senha, sabendo que você é o único responsabilizado pelo uso da sua conta individual.</li>
+                    </ul>
+                </section>
+                
+                <section>
+                    <h2 class="text-2xl font-serif text-writer-700 mb-4 inline-flex items-center gap-3"><span class="w-8 h-px bg-writer-300"></span> 3. Política Financeira e Garantia</h2>
+                    <p>Nosso ambiente de pagamento utiliza os mais altos protocolos de segurança fornecidos pela plataforma parceira (Hotmart). Ao comprar, você tem amparo do direito do consumidor aliado à nossa exclusiva <strong>Garantia Incondicional de 7 dias</strong>.</p>
+                    <p class="mt-4">Isso significa que você tem 7 dias corridos após a confirmação do pagamento para acessar o conteúdo. Se neste período, por qualquer motivo legal, entender que não está sentindo os devidos efeitos, basta um clique dentro da sua conta Hotmart para estornar sem burocracias ou ressentimentos do nosso lado.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-serif text-writer-700 mb-4 inline-flex items-center gap-3"><span class="w-8 h-px bg-writer-300"></span> 4. Entrega do Módulo Bônus Físico</h2>
+                    <p>Compreendendo o pacote, você é agraciado com a entrega física do livro. Para garantirmos uma logística suave, atente-se a essas normas:</p>
+                    <ul class="list-disc pl-6 mt-4 space-y-3">
+                        <li>O endereço fornecido pelo cliente durante o cadastro na plataforma de checkout e compra é considerado oficial para envio. Endereços incorretos que resultem em retorno de mercadoria gerarão novos custos de reenvio que deverão ser suportados unicamente pelo cliente.</li>
+                        <li>O transporte físico é regido por empresas terceirizadas (via Correios ou Transportadoras locais). Logo, o rastreio deve ser acompanhado.</li>
+                    </ul>
+                </section>
+                
+                <section>
+                    <h2 class="text-2xl font-serif text-writer-700 mb-4 inline-flex items-center gap-3"><span class="w-8 h-px bg-writer-300"></span> 5. Atualizações Legais Gerais</h2>
+                    <p>O ambiente virtual é dinâmico, por isso a Elisa Chocada reserva o direito de fazer ajustes neste documento bem como atualizar todo o escopo do produto. Todas as mudanças de natureza sensível serão registradas e os devidos alunos notificados, devendo estes concordar com suas atualizações se desejarem a continuidade na comunidade e a utilização contínua dos materiais adquiridos.</p>
+                </section>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <a href="index.html" class="inline-flex items-center gap-2 text-writer-600 hover:text-writer-700 uppercase tracking-widest text-sm font-semibold transition-colors">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Voltar para a Página Inicial
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-writer-dark py-12 border-t border-writer-800">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8 text-center flex flex-col items-center">
+            <a href="index.html" class="flex items-center gap-2 mb-6 group opacity-80 hover:opacity-100 transition-opacity">
+                <div class="w-8 h-8 rounded-full bg-writer-800 flex items-center justify-center border border-writer-700">
+                    <i data-lucide="feather" class="w-4 h-4 text-writer-300"></i>
+                </div>
+                <span class="font-serif italic font-semibold text-lg tracking-wide text-white">Elisa Chocada</span>
+            </a>
+            
+            <p class="text-writer-400 font-sans text-sm mb-4">
+                <a href="https://api.whatsapp.com/send/?phone=5511938003268&text=Cheguei+atrav%C3%A9s+do+site+%28informe+o+site%29&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="hover:text-writer-200 transition-colors border-b border-transparent hover:border-writer-300 pb-0.5">
+                    © 2026 Dirilis Digital – Agencia e Criação de Sites
+                </a>
+            </p>
+            
+            <div class="flex items-center gap-4 text-xs font-sans text-writer-500 uppercase tracking-widest mt-2">
+                <a href="termos-de-uso.html" class="hover:text-writer-300 transition-colors">Termos de Uso</a>
+                <span>•</span>
+                <a href="politica-de-privacidade.html" class="hover:text-writer-300 transition-colors">Política de Privacidade</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>

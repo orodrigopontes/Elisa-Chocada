@@ -79,12 +79,54 @@
                 <a href="#oferta" class="text-writer-800/60 hover:text-writer-800 transition-colors hidden lg:block">Oferta</a>
             </nav>
             
-            <!-- Mobile Menu Icon -->
-            <button class="md:hidden text-writer-dark">
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-writer-dark p-2 -mr-2 transition-transform active:scale-95">
                 <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
+        
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full bg-writer-50/95 backdrop-blur-md border-b border-writer-200/50 shadow-glass overflow-hidden transition-all duration-300 max-h-0 opacity-0">
+            <nav class="flex flex-col px-8 py-6 gap-6 text-sm font-medium tracking-widest uppercase items-center text-center">
+                <a href="#hero" class="mobile-menu-link text-writer-800/80 hover:text-writer-800 transition-colors w-full">Início</a>
+                <a href="#sobre-o-curso" class="mobile-menu-link text-writer-800/80 hover:text-writer-800 transition-colors w-full">O Curso</a>
+                <a href="#conteudo" class="mobile-menu-link text-writer-800/80 hover:text-writer-800 transition-colors w-full">Módulos</a>
+                <a href="#depoimentos" class="mobile-menu-link text-writer-800/80 hover:text-writer-800 transition-colors w-full">Depoimentos</a>
+                <a href="#oferta" class="mobile-menu-link text-writer-800/80 hover:text-writer-800 transition-colors w-full">Oferta</a>
+            </nav>
+        </div>
     </header>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const links = document.querySelectorAll('.mobile-menu-link');
+            
+            let isOpen = false;
+            
+            const toggleMenu = () => {
+                isOpen = !isOpen;
+                if(isOpen) {
+                    menu.classList.remove('max-h-0', 'opacity-0');
+                    menu.classList.add('max-h-96', 'opacity-100');
+                    btn.innerHTML = '<i data-lucide="x" class="w-6 h-6"></i>';
+                    lucide.createIcons();
+                } else {
+                    menu.classList.add('max-h-0', 'opacity-0');
+                    menu.classList.remove('max-h-96', 'opacity-100');
+                    btn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+                    lucide.createIcons();
+                }
+            };
+            
+            btn.addEventListener('click', toggleMenu);
+            links.forEach(link => link.addEventListener('click', () => {
+                if(isOpen) toggleMenu();
+            }));
+        });
+    </script>
 
     <!-- Hero Section (Full Width) -->
     <section id="hero" class="relative w-full pt-12 pb-28 hero-flashlight overflow-hidden">
@@ -764,14 +806,33 @@
 
                             <!-- Main Book Face Image -->
                             <img src="assets/livro_bonus.png" alt="Livro Jornada da Rendição" 
-                                 class="relative w-72 lg:w-[28rem] xl:w-[32rem] object-contain drop-shadow-[0_30px_50px_rgba(0,0,0,0.25)] group-hover:drop-shadow-[0_40px_60px_rgba(192,113,135,0.35)] transition-all duration-500"
+                                 class="relative w-52 sm:w-64 md:w-72 lg:w-[28rem] xl:w-[32rem] object-contain drop-shadow-[0_30px_50px_rgba(0,0,0,0.25)] group-hover:drop-shadow-[0_40px_60px_rgba(192,113,135,0.35)] transition-all duration-500"
                                  style="transform: translateZ(10px);">
 
-                            <!-- Floating badge -->
-                            <div class="absolute -top-2 -right-2 lg:-top-6 lg:-right-6 w-16 h-16 rounded-full shadow-elegant flex flex-col items-center justify-center text-center z-30 border-2 border-white transition-transform duration-500 hover:scale-110" 
-                                 style="background: linear-gradient(135deg, #c07187 0%, #8c3a52 100%); transform: translateZ(40px);">
-                                <span class="text-[0.45rem] font-bold uppercase tracking-wider text-white/80 leading-none">100%</span>
-                                <span class="text-[0.6rem] font-bold text-white leading-none mt-0.5">Grátis</span>
+                            <!-- Floating badge - Elegant & Animated -->
+                            <div class="absolute -top-4 -right-2 sm:-top-6 sm:-right-6 lg:-top-10 lg:-right-12 w-24 h-24 sm:w-28 sm:h-28 lg:w-36 lg:h-36 z-30 group/badge hover:scale-105 transition-transform duration-700" 
+                                 style="transform: translateZ(50px);">
+                                 
+                                <!-- Ambient glow footprint -->
+                                <div class="absolute inset-0 bg-writer-500/40 rounded-full blur-xl group-hover/badge:blur-2xl group-hover/badge:bg-writer-400/50 transition-all duration-700"></div>
+                                
+                                <!-- Outer wrapper with rotating conic border -->
+                                <div class="absolute inset-0 rounded-full bg-writer-400 overflow-hidden shadow-elegant">
+                                    <div class="absolute inset-[-150%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,transparent_80%,#ffffff_100%)] opacity-70 group-hover/badge:opacity-100 transition-opacity duration-500"></div>
+                                    <!-- Inner layer masking the conic gradient so it acts like a border -->
+                                    <div class="absolute inset-[3px] rounded-full" style="background: linear-gradient(135deg, #c07187 0%, #8c3a52 100%);"></div>
+                                </div>
+                                
+                                <!-- Inner Glass Ring & Content -->
+                                <div class="absolute inset-[6px] sm:inset-[8px] lg:inset-[10px] rounded-full border border-white/30 flex flex-col items-center justify-center text-center shadow-inner-elegant overflow-hidden" style="background: radial-gradient(circle at top left, rgba(255,255,255,0.15), transparent 60%);">
+                                    <!-- Light sweep on hover -->
+                                    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/40 to-transparent -translate-x-[100%] group-hover/badge:translate-x-[100%] transition-transform duration-[1.2s] ease-in-out"></div>
+                                    
+                                    <div class="relative z-10 flex flex-col items-center justify-center transform group-hover/badge:-translate-y-0.5 transition-transform duration-500 pt-1 lg:pt-2">
+                                        <span class="text-[0.65rem] sm:text-[0.75rem] lg:text-[0.9rem] font-bold uppercase tracking-[0.2em] text-white/95 leading-none mb-1.5 drop-shadow-sm">100%</span>
+                                        <span class="text-xl sm:text-2xl lg:text-[2rem] font-serif italic text-white leading-none drop-shadow-md">Grátis</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -859,213 +920,185 @@
                 </p>
             </div>
 
-            <!-- Videos Carousel -->
+            <!-- Videos & Prints Carousel -->
             <div class="relative w-[100vw] ml-[calc(50%-50vw)] overflow-hidden py-4 lg:py-10">
                 <!-- Fade edges -->
                 <div class="absolute left-0 top-0 bottom-0 w-12 lg:w-48 bg-gradient-to-r from-writer-50 to-transparent z-30 pointer-events-none"></div>
                 <div class="absolute right-0 top-0 bottom-0 w-12 lg:w-48 bg-gradient-to-l from-writer-50 to-transparent z-30 pointer-events-none"></div>
                 
-                <div class="flex w-max animate-marquee-slow hover:[animation-play-state:paused]">
+                <!-- Track 1: Videos -->
+                <div class="flex w-max animate-marquee-slow hover:[animation-play-state:paused] pb-8">
                     <!-- Block 1 -->
                     <div class="flex gap-6 lg:gap-8 px-3 lg:px-4">
-                        
-                        <!-- Video Card 1 -->
-                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-[0_20px_40px_-10px_rgba(192,113,135,0.3)] transition-all duration-500 transform hover:-translate-y-2">
-                            <div class="absolute inset-0 bg-writer-300 group-hover:scale-105 transition-transform duration-700">
-                                <div class="absolute inset-0 bg-gradient-to-t from-writer-900/90 via-writer-900/20 to-writer-900/10 z-10"></div>
-                            </div>
-                            <div class="absolute inset-0 flex items-center justify-center z-20">
-                                <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-writer-500 group-hover:border-writer-400 transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,0.15)]">
-                                    <i data-lucide="play" class="w-6 h-6 text-white ml-1 group-hover:text-white transition-colors"></i>
-                                </div>
-                            </div>
-                            <div class="absolute bottom-0 inset-x-0 p-6 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                                <h4 class="text-white font-serif text-xl mb-1 drop-shadow-md">Aluna 1</h4>
-                                <p class="text-white/80 font-sans text-sm drop-shadow-md">"Encontrei a leveza que precisava"</p>
+                        <!-- Video Card: Andressa -->
+                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden shadow-md hover:shadow-elegant transition-all duration-500 transform hover:-translate-y-2 bg-writer-800">
+                            <video src="assets/depoimentos/Andressa.mp4" controls preload="metadata" class="absolute inset-0 w-full h-full object-cover"></video>
+                            <div class="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="text-[0.65rem] font-bold tracking-widest uppercase text-white drop-shadow-md">Andressa</span>
                             </div>
                         </div>
-
-                        <!-- Video Card 2 -->
-                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-[0_20px_40px_-10px_rgba(192,113,135,0.3)] transition-all duration-500 transform hover:-translate-y-2">
-                            <div class="absolute inset-0 bg-writer-400 group-hover:scale-105 transition-transform duration-700">
-                                <div class="absolute inset-0 bg-gradient-to-t from-writer-900/90 via-writer-900/20 to-writer-900/10 z-10"></div>
-                            </div>
-                            <div class="absolute inset-0 flex items-center justify-center z-20">
-                                <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-writer-500 group-hover:border-writer-400 transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,0.15)]">
-                                    <i data-lucide="play" class="w-6 h-6 text-white ml-1 group-hover:text-white transition-colors"></i>
-                                </div>
-                            </div>
-                            <div class="absolute bottom-0 inset-x-0 p-6 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                                <h4 class="text-white font-serif text-xl mb-1 drop-shadow-md">Aluna 2</h4>
-                                <p class="text-white/80 font-sans text-sm drop-shadow-md">"Foi um divisor de águas"</p>
+                        <!-- Video Card: Beatriz -->
+                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden shadow-md hover:shadow-elegant transition-all duration-500 transform hover:-translate-y-2 bg-writer-800">
+                            <video src="assets/depoimentos/Beatriz.mp4" controls preload="metadata" class="absolute inset-0 w-full h-full object-cover"></video>
+                            <div class="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="text-[0.65rem] font-bold tracking-widest uppercase text-white drop-shadow-md">Beatriz</span>
                             </div>
                         </div>
-
-                        <!-- Video Card 3 -->
-                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-[0_20px_40px_-10px_rgba(192,113,135,0.3)] transition-all duration-500 transform hover:-translate-y-2">
-                            <div class="absolute inset-0 bg-writer-500 group-hover:scale-105 transition-transform duration-700">
-                                <div class="absolute inset-0 bg-gradient-to-t from-writer-900/90 via-writer-900/20 to-writer-900/10 z-10"></div>
-                            </div>
-                            <div class="absolute inset-0 flex items-center justify-center z-20">
-                                <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-writer-500 group-hover:border-writer-400 transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,0.15)]">
-                                    <i data-lucide="play" class="w-6 h-6 text-white ml-1 group-hover:text-white transition-colors"></i>
-                                </div>
-                            </div>
-                            <div class="absolute bottom-0 inset-x-0 p-6 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                                <h4 class="text-white font-serif text-xl mb-1 drop-shadow-md">Aluna 3</h4>
-                                <p class="text-white/80 font-sans text-sm drop-shadow-md">"Finalmente me perdoei"</p>
+                        <!-- Video Card: Eliana -->
+                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden shadow-md hover:shadow-elegant transition-all duration-500 transform hover:-translate-y-2 bg-writer-800">
+                            <video src="assets/depoimentos/Eliana.mp4" controls preload="metadata" class="absolute inset-0 w-full h-full object-cover"></video>
+                            <div class="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="text-[0.65rem] font-bold tracking-widest uppercase text-white drop-shadow-md">Eliana</span>
                             </div>
                         </div>
-
-                        <!-- Video Card 4 -->
-                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-[0_20px_40px_-10px_rgba(192,113,135,0.3)] transition-all duration-500 transform hover:-translate-y-2">
-                            <div class="absolute inset-0 bg-writer-600 group-hover:scale-105 transition-transform duration-700">
-                                <div class="absolute inset-0 bg-gradient-to-t from-writer-900/90 via-writer-900/20 to-writer-900/10 z-10"></div>
-                            </div>
-                            <div class="absolute inset-0 flex items-center justify-center z-20">
-                                <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-writer-500 group-hover:border-writer-400 transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,0.15)]">
-                                    <i data-lucide="play" class="w-6 h-6 text-white ml-1 group-hover:text-white transition-colors"></i>
-                                </div>
-                            </div>
-                            <div class="absolute bottom-0 inset-x-0 p-6 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                                <h4 class="text-white font-serif text-xl mb-1 drop-shadow-md">Aluna 4</h4>
-                                <p class="text-white/80 font-sans text-sm drop-shadow-md">"Meu relacionamento foi transformado"</p>
+                        <!-- Video Card: Ellis -->
+                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden shadow-md hover:shadow-elegant transition-all duration-500 transform hover:-translate-y-2 bg-writer-800">
+                            <video src="assets/depoimentos/Ellis.mp4" controls preload="metadata" class="absolute inset-0 w-full h-full object-cover"></video>
+                            <div class="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="text-[0.65rem] font-bold tracking-widest uppercase text-white drop-shadow-md">Ellis</span>
                             </div>
                         </div>
-
-                        <!-- Video Card 5 -->
-                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-[0_20px_40px_-10px_rgba(192,113,135,0.3)] transition-all duration-500 transform hover:-translate-y-2">
-                            <div class="absolute inset-0 bg-writer-700 group-hover:scale-105 transition-transform duration-700">
-                                <div class="absolute inset-0 bg-gradient-to-t from-writer-900/90 via-writer-900/20 to-writer-900/10 z-10"></div>
-                            </div>
-                            <div class="absolute inset-0 flex items-center justify-center z-20">
-                                <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-writer-500 group-hover:border-writer-400 transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,0.15)]">
-                                    <i data-lucide="play" class="w-6 h-6 text-white ml-1 group-hover:text-white transition-colors"></i>
-                                </div>
-                            </div>
-                            <div class="absolute bottom-0 inset-x-0 p-6 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                                <h4 class="text-white font-serif text-xl mb-1 drop-shadow-md">Aluna 5</h4>
-                                <p class="text-white/80 font-sans text-sm drop-shadow-md">"Descobri minha verdadeira identidade"</p>
+                        <!-- Video Card: Flavia -->
+                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden shadow-md hover:shadow-elegant transition-all duration-500 transform hover:-translate-y-2 bg-writer-800">
+                            <video src="assets/depoimentos/Flavia.mp4" controls preload="metadata" class="absolute inset-0 w-full h-full object-cover"></video>
+                            <div class="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="text-[0.65rem] font-bold tracking-widest uppercase text-white drop-shadow-md">Flavia</span>
                             </div>
                         </div>
-
-                        <!-- Video Card 6 -->
-                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-[0_20px_40px_-10px_rgba(192,113,135,0.3)] transition-all duration-500 transform hover:-translate-y-2">
-                            <div class="absolute inset-0 bg-writer-800 group-hover:scale-105 transition-transform duration-700">
-                                <div class="absolute inset-0 bg-gradient-to-t from-writer-900/90 via-writer-900/20 to-writer-900/10 z-10"></div>
-                            </div>
-                            <div class="absolute inset-0 flex items-center justify-center z-20">
-                                <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-writer-500 group-hover:border-writer-400 transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,0.15)]">
-                                    <i data-lucide="play" class="w-6 h-6 text-white ml-1 group-hover:text-white transition-colors"></i>
-                                </div>
-                            </div>
-                            <div class="absolute bottom-0 inset-x-0 p-6 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                                <h4 class="text-white font-serif text-xl mb-1 drop-shadow-md">Aluna 6</h4>
-                                <p class="text-white/80 font-sans text-sm drop-shadow-md">"Paz no coração depois de anos"</p>
+                        <!-- Video Card: Walquiria -->
+                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden shadow-md hover:shadow-elegant transition-all duration-500 transform hover:-translate-y-2 bg-writer-800">
+                            <video src="assets/depoimentos/Walquiria.mp4" controls preload="metadata" class="absolute inset-0 w-full h-full object-cover"></video>
+                            <div class="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="text-[0.65rem] font-bold tracking-widest uppercase text-white drop-shadow-md">Walquiria</span>
                             </div>
                         </div>
-
                     </div>
 
                     <!-- Block 2 (Duplicate for Seamless Loop) -->
                     <div class="flex gap-6 lg:gap-8 px-3 lg:px-4" aria-hidden="true">
-                        
-                        <!-- Video Card 1 -->
-                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-[0_20px_40px_-10px_rgba(192,113,135,0.3)] transition-all duration-500 transform hover:-translate-y-2">
-                            <div class="absolute inset-0 bg-writer-300 group-hover:scale-105 transition-transform duration-700">
-                                <div class="absolute inset-0 bg-gradient-to-t from-writer-900/90 via-writer-900/20 to-writer-900/10 z-10"></div>
-                            </div>
-                            <div class="absolute inset-0 flex items-center justify-center z-20">
-                                <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-writer-500 group-hover:border-writer-400 transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,0.15)]">
-                                    <i data-lucide="play" class="w-6 h-6 text-white ml-1 group-hover:text-white transition-colors"></i>
-                                </div>
-                            </div>
-                            <div class="absolute bottom-0 inset-x-0 p-6 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                                <h4 class="text-white font-serif text-xl mb-1 drop-shadow-md">Aluna 1</h4>
-                                <p class="text-white/80 font-sans text-sm drop-shadow-md">"Encontrei a leveza que precisava"</p>
+                        <!-- Video Card: Andressa -->
+                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden shadow-md hover:shadow-elegant transition-all duration-500 transform hover:-translate-y-2 bg-writer-800">
+                            <video src="assets/depoimentos/Andressa.mp4" controls preload="metadata" class="absolute inset-0 w-full h-full object-cover"></video>
+                            <div class="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="text-[0.65rem] font-bold tracking-widest uppercase text-white drop-shadow-md">Andressa</span>
                             </div>
                         </div>
-
-                        <!-- Video Card 2 -->
-                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-[0_20px_40px_-10px_rgba(192,113,135,0.3)] transition-all duration-500 transform hover:-translate-y-2">
-                            <div class="absolute inset-0 bg-writer-400 group-hover:scale-105 transition-transform duration-700">
-                                <div class="absolute inset-0 bg-gradient-to-t from-writer-900/90 via-writer-900/20 to-writer-900/10 z-10"></div>
-                            </div>
-                            <div class="absolute inset-0 flex items-center justify-center z-20">
-                                <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-writer-500 group-hover:border-writer-400 transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,0.15)]">
-                                    <i data-lucide="play" class="w-6 h-6 text-white ml-1 group-hover:text-white transition-colors"></i>
-                                </div>
-                            </div>
-                            <div class="absolute bottom-0 inset-x-0 p-6 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                                <h4 class="text-white font-serif text-xl mb-1 drop-shadow-md">Aluna 2</h4>
-                                <p class="text-white/80 font-sans text-sm drop-shadow-md">"Foi um divisor de águas"</p>
+                        <!-- Video Card: Beatriz -->
+                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden shadow-md hover:shadow-elegant transition-all duration-500 transform hover:-translate-y-2 bg-writer-800">
+                            <video src="assets/depoimentos/Beatriz.mp4" controls preload="metadata" class="absolute inset-0 w-full h-full object-cover"></video>
+                            <div class="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="text-[0.65rem] font-bold tracking-widest uppercase text-white drop-shadow-md">Beatriz</span>
                             </div>
                         </div>
-
-                        <!-- Video Card 3 -->
-                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-[0_20px_40px_-10px_rgba(192,113,135,0.3)] transition-all duration-500 transform hover:-translate-y-2">
-                            <div class="absolute inset-0 bg-writer-500 group-hover:scale-105 transition-transform duration-700">
-                                <div class="absolute inset-0 bg-gradient-to-t from-writer-900/90 via-writer-900/20 to-writer-900/10 z-10"></div>
-                            </div>
-                            <div class="absolute inset-0 flex items-center justify-center z-20">
-                                <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-writer-500 group-hover:border-writer-400 transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,0.15)]">
-                                    <i data-lucide="play" class="w-6 h-6 text-white ml-1 group-hover:text-white transition-colors"></i>
-                                </div>
-                            </div>
-                            <div class="absolute bottom-0 inset-x-0 p-6 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                                <h4 class="text-white font-serif text-xl mb-1 drop-shadow-md">Aluna 3</h4>
-                                <p class="text-white/80 font-sans text-sm drop-shadow-md">"Finalmente me perdoei"</p>
+                        <!-- Video Card: Eliana -->
+                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden shadow-md hover:shadow-elegant transition-all duration-500 transform hover:-translate-y-2 bg-writer-800">
+                            <video src="assets/depoimentos/Eliana.mp4" controls preload="metadata" class="absolute inset-0 w-full h-full object-cover"></video>
+                            <div class="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="text-[0.65rem] font-bold tracking-widest uppercase text-white drop-shadow-md">Eliana</span>
                             </div>
                         </div>
-
-                        <!-- Video Card 4 -->
-                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-[0_20px_40px_-10px_rgba(192,113,135,0.3)] transition-all duration-500 transform hover:-translate-y-2">
-                            <div class="absolute inset-0 bg-writer-600 group-hover:scale-105 transition-transform duration-700">
-                                <div class="absolute inset-0 bg-gradient-to-t from-writer-900/90 via-writer-900/20 to-writer-900/10 z-10"></div>
-                            </div>
-                            <div class="absolute inset-0 flex items-center justify-center z-20">
-                                <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-writer-500 group-hover:border-writer-400 transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,0.15)]">
-                                    <i data-lucide="play" class="w-6 h-6 text-white ml-1 group-hover:text-white transition-colors"></i>
-                                </div>
-                            </div>
-                            <div class="absolute bottom-0 inset-x-0 p-6 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                                <h4 class="text-white font-serif text-xl mb-1 drop-shadow-md">Aluna 4</h4>
-                                <p class="text-white/80 font-sans text-sm drop-shadow-md">"Meu relacionamento foi transformado"</p>
+                        <!-- Video Card: Ellis -->
+                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden shadow-md hover:shadow-elegant transition-all duration-500 transform hover:-translate-y-2 bg-writer-800">
+                            <video src="assets/depoimentos/Ellis.mp4" controls preload="metadata" class="absolute inset-0 w-full h-full object-cover"></video>
+                            <div class="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="text-[0.65rem] font-bold tracking-widest uppercase text-white drop-shadow-md">Ellis</span>
                             </div>
                         </div>
-
-                        <!-- Video Card 5 -->
-                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-[0_20px_40px_-10px_rgba(192,113,135,0.3)] transition-all duration-500 transform hover:-translate-y-2">
-                            <div class="absolute inset-0 bg-writer-700 group-hover:scale-105 transition-transform duration-700">
-                                <div class="absolute inset-0 bg-gradient-to-t from-writer-900/90 via-writer-900/20 to-writer-900/10 z-10"></div>
-                            </div>
-                            <div class="absolute inset-0 flex items-center justify-center z-20">
-                                <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-writer-500 group-hover:border-writer-400 transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,0.15)]">
-                                    <i data-lucide="play" class="w-6 h-6 text-white ml-1 group-hover:text-white transition-colors"></i>
-                                </div>
-                            </div>
-                            <div class="absolute bottom-0 inset-x-0 p-6 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                                <h4 class="text-white font-serif text-xl mb-1 drop-shadow-md">Aluna 5</h4>
-                                <p class="text-white/80 font-sans text-sm drop-shadow-md">"Descobri minha verdadeira identidade"</p>
+                        <!-- Video Card: Flavia -->
+                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden shadow-md hover:shadow-elegant transition-all duration-500 transform hover:-translate-y-2 bg-writer-800">
+                            <video src="assets/depoimentos/Flavia.mp4" controls preload="metadata" class="absolute inset-0 w-full h-full object-cover"></video>
+                            <div class="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="text-[0.65rem] font-bold tracking-widest uppercase text-white drop-shadow-md">Flavia</span>
                             </div>
                         </div>
-
-                        <!-- Video Card 6 -->
-                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-[0_20px_40px_-10px_rgba(192,113,135,0.3)] transition-all duration-500 transform hover:-translate-y-2">
-                            <div class="absolute inset-0 bg-writer-800 group-hover:scale-105 transition-transform duration-700">
-                                <div class="absolute inset-0 bg-gradient-to-t from-writer-900/90 via-writer-900/20 to-writer-900/10 z-10"></div>
-                            </div>
-                            <div class="absolute inset-0 flex items-center justify-center z-20">
-                                <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-writer-500 group-hover:border-writer-400 transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,0.15)]">
-                                    <i data-lucide="play" class="w-6 h-6 text-white ml-1 group-hover:text-white transition-colors"></i>
-                                </div>
-                            </div>
-                            <div class="absolute bottom-0 inset-x-0 p-6 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                                <h4 class="text-white font-serif text-xl mb-1 drop-shadow-md">Aluna 6</h4>
-                                <p class="text-white/80 font-sans text-sm drop-shadow-md">"Paz no coração depois de anos"</p>
+                        <!-- Video Card: Walquiria -->
+                        <div class="w-64 lg:w-80 shrink-0 group relative aspect-[9/16] rounded-2xl overflow-hidden shadow-md hover:shadow-elegant transition-all duration-500 transform hover:-translate-y-2 bg-writer-800">
+                            <video src="assets/depoimentos/Walquiria.mp4" controls preload="metadata" class="absolute inset-0 w-full h-full object-cover"></video>
+                            <div class="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="text-[0.65rem] font-bold tracking-widest uppercase text-white drop-shadow-md">Walquiria</span>
                             </div>
                         </div>
+                    </div>
+                </div>
 
+                <!-- Track 2: Prints (Moves Reverse) -->
+                <div class="flex w-max animate-marquee-slow hover:[animation-play-state:paused]" style="animation-direction: reverse;">
+                    <!-- Block 1 -->
+                    <div class="flex gap-6 lg:gap-8 px-3 lg:px-4">
+                        <div class="w-64 lg:w-72 shrink-0 h-96 bg-white rounded-2xl p-2 shadow-sm border border-writer-200/60 hover:shadow-elegant transition-all duration-500 flex flex-col group overflow-hidden transform hover:-translate-y-2">
+                            <div class="w-full h-full rounded-xl overflow-hidden relative z-10 bg-writer-50">
+                                <img src="assets/depoimentos/WhatsApp Image 2025-12-07 at 17.03.56.jpeg" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                        <div class="w-64 lg:w-72 shrink-0 h-96 bg-white rounded-2xl p-2 shadow-sm border border-writer-200/60 hover:shadow-elegant transition-all duration-500 flex flex-col group overflow-hidden transform hover:-translate-y-2">
+                            <div class="w-full h-full rounded-xl overflow-hidden relative z-10 bg-writer-50">
+                                <img src="assets/depoimentos/WhatsApp Image 2025-12-17 at 15.42.26.jpeg" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                        <div class="w-64 lg:w-72 shrink-0 h-96 bg-white rounded-2xl p-2 shadow-sm border border-writer-200/60 hover:shadow-elegant transition-all duration-500 flex flex-col group overflow-hidden transform hover:-translate-y-2">
+                            <div class="w-full h-full rounded-xl overflow-hidden relative z-10 bg-writer-50">
+                                <img src="assets/depoimentos/WhatsApp Image 2025-12-17 at 15.45.09.jpeg" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                        <div class="w-64 lg:w-72 shrink-0 h-96 bg-white rounded-2xl p-2 shadow-sm border border-writer-200/60 hover:shadow-elegant transition-all duration-500 flex flex-col group overflow-hidden transform hover:-translate-y-2">
+                            <div class="w-full h-full rounded-xl overflow-hidden relative z-10 bg-writer-50">
+                                <img src="assets/depoimentos/WhatsApp Image 2025-12-18 at 07.05.48.jpeg" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                        <div class="w-64 lg:w-72 shrink-0 h-96 bg-white rounded-2xl p-2 shadow-sm border border-writer-200/60 hover:shadow-elegant transition-all duration-500 flex flex-col group overflow-hidden transform hover:-translate-y-2">
+                            <div class="w-full h-full rounded-xl overflow-hidden relative z-10 bg-writer-50">
+                                <img src="assets/depoimentos/WhatsApp Image 2025-12-23 at 15.27.13.jpeg" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                        <div class="w-64 lg:w-72 shrink-0 h-96 bg-white rounded-2xl p-2 shadow-sm border border-writer-200/60 hover:shadow-elegant transition-all duration-500 flex flex-col group overflow-hidden transform hover:-translate-y-2">
+                            <div class="w-full h-full rounded-xl overflow-hidden relative z-10 bg-writer-50">
+                                <img src="assets/depoimentos/WhatsApp Image 2026-01-08 at 10.48.46.jpeg" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                        <div class="w-64 lg:w-72 shrink-0 h-96 bg-white rounded-2xl p-2 shadow-sm border border-writer-200/60 hover:shadow-elegant transition-all duration-500 flex flex-col group overflow-hidden transform hover:-translate-y-2">
+                            <div class="w-full h-full rounded-xl overflow-hidden relative z-10 bg-writer-50">
+                                <img src="assets/depoimentos/WhatsApp Image 2026-01-11 at 13.12.24.jpeg" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Block 2 (Duplicate for Seamless Loop) -->
+                    <div class="flex gap-6 lg:gap-8 px-3 lg:px-4" aria-hidden="true">
+                        <div class="w-64 lg:w-72 shrink-0 h-96 bg-white rounded-2xl p-2 shadow-sm border border-writer-200/60 hover:shadow-elegant transition-all duration-500 flex flex-col group overflow-hidden transform hover:-translate-y-2">
+                            <div class="w-full h-full rounded-xl overflow-hidden relative z-10 bg-writer-50">
+                                <img src="assets/depoimentos/WhatsApp Image 2025-12-07 at 17.03.56.jpeg" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                        <div class="w-64 lg:w-72 shrink-0 h-96 bg-white rounded-2xl p-2 shadow-sm border border-writer-200/60 hover:shadow-elegant transition-all duration-500 flex flex-col group overflow-hidden transform hover:-translate-y-2">
+                            <div class="w-full h-full rounded-xl overflow-hidden relative z-10 bg-writer-50">
+                                <img src="assets/depoimentos/WhatsApp Image 2025-12-17 at 15.42.26.jpeg" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                        <div class="w-64 lg:w-72 shrink-0 h-96 bg-white rounded-2xl p-2 shadow-sm border border-writer-200/60 hover:shadow-elegant transition-all duration-500 flex flex-col group overflow-hidden transform hover:-translate-y-2">
+                            <div class="w-full h-full rounded-xl overflow-hidden relative z-10 bg-writer-50">
+                                <img src="assets/depoimentos/WhatsApp Image 2025-12-17 at 15.45.09.jpeg" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                        <div class="w-64 lg:w-72 shrink-0 h-96 bg-white rounded-2xl p-2 shadow-sm border border-writer-200/60 hover:shadow-elegant transition-all duration-500 flex flex-col group overflow-hidden transform hover:-translate-y-2">
+                            <div class="w-full h-full rounded-xl overflow-hidden relative z-10 bg-writer-50">
+                                <img src="assets/depoimentos/WhatsApp Image 2025-12-18 at 07.05.48.jpeg" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                        <div class="w-64 lg:w-72 shrink-0 h-96 bg-white rounded-2xl p-2 shadow-sm border border-writer-200/60 hover:shadow-elegant transition-all duration-500 flex flex-col group overflow-hidden transform hover:-translate-y-2">
+                            <div class="w-full h-full rounded-xl overflow-hidden relative z-10 bg-writer-50">
+                                <img src="assets/depoimentos/WhatsApp Image 2025-12-23 at 15.27.13.jpeg" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                        <div class="w-64 lg:w-72 shrink-0 h-96 bg-white rounded-2xl p-2 shadow-sm border border-writer-200/60 hover:shadow-elegant transition-all duration-500 flex flex-col group overflow-hidden transform hover:-translate-y-2">
+                            <div class="w-full h-full rounded-xl overflow-hidden relative z-10 bg-writer-50">
+                                <img src="assets/depoimentos/WhatsApp Image 2026-01-08 at 10.48.46.jpeg" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                        <div class="w-64 lg:w-72 shrink-0 h-96 bg-white rounded-2xl p-2 shadow-sm border border-writer-200/60 hover:shadow-elegant transition-all duration-500 flex flex-col group overflow-hidden transform hover:-translate-y-2">
+                            <div class="w-full h-full rounded-xl overflow-hidden relative z-10 bg-writer-50">
+                                <img src="assets/depoimentos/WhatsApp Image 2026-01-11 at 13.12.24.jpeg" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1254,12 +1287,15 @@
             </a>
             
             <p class="text-writer-400 font-sans text-sm mb-4">
-                Copyright © 2026 | Todos os direitos reservados
+                <a href="https://api.whatsapp.com/send/?phone=5511938003268&text=Cheguei+atrav%C3%A9s+do+site+%28informe+o+site%29&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="hover:text-writer-200 transition-colors border-b border-transparent hover:border-writer-300 pb-0.5">
+                    © 2026 Dirilis Digital – Agencia e Criação de Sites
+                </a>
             </p>
-            <div class="flex items-center gap-4 text-xs font-sans text-writer-500 uppercase tracking-widest">
-                <a href="#" class="hover:text-writer-200 transition-colors">Termos de Uso</a>
+            
+            <div class="flex items-center gap-4 text-xs font-sans text-writer-500 uppercase tracking-widest mt-2">
+                <a href="termos-de-uso.html" class="hover:text-writer-300 transition-colors">Termos de Uso</a>
                 <span>•</span>
-                <a href="#" class="hover:text-writer-200 transition-colors">Política de Privacidade</a>
+                <a href="politica-de-privacidade.html" class="hover:text-writer-300 transition-colors">Política de Privacidade</a>
             </div>
         </div>
     </footer>
@@ -1269,6 +1305,79 @@
 
     <!-- Initialize Scripts -->
     <script src="js/main.js"></script>
+
+    <!-- Image Lightbox Modal -->
+    <div id="image-lightbox" class="fixed inset-0 z-[100] flex items-center justify-center bg-writer-900/95 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <button id="close-lightbox" class="absolute top-6 right-6 lg:top-10 lg:right-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <div class="relative w-full max-w-4xl h-full p-4 lg:p-12 flex items-center justify-center" id="lightbox-container">
+            <img id="lightbox-img" src="" alt="Depoimento Original Completo" class="max-w-full max-h-full object-contain rounded-xl shadow-2xl transition-transform duration-500 scale-95 opacity-0">
+        </div>
+    </div>
+
+    <!-- Lightbox Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const lightbox = document.getElementById('image-lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const closeBtn = document.getElementById('close-lightbox');
+            const container = document.getElementById('lightbox-container');
+            
+            // Ativa o clique em todas as imagens de WhatsApp no carrossel
+            document.querySelectorAll('img[src*="WhatsApp Image"]').forEach(img => {
+                const card = img.closest('.group');
+                if (card) {
+                    card.classList.add('cursor-pointer');
+                    card.addEventListener('click', () => {
+                        lightboxImg.src = img.src;
+                        
+                        // Mostra o fundo
+                        lightbox.classList.remove('opacity-0', 'pointer-events-none');
+                        
+                        // Animação da imagem
+                        setTimeout(() => {
+                            lightboxImg.classList.remove('scale-95', 'opacity-0');
+                            lightboxImg.classList.add('scale-100', 'opacity-100');
+                        }, 50);
+                        
+                        // Bloqueia rolagem do fundo
+                        document.body.style.overflow = 'hidden'; 
+                    });
+                }
+            });
+
+            // Fecha o lightbox
+            const closeLightbox = () => {
+                lightbox.classList.add('opacity-0', 'pointer-events-none');
+                lightboxImg.classList.remove('scale-100', 'opacity-100');
+                lightboxImg.classList.add('scale-95', 'opacity-0');
+                
+                setTimeout(() => { 
+                    lightboxImg.src = ''; 
+                }, 300);
+                
+                document.body.style.overflow = '';
+            };
+
+            // Eventos de fechamento
+            closeBtn.addEventListener('click', closeLightbox);
+            
+            // Clicar fora da imagem para fechar
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox || e.target === container) {
+                    closeLightbox();
+                }
+            });
+            
+            // Fechar com tecla ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !lightbox.classList.contains('opacity-0')) {
+                    closeLightbox();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
 
