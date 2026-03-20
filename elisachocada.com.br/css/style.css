@@ -1,0 +1,71 @@
+﻿        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #ffffff; 
+            color: #2d2426; 
+            scroll-behavior: smooth;
+        }
+        
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 1);
+            box-shadow: 0 10px 40px -10px rgba(117, 59, 73, 0.08);
+        }
+        
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(253, 248, 249, 0.4) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px 0 rgba(117, 59, 73, 0.05);
+        }
+
+        /* Intro Sequence Animations (Fade + Blur In) */
+        @keyframes animationIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+                filter: blur(8px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0px);
+            }
+        }
+        /* Paused default, Activated by JS */
+        .animate-on-scroll { animation-play-state: paused !important; }
+        .animate-on-scroll.animate { animation-play-state: running !important; }
+        
+        /* Details & Gradients */
+        .text-gradient {
+            background: linear-gradient(135deg, #2d2426 0%, #8c4355 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .bg-mesh {
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(347, 45%, 96%, 1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(347, 45%, 94%, 1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(347, 45%, 96%, 1) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(0, 0%, 100%, 1) 0px, transparent 50%);
+        }
+        
+        .selection-pink *::selection {
+            background-color: #f1dce2;
+            color: #753b49;
+        }
+
+        /* Continuous Animations */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            animation: marquee 20s linear infinite;
+        }
+        .animate-marquee-slow {
+            animation: marquee 40s linear infinite;
+        }
